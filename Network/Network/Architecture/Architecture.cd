@@ -3,7 +3,7 @@
   <Interface Name="Network.Architecture.Interfaces.ILifecycleComponent">
     <Position X="2.5" Y="0.5" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>ACAAAAAAACAAAAAAAAAAAAAAAAAAACAAIAAABAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAACIAAAAAAAAAAAAAAAIAAAAAIAAABAAAAAA=</HashCode>
       <FileName>Architecture\Interfaces\ILifecycleComponent.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>

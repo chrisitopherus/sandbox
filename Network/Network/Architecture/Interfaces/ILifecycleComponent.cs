@@ -9,8 +9,8 @@ namespace Network.Architecture.Interfaces;
 
 public interface ILifecycleComponent
 {
-    event EventHandler OnStarted;
-    event EventHandler OnStopped;
+    event EventHandler? Started;
+    event EventHandler? Stopped;
 
     LifecycleState State { get; }
     void Start();
