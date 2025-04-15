@@ -27,4 +27,9 @@ public class EnhancedNetworkStreamConfiguration<TMessage>
     public int PollDelayMs { get; }
 
     public IMessageProtocol<TMessage> MessageProtocol { get; }
+
+    public static EnhancedNetworkStreamConfiguration<TMessage> CreateDefault(IMessageProtocol<TMessage> protocol)
+    {
+        return new EnhancedNetworkStreamConfiguration<TMessage>(4096, 100, protocol);
+    }
 }
