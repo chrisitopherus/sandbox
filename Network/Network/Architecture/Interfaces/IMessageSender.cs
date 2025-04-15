@@ -8,5 +8,7 @@ namespace Network.Architecture.Interfaces;
 
 public interface IMessageSender<TMessage>
 {
-    Task Send(TMessage message, CancellationToken cancellationToken = default);
+    void Send(TMessage message);
+
+    Task SendAsync(TMessage message, CancellationToken cancellationToken = default);
 }

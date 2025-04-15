@@ -13,7 +13,7 @@
   <Interface Name="Network.Architecture.Interfaces.IMessageSender&lt;TMessage&gt;">
     <Position X="5.5" Y="0.5" Width="4.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Architecture\Interfaces\IMessageSender.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -37,7 +37,7 @@
     </InheritanceLine>
     <InheritanceLine Type="Network.Architecture.Interfaces.IMessageSender&lt;TMessage&gt;" FixedFromPoint="true">
       <Path>
-        <Point X="8.625" Y="1.603" />
+        <Point X="8.625" Y="1.795" />
         <Point X="8.625" Y="5.181" />
         <Point X="8.25" Y="5.181" />
       </Path>
