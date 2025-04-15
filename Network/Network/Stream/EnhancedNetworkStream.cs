@@ -1,6 +1,7 @@
 ﻿using Network.Architecture;
 using Network.Architecture.Interfaces;
 using Network.Architecture.Interfaces.Protocol;
+using Network.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,8 @@ using System.Threading.Tasks;
 
 namespace Network.Stream;
 
-public class EnhancedNetworkStream<TMessage> : ILifecycleComponent, IMessageSender<TMessage>
+public class EnhancedNetworkStream<TMessage> : LifecycleComponent, IMessageSender<TMessage>
 {
-    private LifecycleState state;
-
     private NetworkStream stream;
     private EnhancedNetworkStreamConfiguration<TMessage> configuration;
 
@@ -28,36 +27,9 @@ public class EnhancedNetworkStream<TMessage> : ILifecycleComponent, IMessageSend
         this.state = LifecycleState.Initialized;
     }
 
-    public event EventHandler? Started;
-    public event EventHandler? Stopped;
     public event EventHandler<EnhancedNetworkStreamDataReceivedEventArgs>? DataReceived;
 
-    public LifecycleState State
-    {
-        get
-        {
-            return this.state;
-        }
-
-        private set
-        {
-            if (value != this.state)
-            {
-                this.state = value;
-                switch (this.state)
-                {
-                    case LifecycleState.Started:
-                        this.FireOnStarted();
-                        break;
-                    case LifecycleState.Stopped:
-                        this.FireOnStopped();
-                        break;
-                }
-            }
-        }
-    }
-
-    public void Start()
+    public override void Start()
     {
         if (this.state == LifecycleState.Started)
         {
@@ -69,18 +41,31 @@ public class EnhancedNetworkStream<TMessage> : ILifecycleComponent, IMessageSend
         Task _ = Task.Run(() => this.PollForDataAsync(this.cancellationTokenSource.Token));
     }
 
-    public void Stop()
+    public override void Stop()
     {
         if (this.state != LifecycleState.Started)
         {
-            throw new InvalidOperationException("Network stream was not started.");
+            throw new InvalidOperationException("Network stream is to running.");
         }
 
         this.cancellationTokenSource?.Cancel();
         this.cancellationTokenSource = null;
     }
 
-    public async Task Send(TMessage message, CancellationToken cancellationToken = default)
+    public void Send(TMessage message)
+    {
+        try
+        {
+            ReadOnlySpan<byte> encodedMessage = this.configuration.MessageProtocol.Encode(message).Span;
+            this.stream.Write(encodedMessage);
+        }
+        catch
+        {
+            this.Stop();
+        }
+    }
+
+    public async Task SendAsync(TMessage message, CancellationToken cancellationToken = default)
     {
         try
         {
@@ -95,16 +80,6 @@ public class EnhancedNetworkStream<TMessage> : ILifecycleComponent, IMessageSend
         {
             this.Stop();
         }
-    }
-
-    protected virtual void FireOnStarted()
-    {
-        this.Started?.Invoke(this, EventArgs.Empty);
-    }
-
-    protected virtual void FireOnStopped()
-    {
-        this.Stopped?.Invoke(this, EventArgs.Empty);
     }
 
     protected virtual void FireOnDataReceived(EnhancedNetworkStreamDataReceivedEventArgs e)
@@ -145,6 +120,10 @@ public class EnhancedNetworkStream<TMessage> : ILifecycleComponent, IMessageSend
         catch (OperationCanceledException)
         {
             // Expected
+        }
+        catch
+        {
+            // Exception Handling
         }
         finally
         {
