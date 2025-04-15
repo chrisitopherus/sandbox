@@ -1,4 +1,5 @@
 ﻿using Network.Architecture.Interfaces.Protocol;
+using Network.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,18 +16,21 @@ public class EnhancedNetworkStreamConfigurationBuilder<TMessage>
 
     EnhancedNetworkStreamConfigurationBuilder<TMessage> WithBufferSize(int bufferSize)
     {
+        Validator.NotLessThan(bufferSize, 0, nameof(bufferSize));
         this.networkBufferSize = bufferSize;
         return this;
     }
 
     EnhancedNetworkStreamConfigurationBuilder<TMessage> WithPollDelay(int pollDelayMs)
     {
+        Validator.NotLessThan(pollDelayMs, 0, nameof(pollDelayMs));
         this.pollDelayMs = pollDelayMs;
         return this;
     }
 
     EnhancedNetworkStreamConfigurationBuilder<TMessage> WithProtocol(IMessageProtocol<TMessage> messageProtocol)
     {
+        Validator.NotNull(messageProtocol, nameof(messageProtocol));
         this.messageProtocol = messageProtocol;
         return this;
     }
