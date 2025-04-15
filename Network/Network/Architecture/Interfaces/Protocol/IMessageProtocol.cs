@@ -10,5 +10,7 @@ public interface IMessageProtocol<TMessage> : IMessageCodec<TMessage>
 {
     ReadOnlyMemory<byte> AliveMessageBytes { get; }
 
+    TMessage CreateAliveMessage();
+
     bool IsAliveMessage(ReadOnlyMemory<byte> data);
 }
