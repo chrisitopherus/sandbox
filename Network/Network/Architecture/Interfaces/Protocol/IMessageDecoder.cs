@@ -8,5 +8,5 @@ namespace Network.Architecture.Interfaces.Protocol;
 
 public interface IMessageDecoder<TMessage>
 {
-    TMessage Decode(Memory<byte> data);
+    TMessage Decode(ReadOnlyMemory<byte> data);
 }
