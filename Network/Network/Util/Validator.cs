@@ -9,7 +9,6 @@ namespace Network.Util;
 public static class Validator
 {
     public static void NotNull<TNullable>(TNullable value, string parameterName, string? message = null)
-        where TNullable : class
     {
         if (message == null)
         {
