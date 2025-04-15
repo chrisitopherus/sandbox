@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Network.Stream;
 
-public class EnhancedNetworkStreamDataReceivedEventArgs
+public class EnhancedNetworkStreamDataReceivedEventArgs : EventArgs
 {
     public EnhancedNetworkStreamDataReceivedEventArgs(ReadOnlyMemory<byte> data)
     {
