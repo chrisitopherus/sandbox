@@ -12,7 +12,13 @@ public class EnhancedNetworkStreamConfigurationBuilder<TMessage>
 {
     private int networkBufferSize = 4096;
     private int pollDelayMs = 100;
-    private IMessageProtocol<TMessage>? messageProtocol;
+    private IMessageProtocol<TMessage> messageProtocol;
+
+    public EnhancedNetworkStreamConfigurationBuilder(IMessageProtocol<TMessage> messageProtocol)
+    {
+        Validator.NotNull(messageProtocol, nameof(messageProtocol));
+        this.messageProtocol = messageProtocol;
+    }
 
     EnhancedNetworkStreamConfigurationBuilder<TMessage> WithBufferSize(int bufferSize)
     {
@@ -37,11 +43,6 @@ public class EnhancedNetworkStreamConfigurationBuilder<TMessage>
 
     EnhancedNetworkStreamConfiguration<TMessage> Create()
     {
-        if (this.messageProtocol == null)
-        {
-            throw new InvalidOperationException("The message protocol must be specified.");
-        }
-
         return new EnhancedNetworkStreamConfiguration<TMessage>(this.networkBufferSize, this.pollDelayMs, this.messageProtocol);
     }
 }
