@@ -15,6 +15,7 @@ This repository serves as a playground for design patterns, network architecture
 | `Sorting`      | Implementations of sorting algorithms for educational and performance testing |
 | `Helpers`      | Shared logic like validation, extensions, and utility functions             |
 | `Demos`        | Console-based demo projects that showcase features from other modules       |
+| `CLI`          | Build command lines                                                         |
 
 ---
 
