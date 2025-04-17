@@ -27,6 +27,8 @@ public class CommandLineParser
 
         string? commandValue = default;
         Dictionary<IModifier, string> modifierValues = [];
+
+        // TODO: Refactor loop
         for (int i = 1; i < args.Length; i++)
         {
             string value = args[i];
