@@ -1,7 +1,7 @@
 # 🧪 sandbox
 
 A modular C# codebase for exploring, crafting, and reusing clean software components.  
-This repository serves as a playground for design patterns, network architecture, algorithm demos, and foundational utilities.
+This repository serves as a playground for design patterns, network architecture, algorithms, demos and foundational utilities.
 
 ---
 
