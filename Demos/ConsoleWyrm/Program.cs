@@ -1,4 +1,4 @@
-﻿namespace Demo
+﻿namespace ConsoleWyrm
 {
     internal class Program
     {

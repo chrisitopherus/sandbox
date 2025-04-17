@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Demo
+namespace ConsoleWyrm;
+
+public class Application
 {
-    public class Application
-    {
-    }
 }
