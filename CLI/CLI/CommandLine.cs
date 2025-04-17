@@ -7,8 +7,8 @@ public class CommandLine
     private readonly CommandLineParser cliParser;
     public CommandLine(ICommand[] commands)
     {
-        this.Commands = commands;
-        this.cliParser = new CommandLineParser(commands);
+        this.Commands = [..commands, new HelpCommand(["-h", "--help"], commands)];
+        this.cliParser = new CommandLineParser(this.Commands);
     }
 
     public ICommand[] Commands

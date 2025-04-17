@@ -42,6 +42,14 @@
       <FileName>Exceptions\CLIInvalidSyntaxException.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="CLI.HelpCommand">
+    <Position X="12.25" Y="2.5" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAQAAAAEAAoAAAABAAQAABAAAAIgAAA=</HashCode>
+      <FileName>HelpCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
   <Interface Name="CLI.Interfaces.ICommand">
     <Position X="9" Y="0.5" Width="2.5" />
     <TypeIdentifier>
