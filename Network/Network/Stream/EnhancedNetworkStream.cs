@@ -87,9 +87,35 @@ public class EnhancedNetworkStream<TMessage> : LifecycleComponent, IMessageSende
         this.DataReceived?.Invoke(this, e);
     }
 
+    private async Task PollUntilFullMessage(int messageSize, MemoryStream dataBuffer, Memory<byte> networkBuffer, CancellationToken cancellationToken = default)
+    {
+        while (!cancellationToken.IsCancellationRequested)
+        {
+            if (!this.stream.DataAvailable)
+            {
+                await Task.Delay(this.configuration.PollDelayMs, cancellationToken);
+                continue;
+            }
+
+            int readBytesCount = await this.stream.ReadAsync(networkBuffer, cancellationToken);
+            if (readBytesCount == 0)
+            {
+                throw new InvalidOperationException("Socket connection probably closed.");
+            }
+
+            await dataBuffer.WriteAsync(networkBuffer[0..readBytesCount], cancellationToken);
+            if (dataBuffer.Length >= messageSize)
+            {
+                return;
+            }
+        }
+    }
+
     private async Task PollForDataAsync(CancellationToken cancellationToken = default)
     {
         Memory<byte> buffer = new byte[this.configuration.NetworkBufferSize];
+        MemoryStream dataBuffer = new MemoryStream();
+
         try
         {
             while (!cancellationToken.IsCancellationRequested)
@@ -101,20 +127,29 @@ public class EnhancedNetworkStream<TMessage> : LifecycleComponent, IMessageSende
                 }
 
                 int readBytesCount = await this.stream.ReadAsync(buffer, cancellationToken);
-
                 if (readBytesCount == 0)
                 {
                     break;
                 }
 
-                ReadOnlyMemory<byte> data = buffer[0..readBytesCount];
-                if (this.configuration.MessageProtocol.IsAliveMessage(data))
+                int messageSize = this.configuration.MessageProtocol.GetMessageSize(buffer[0..readBytesCount]);
+                await dataBuffer.WriteAsync(buffer[0..readBytesCount], cancellationToken);
+                if (messageSize != readBytesCount)
                 {
-                    // ignore
-                    continue;
+                    await this.PollUntilFullMessage(messageSize, dataBuffer, buffer, cancellationToken);
                 }
 
-                this.FireOnDataReceived(new EnhancedNetworkStreamDataReceivedEventArgs(data));
+                byte[] receivedData = dataBuffer.GetBuffer();
+                ReadOnlyMemory<byte> data = receivedData.AsMemory(0, messageSize);
+                if (!this.configuration.MessageProtocol.IsAliveMessage(data))
+                {
+                    this.FireOnDataReceived(new EnhancedNetworkStreamDataReceivedEventArgs(data));
+                }
+
+                byte[] unusedData = receivedData[messageSize..];
+
+                // get unused bytes
+                dataBuffer = new MemoryStream(unusedData);
             }
         }
         catch (OperationCanceledException)
