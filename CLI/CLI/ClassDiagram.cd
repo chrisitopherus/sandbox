@@ -42,26 +42,25 @@
       <FileName>Exceptions\CLIInvalidSyntaxException.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Interface Name="CLI.IModifier">
-    <Position X="8.5" Y="0.5" Width="2.75" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>IModifier.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="CLI.ITypedModifier&lt;TType&gt;">
-    <Position X="8.5" Y="2.25" Width="2.75" />
-    <TypeIdentifier>
-      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ITypedModifier.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="CLI.ICommand">
-    <Position X="5.75" Y="0.5" Width="2.25" />
+  <Interface Name="CLI.Interfaces.ICommand">
+    <Position X="9" Y="0.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAABAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ICommand.cs</FileName>
-      <NewMemberFileName>ICustomCommand.cs</NewMemberFileName>
+      <FileName>Interfaces\ICommand.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CLI.Interfaces.IModifier">
+    <Position X="6" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IModifier.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CLI.Interfaces.ITypedModifier&lt;TType&gt;">
+    <Position X="6" Y="2.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\ITypedModifier.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

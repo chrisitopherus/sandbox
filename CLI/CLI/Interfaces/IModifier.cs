@@ -1,10 +1,9 @@
-﻿using CLI.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CLI
+namespace CLI.Interfaces
 {
     public interface IModifier : IHasIdentifiers
     {

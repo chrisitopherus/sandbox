@@ -1,4 +1,6 @@
-﻿namespace CLI;
+﻿using CLI.Interfaces;
+
+namespace CLI;
 
 public class CommandLine
 {
