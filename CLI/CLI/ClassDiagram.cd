@@ -22,7 +22,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="CLI.Exceptions.CLIUnknownCommandException">
-    <Position X="15.75" Y="3.75" Width="3" />
+    <Position X="0.5" Y="10.75" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Exceptions\CLIUnknownCommandException.cs</FileName>
@@ -36,7 +36,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="CLI.Exceptions.CLIInvalidSyntaxException">
-    <Position X="15.75" Y="1.75" Width="3" />
+    <Position X="0.5" Y="8.75" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>Exceptions\CLIInvalidSyntaxException.cs</FileName>
