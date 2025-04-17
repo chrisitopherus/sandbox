@@ -7,5 +7,5 @@ namespace CLI;
 
 public interface ITypedModifier<TType> : IModifier
 {
-    public TType Parse(string value);
+    public TType? Parse(string? value);
 }

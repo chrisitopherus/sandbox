@@ -19,7 +19,7 @@ public class CommandLineParser
     public CLIParserResult Parse(string[] args)
     {
         string cmdName = args[0];
-        ICommand? command = this.GetByIdentifier(this.Commands, cmdName);
+        ICommand? command = GetByIdentifier(this.Commands, cmdName);
         if (command == null)
         {
             throw new CLIUnknownCommandException(cmdName, $"Command \"{cmdName}\" is not a valid command.");
@@ -32,7 +32,7 @@ public class CommandLineParser
         for (int i = 1; i < args.Length; i++)
         {
             string value = args[i];
-            IModifier? currentModifier = this.GetByIdentifier(command.Modifiers, value);
+            IModifier? currentModifier = GetByIdentifier(command.Modifiers, value);
             if (currentModifier == null && i != 1)
             {
                 throw new CLIInvalidSyntaxException(value, $"Encountered value without command or modifier: \"{value}\"");
@@ -63,7 +63,7 @@ public class CommandLineParser
         return new CLIParserResult(command, commandValue, modifierValues);
     }
 
-    private T? GetByIdentifier<T>(IEnumerable<T> collection, string identifier) where T : IHasIdentifiers
+    private static T? GetByIdentifier<T>(IEnumerable<T> collection, string identifier) where T : IHasIdentifiers
     {
         return collection.FirstOrDefault((item) => item.Identifiers.Contains(identifier));
     }

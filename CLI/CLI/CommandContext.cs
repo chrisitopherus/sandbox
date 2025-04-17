@@ -19,13 +19,15 @@ public class CommandContext
         get;
     }
 
-    public string GetModifierValue(IModifier modifier)
+    public string? GetModifierValue(IModifier modifier)
     {
-        throw new NotImplementedException();
+        return this.modifierValues.TryGetValue(modifier, out string? value) ? value : null;
     }
 
-    public TValue GetModifierValue<TValue>(ITypedModifier<TValue> modifier)
+    public TValue? GetModifierValue<TValue>(ITypedModifier<TValue> modifier)
     {
-        throw new NotImplementedException();
+        string? value = default;
+        this.modifierValues.TryGetValue(modifier, out value);
+        return modifier.Parse(value);
     }
 }
