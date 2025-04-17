@@ -42,4 +42,11 @@ public static class Validator
             throw new ArgumentOutOfRangeException(parameterName, message);
         }
     }
+
+    public static void NotWithin<TComparable>(TComparable value, TComparable minValue, TComparable maxValue, string parameterName, string? message = null)
+        where TComparable : IComparable
+    {
+        NotLessThan(value, minValue, parameterName, message);
+        NotGreaterThan(value, maxValue, parameterName, message);
+    }
 }
