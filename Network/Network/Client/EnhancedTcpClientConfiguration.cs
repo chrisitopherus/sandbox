@@ -1,4 +1,5 @@
-﻿using Network.Architecture.Interfaces.Protocol;
+﻿using Helpers.Validation;
+using Network.Architecture.Interfaces.Protocol;
 using Network.Stream;
 using Network.Util;
 using System;

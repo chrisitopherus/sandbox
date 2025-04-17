@@ -1,4 +1,5 @@
-﻿using Network.Client;
+﻿using Helpers.Validation;
+using Network.Client;
 using Network.Util;
 using System;
 using System.Collections.Generic;

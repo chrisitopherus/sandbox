@@ -5,7 +5,9 @@ VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Network", "Network\Network.csproj", "{9BF3A752-60D2-43BB-87A2-DBB309DEB8E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "Demo\Demo.csproj", "{AD11D136-367D-4399-A9B9-3E0CE6B7F911}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo", "Demo\Demo.csproj", "{AD11D136-367D-4399-A9B9-3E0CE6B7F911}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helpers", "..\Helpers\Helpers\Helpers.csproj", "{1C84E37B-D61F-4DAF-A4B2-9C7122F33BD6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{AD11D136-367D-4399-A9B9-3E0CE6B7F911}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD11D136-367D-4399-A9B9-3E0CE6B7F911}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD11D136-367D-4399-A9B9-3E0CE6B7F911}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C84E37B-D61F-4DAF-A4B2-9C7122F33BD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C84E37B-D61F-4DAF-A4B2-9C7122F33BD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C84E37B-D61F-4DAF-A4B2-9C7122F33BD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C84E37B-D61F-4DAF-A4B2-9C7122F33BD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
