@@ -1,11 +1,68 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Class Name="CLI.CommandLine">
-    <Position X="0.5" Y="0.5" Width="2.5" />
+    <Position X="0.5" Y="0.5" Width="3" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAgAAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CommandLine.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="CLI.CommandContext">
+    <Position X="6" Y="6" Width="6.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAACAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>CommandContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CLI.CLIParserResult">
+    <Position X="0.5" Y="6" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAACAAAAAABAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>CLIParserResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CLI.Exceptions.CLIUnknownCommandException">
+    <Position X="15.75" Y="3.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\CLIUnknownCommandException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CLI.CommandLineParser">
+    <Position X="0.5" Y="3.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAgAgAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CommandLineParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CLI.Exceptions.CLIInvalidSyntaxException">
+    <Position X="15.75" Y="1.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Exceptions\CLIInvalidSyntaxException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="CLI.IModifier">
+    <Position X="8.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IModifier.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CLI.ITypedModifier&lt;TType&gt;">
+    <Position X="8.5" Y="2.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ITypedModifier.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CLI.ICommand">
+    <Position X="5.75" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ICommand.cs</FileName>
+      <NewMemberFileName>ICustomCommand.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Interface>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
