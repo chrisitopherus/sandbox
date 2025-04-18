@@ -34,7 +34,7 @@ public class HelpCommand : ICommand
         StringBuilder sb = new();
         sb.AppendLine("Overview of all commands:");
         sb.AppendLine();
-        sb.AppendLine(this.FormatCommands(commands));
+        sb.Append(this.FormatCommands(commands));
         sb.Append("Ende Gelände");
 
         return sb.ToString();
@@ -46,7 +46,6 @@ public class HelpCommand : ICommand
         foreach (ICommand command in commands)
         {
             sb.AppendLine(this.FormatCommand(command));
-            sb.AppendLine();
         }
 
         return sb.ToString();
@@ -64,18 +63,25 @@ public class HelpCommand : ICommand
     private string FormatModifers(IModifier[] modifiers)
     {
         StringBuilder sb = new();
+        if (modifiers.Length == 0)
+        {
+            return sb.ToString();
+        }
+
+        int maxFirstIdentifierLength = modifiers.Max((m) => m.Identifiers[0].Length);
         foreach (IModifier modifier in modifiers)
         {
-            sb.AppendLine($"\t{this.FormatModifier(modifier)}");
+            sb.AppendLine($"\t{this.FormatModifier(modifier, maxFirstIdentifierLength)}");
         }
 
         return sb.ToString();
     }
 
-    private string FormatModifier(IModifier modifier)
+    private string FormatModifier(IModifier modifier, int maxFirstIdentifierLength)
     {
         StringBuilder sb = new();
-        string modifierIdentifiers = string.Join(" | ", modifier.Identifiers).PadRight(18);
+        IEnumerable<string> identifiers = modifier.Identifiers.Select((identifier, index) => index == 0 ? identifier.PadRight(maxFirstIdentifierLength) : identifier);
+        string modifierIdentifiers = string.Join(" | ", identifiers).PadRight(24);
         string modifierTypeText = this.GetModifierTypeText(modifier);
         sb.Append($"{modifierIdentifiers}({modifierTypeText})");
         return sb.ToString();
