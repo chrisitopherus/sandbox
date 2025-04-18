@@ -29,4 +29,6 @@ public class UsernameModifier : IModifier
         get;
         set;
     }
+
+    public string Description => "Specifies the username for the game.";
 }

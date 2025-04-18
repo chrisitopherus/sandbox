@@ -26,6 +26,8 @@ public class ServerCommand : ICommand
         get;
     }
 
+    public string Description => "Starts the game server on the given IP and port.";
+
     public void Execute(CommandContext ctx)
     {
         throw new NotImplementedException();

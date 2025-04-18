@@ -27,6 +27,8 @@ public class ClientCommand : ICommand
         get;
     }
 
+    public string Description => "Connects to a game server on the given IP and port.";
+
     public void Execute(CommandContext ctx)
     {
         string? username = ctx.GetModifierValue(this.usernameModifier);

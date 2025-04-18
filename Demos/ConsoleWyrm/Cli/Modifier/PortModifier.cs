@@ -30,6 +30,8 @@ public class PortModifier : ITypedModifier<int?>
         set;
     }
 
+    public string Description => "Specifies the network port.";
+
     public int? Parse(string? value)
     {
         if (int.TryParse(value, out int port))

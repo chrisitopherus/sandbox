@@ -32,6 +32,8 @@ public class IPModifier : ITypedModifier<IPAddress>
         set;
     }
 
+    public string Description => "Specifies the ip.";
+
     public IPAddress? Parse(string? value)
     {
         if (IPAddress.TryParse(value, out IPAddress? ip))
