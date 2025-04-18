@@ -4,6 +4,7 @@ using ConsoleWyrm.Cli.Modifier;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,7 +31,8 @@ public class ServerCommand : ICommand
 
     public void Execute(CommandContext ctx)
     {
-        throw new NotImplementedException();
+        int? port = ctx.GetModifierValue(this.portModifier);
+        IPAddress? ip = ctx.GetModifierValue(this.ipModifer);
     }
 
     public override string ToString()
