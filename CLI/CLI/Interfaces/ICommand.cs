@@ -9,5 +9,7 @@ public interface ICommand : IHasIdentifiers
 {
     IModifier[] Modifiers { get; }
 
+    string Description { get; }
+
     void Execute(CommandContext ctx);
 }

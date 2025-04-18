@@ -7,6 +7,7 @@ namespace CLI.Interfaces
 {
     public interface IModifier : IHasIdentifiers
     {
+        string Description { get; }
         bool IsFlag { get; set; }
         bool IsRequired { get; set; }
     }

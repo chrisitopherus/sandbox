@@ -10,15 +10,21 @@ namespace CLI;
 public class HelpCommand : ICommand
 {
     private readonly ICommand[] otherCommands;
-    public HelpCommand(string[] identifiers, ICommand[] otherCommands)
+    public HelpCommand(string[] identifiers, ICommand[] otherCommands, string? description = null)
     {
         this.otherCommands = otherCommands;
         this.Identifiers = identifiers;
+        this.Description = description ?? "Shows an overview of all commands and their modifiers.";
     }
 
     public IModifier[] Modifiers => [];
 
     public string[] Identifiers
+    {
+        get;
+    }
+
+    public string Description
     {
         get;
     }
@@ -43,18 +49,21 @@ public class HelpCommand : ICommand
     private string FormatCommands(ICommand[] commands)
     {
         StringBuilder sb = new();
+        int maxCommandNameLength = commands.Max((c) => $"[{string.Join(", ", c.Identifiers)}]".Length);
         foreach (ICommand command in commands)
         {
-            sb.AppendLine(this.FormatCommand(command));
+            sb.AppendLine(this.FormatCommand(command, maxCommandNameLength));
         }
 
         return sb.ToString();
     }
 
-    private string FormatCommand(ICommand command)
+    private string FormatCommand(ICommand command, int maxCommandNameLength)
     {
         StringBuilder sb = new();
-        sb.AppendLine($"[{string.Join(", ", command.Identifiers)}]");
+        string cmdNames = $"[{string.Join(", ", command.Identifiers)}]".PadRight(maxCommandNameLength);
+        sb.AppendLine($"{cmdNames} -> {command.Description}");
+        sb.AppendLine();
         sb.Append(this.FormatModifers(command.Modifiers));
 
         return sb.ToString();
@@ -69,21 +78,22 @@ public class HelpCommand : ICommand
         }
 
         int maxFirstIdentifierLength = modifiers.Max((m) => m.Identifiers[0].Length);
+        int maxIdentifiersLength = modifiers.Max((m) => string.Join(" | ", m.Identifiers).Length);
         foreach (IModifier modifier in modifiers)
         {
-            sb.AppendLine($"\t{this.FormatModifier(modifier, maxFirstIdentifierLength)}");
+            sb.AppendLine($"\t{this.FormatModifier(modifier, maxFirstIdentifierLength, maxIdentifiersLength)}");
         }
 
         return sb.ToString();
     }
 
-    private string FormatModifier(IModifier modifier, int maxFirstIdentifierLength)
+    private string FormatModifier(IModifier modifier, int maxFirstIdentifierLength, int maxIdentifiersLength)
     {
         StringBuilder sb = new();
         IEnumerable<string> identifiers = modifier.Identifiers.Select((identifier, index) => index == 0 ? identifier.PadRight(maxFirstIdentifierLength) : identifier);
-        string modifierIdentifiers = string.Join(" | ", identifiers).PadRight(24);
+        string modifierIdentifiers = string.Join(" | ", identifiers).PadRight(maxIdentifiersLength);
         string modifierTypeText = this.GetModifierTypeText(modifier);
-        sb.Append($"{modifierIdentifiers}({modifierTypeText})");
+        sb.Append($"({modifierTypeText}) {modifierIdentifiers} -> {modifier.Description}");
         return sb.ToString();
     }
 
