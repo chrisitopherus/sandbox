@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CLI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,4 +9,14 @@ namespace ConsoleWyrm;
 
 public class Application
 {
+    private readonly CommandLine cli;
+    public Application(CommandLine cli)
+    {
+        this.cli = cli;
+    }
+
+    public void Run(string[] args)
+    {
+        this.cli.Execute(args);
+    }
 }
