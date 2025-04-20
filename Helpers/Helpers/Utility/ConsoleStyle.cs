@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Helpers.Utility;
 
-public struct ConsoleStyle
+public class ConsoleStyle
 {
     public ConsoleStyle(ConsoleColor foreground, ConsoleColor background)
     {
