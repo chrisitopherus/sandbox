@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CLI.Exceptions;
 
-public class CLIInvalidSyntaxException : Exception
+public class CLIInvalidSyntaxException : CLIParserException
 {
     public CLIInvalidSyntaxException(string value, string message)
         : base(message)

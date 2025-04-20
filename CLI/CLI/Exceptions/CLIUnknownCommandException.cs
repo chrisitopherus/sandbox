@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CLI.Exceptions;
 
-public class CLIUnknownCommandException : Exception
+public class CLIUnknownCommandException : CLIParserException
 {
     public CLIUnknownCommandException(string cmdName, string message)
         : base(message)
