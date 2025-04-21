@@ -13,10 +13,16 @@ public class Application
     public Application(CommandLine cli)
     {
         this.cli = cli;
+        this.Setup();
     }
 
     public void Run(string[] args)
     {
         this.cli.Execute(args);
+    }
+
+    private void Setup()
+    {
+
     }
 }
