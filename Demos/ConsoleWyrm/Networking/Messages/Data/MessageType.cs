@@ -29,7 +29,6 @@ public enum MessageType : byte
 
     /// <summary>
     /// Server to Client.
-    /// add different kind of food, like steroid (red), pickle(green), esmacho(either rgb or blue)
     /// </summary>
     FoodSpawned,
 
