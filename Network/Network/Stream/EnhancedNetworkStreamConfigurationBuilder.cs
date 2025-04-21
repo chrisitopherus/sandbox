@@ -13,6 +13,7 @@ public class EnhancedNetworkStreamConfigurationBuilder<TMessage>
 {
     private int networkBufferSize = 4096;
     private int pollDelayMs = 100;
+    private bool filterAliveMessages = true;
     private IMessageProtocol<TMessage> messageProtocol;
 
     public EnhancedNetworkStreamConfigurationBuilder(IMessageProtocol<TMessage> messageProtocol)
@@ -42,8 +43,14 @@ public class EnhancedNetworkStreamConfigurationBuilder<TMessage>
         return this;
     }
 
+    public EnhancedNetworkStreamConfigurationBuilder<TMessage> DeactiveAliveMessageFilter()
+    {
+        this.filterAliveMessages = false;
+        return this;
+    }
+
     public EnhancedNetworkStreamConfiguration<TMessage> Create()
     {
-        return new EnhancedNetworkStreamConfiguration<TMessage>(this.networkBufferSize, this.pollDelayMs, this.messageProtocol);
+        return new EnhancedNetworkStreamConfiguration<TMessage>(this.networkBufferSize, this.pollDelayMs, this.messageProtocol) { FilterAliveMessages = this.filterAliveMessages};
     }
 }

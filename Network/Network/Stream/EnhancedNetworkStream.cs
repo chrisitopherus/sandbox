@@ -141,7 +141,7 @@ public class EnhancedNetworkStream<TMessage> : LifecycleComponent, IMessageSende
 
                 byte[] receivedData = dataBuffer.GetBuffer();
                 ReadOnlyMemory<byte> data = receivedData.AsMemory(0, messageSize);
-                if (!this.configuration.MessageProtocol.IsAliveMessage(data))
+                if (!this.configuration.MessageProtocol.IsAliveMessage(data) || !this.configuration.FilterAliveMessages)
                 {
                     this.FireOnDataReceived(new EnhancedNetworkStreamDataReceivedEventArgs(data));
                 }

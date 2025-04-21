@@ -16,6 +16,7 @@ public class EnhancedTcpClientConfigurationBuilder<TMessage>
     private int keepAliveMessageIntervalMs = 1000;
     private int networkBufferSize = 4096;
     private int pollDelayMs = 100;
+    private bool filterAliveMessages = true;
 
     public EnhancedTcpClientConfigurationBuilder(IMessageProtocol<TMessage> messageProtocol)
     {
@@ -51,17 +52,24 @@ public class EnhancedTcpClientConfigurationBuilder<TMessage>
         return this;
     }
 
+    public EnhancedTcpClientConfigurationBuilder<TMessage> DeactiveAliveMessageFilter()
+    {
+        this.filterAliveMessages = false;
+        return this;
+    }
+
     public EnhancedTcpClientConfigurationBuilder<TMessage> WithNetworkStreamConfiguration(EnhancedNetworkStreamConfiguration<TMessage> configuration)
     {
         Validator.NotNull(configuration, nameof(configuration));
         this.messageProtocol = configuration.MessageProtocol;
         this.pollDelayMs = configuration.PollDelayMs;
         this.networkBufferSize = configuration.NetworkBufferSize;
+        this.filterAliveMessages = configuration.FilterAliveMessages;
         return this;
     }
 
     public EnhancedTcpClientConfiguration<TMessage> Create()
     {
-        return new EnhancedTcpClientConfiguration<TMessage>(this.messageProtocol, this.keepAliveMessageIntervalMs, this.networkBufferSize, this.pollDelayMs);
+        return new EnhancedTcpClientConfiguration<TMessage>(this.messageProtocol, this.keepAliveMessageIntervalMs, this.networkBufferSize, this.pollDelayMs) { FilterAliveMessages = this.filterAliveMessages};
     }
 }
