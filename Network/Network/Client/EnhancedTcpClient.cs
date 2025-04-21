@@ -22,6 +22,11 @@ public class EnhancedTcpClient<TMessage> : LifecycleComponent, IMessageSender<TM
     public EnhancedTcpClient(TcpClient client, EnhancedTcpClientConfiguration<TMessage> configuration)
     {
         this.client = client;
+        if (!client.Connected)
+        {
+            throw new InvalidOperationException("Client is not connected.");
+        }
+
         this.configuration = configuration;
         this.networkStream = new EnhancedNetworkStream<TMessage>(client.GetStream(), configuration);
 
@@ -47,6 +52,22 @@ public class EnhancedTcpClient<TMessage> : LifecycleComponent, IMessageSender<TM
         try
         {
             await this.networkStream.SendAsync(message, cancellationToken);
+        }
+        catch (OperationCanceledException)
+        {
+            // Expected
+        }
+        catch
+        {
+            this.Stop();
+        }
+    }
+
+    public async Task SendAsync(ReadOnlyMemory<byte> data, CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            await this.networkStream.SendAsync(data, cancellationToken);
         }
         catch (OperationCanceledException)
         {
@@ -111,11 +132,11 @@ public class EnhancedTcpClient<TMessage> : LifecycleComponent, IMessageSender<TM
     {
         try
         {
-            TMessage aliveMessage = this.configuration.MessageProtocol.CreateAliveMessage();
+            ReadOnlyMemory<byte> aliveMessageBytes= this.configuration.MessageProtocol.AliveMessageBytes;
             while (!cancellationToken.IsCancellationRequested)
             {
                 await Task.Delay(1000, cancellationToken);
-                await this.networkStream.SendAsync(aliveMessage, cancellationToken);
+                await this.networkStream.SendAsync(aliveMessageBytes, cancellationToken);
             }
         }
         catch (OperationCanceledException)

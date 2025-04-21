@@ -11,4 +11,6 @@ public interface IMessageSender<TMessage>
     void Send(TMessage message);
 
     Task SendAsync(TMessage message, CancellationToken cancellationToken = default);
+
+    Task SendAsync(ReadOnlyMemory<byte> data, CancellationToken cancellationToken = default);
 }

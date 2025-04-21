@@ -82,6 +82,22 @@ public class EnhancedNetworkStream<TMessage> : LifecycleComponent, IMessageSende
         }
     }
 
+    public async Task SendAsync(ReadOnlyMemory<byte> data, CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            await this.stream.WriteAsync(data, cancellationToken);
+        }
+        catch (OperationCanceledException)
+        {
+            // Expected
+        }
+        catch
+        {
+            this.Stop();
+        }
+    }
+
     protected virtual void FireOnDataReceived(EnhancedNetworkStreamDataReceivedEventArgs e)
     {
         this.DataReceived?.Invoke(this, e);
