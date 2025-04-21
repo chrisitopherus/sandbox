@@ -10,7 +10,8 @@ namespace ConsoleWyrm.Networking.Messages;
 
 public interface IClientMessageVisitor
 {
-    void Visit(AliveMessage aliveMessage);
+    // void Visit(AliveMessage aliveMessage);
+
     void Visit(WyrmDirectionChangeMessage directionChangeMessage);
     void Visit(WyrmBoostOnMessage boostOnMessage);
     void Visit(WyrmBoostOffMessage boostOffMessage);

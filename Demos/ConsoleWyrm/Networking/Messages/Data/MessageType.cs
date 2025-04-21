@@ -20,6 +20,11 @@ public enum MessageType : byte
     /// <summary>
     /// Server to Client.
     /// </summary>
+    GameState,
+
+    /// <summary>
+    /// Server to Client.
+    /// </summary>
     WyrmDied,
 
     /// <summary>

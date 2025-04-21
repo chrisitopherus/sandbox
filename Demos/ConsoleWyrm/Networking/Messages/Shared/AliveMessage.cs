@@ -7,17 +7,11 @@ using ConsoleWyrm.Networking.Messages.Data;
 
 namespace ConsoleWyrm.Networking.Messages.Shared;
 
-public class AliveMessage : IMessage<IClientMessageVisitor>, IMessage<IServerMessageVisitor>
+public static class AliveMessage
 {
-    public MessageType Type => MessageType.Alive;
+    public static MessageType Type => MessageType.Alive;
 
-    public void Accept(IClientMessageVisitor visitor)
-    {
-        visitor.Visit(this);
-    }
+    public static byte Check => 69;
 
-    public void Accept(IServerMessageVisitor visitor)
-    {
-        visitor.Visit(this);
-    }
+    public static bool IsAlive(ReadOnlySpan<byte> data) => throw new NotImplementedException();
 }

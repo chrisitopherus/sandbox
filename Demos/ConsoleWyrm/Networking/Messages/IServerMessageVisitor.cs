@@ -11,7 +11,9 @@ namespace ConsoleWyrm.Networking.Messages;
 
 public interface IServerMessageVisitor
 {
-    void Visit(AliveMessage aliveMessage);
+    // void Visit(AliveMessage aliveMessage);
+
+    void Visit(GameStateMessage gameStateMessage);
     void Visit(WyrmDiedMessage wyrmDiedMessage);
     void Visit(FoodSpawnedMessage foodSpawnedMessage);
     void Visit(FoodEatenMessage foodEatenMessage);
