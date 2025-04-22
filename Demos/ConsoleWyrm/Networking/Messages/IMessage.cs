@@ -7,8 +7,12 @@ using ConsoleWyrm.Networking.Messages.Data;
 
 namespace ConsoleWyrm.Networking.Messages;
 
-public interface IMessage<TVisitor>
+public interface IMessage
 {
     MessageType Type { get; }
+}
+
+public interface IMessage<TVisitor> : IMessage
+{
     void Accept(TVisitor visitor);
 }
