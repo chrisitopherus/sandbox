@@ -64,17 +64,17 @@
   <Class Name="ConsoleWyrm.Cli.ServerCommand">
     <Position X="3.75" Y="12.75" Width="3" />
     <TypeIdentifier>
-      <HashCode>AAAABAAAAAAgAAQEAAAAAAAAAAAAAAAACAAAAAIAgAA=</HashCode>
+      <HashCode>AAAABAAAAAAgAQQAAAAAAAAAAAAAAAAACAAAAAIAgAA=</HashCode>
       <FileName>Cli\ServerCommand.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="ConsoleWyrm.Networking.Messages.Shared.AliveMessage">
     <Position X="5.75" Y="5.25" Width="3" />
     <TypeIdentifier>
-      <HashCode>AQAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>Networking\Messages\Shared\AliveMessage.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="ConsoleWyrm.Utility.EnumConverter">
     <Position X="4.75" Y="1.5" Width="3.25" />
@@ -150,7 +150,7 @@
   <Interface Name="ConsoleWyrm.Networking.Messages.IMessage&lt;TVisitor&gt;">
     <Position X="1.25" Y="5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Networking\Messages\IMessage.cs</FileName>
     </TypeIdentifier>
   </Interface>
