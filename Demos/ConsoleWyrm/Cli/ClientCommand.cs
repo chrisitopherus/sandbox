@@ -1,6 +1,12 @@
 ﻿using CLI;
 using CLI.Interfaces;
 using ConsoleWyrm.Cli.Modifier;
+using ConsoleWyrm.Networking.Messages;
+using ConsoleWyrm.Networking.Messages.Codecs.Server;
+using ConsoleWyrm.Networking.Messages.Data;
+using ConsoleWyrm.Networking.Messages.Server;
+using ConsoleWyrm.Utility;
+using ConsoleWyrm.Utility.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,22 +40,13 @@ public class ClientCommand : ICommand
         string? username = ctx.GetModifierValue(this.usernameModifier);
         int? port = ctx.GetModifierValue(this.portModifier);
         IPAddress? ip = ctx.GetModifierValue(this.ipModifer);
+        MessageCodecRegistry<IMessage<IServerMessageVisitor>> codecRegistry = this.InitializeMessageCodecRegistry();
     }
 
-    public override string ToString()
+    private MessageCodecRegistry<IMessage<IServerMessageVisitor>> InitializeMessageCodecRegistry()
     {
-        StringBuilder sb = new StringBuilder();
-        sb.Append(string.Join(", ", this.Identifiers));
-        if (this.Modifiers.Length > 0)
-        {
-            sb.AppendLine();
-        }
-
-        foreach (var modifier in this.Modifiers)
-        {
-            sb.AppendLine($"\t{modifier.ToString()}");
-        }
-
-        return sb.ToString();
+        var gameStateMessageCodec = new GameStateMessageCodec().Adapt<IMessage<IServerMessageVisitor>, GameStateMessage>();
+        return new MessageCodecRegistry<IMessage<IServerMessageVisitor>>()
+            .Register(MessageType.GameState, gameStateMessageCodec);
     }
 }

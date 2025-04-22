@@ -1,6 +1,15 @@
 ﻿using CLI;
 using CLI.Interfaces;
 using ConsoleWyrm.Cli.Modifier;
+using ConsoleWyrm.Networking.Messages;
+using ConsoleWyrm.Networking.Messages.Client;
+using ConsoleWyrm.Networking.Messages.Codecs.Client;
+using ConsoleWyrm.Networking.Messages.Codecs.Server;
+using ConsoleWyrm.Networking.Messages.Data;
+using ConsoleWyrm.Utility;
+using ConsoleWyrm.Utility.Extensions;
+using Helpers.Utility;
+using Network.Architecture.Interfaces.Protocol;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,22 +42,13 @@ public class ServerCommand : ICommand
     {
         int? port = ctx.GetModifierValue(this.portModifier);
         IPAddress? ip = ctx.GetModifierValue(this.ipModifer);
+        MessageCodecRegistry<IMessage<IClientMessageVisitor>> codecRegistry = this.InitializeMessageCodecRegistry();
     }
 
-    public override string ToString()
+    private MessageCodecRegistry<IMessage<IClientMessageVisitor>> InitializeMessageCodecRegistry()
     {
-        StringBuilder sb = new StringBuilder();
-        sb.Append(string.Join(", ", this.Identifiers));
-        if (this.Modifiers.Length > 0)
-        {
-            sb.AppendLine();
-        }
-
-        foreach (var modifier in this.Modifiers)
-        {
-            sb.AppendLine($"\t{modifier.ToString()}");
-        }
-
-        return sb.ToString();
+        var wyrmBoostOffMessageCodec = new WyrmBoostOffMessageCodec().Adapt<IMessage<IClientMessageVisitor>, WyrmBoostOffMessage>();
+        return new MessageCodecRegistry<IMessage<IClientMessageVisitor>>()
+            .Register(MessageType.GameState, wyrmBoostOffMessageCodec);
     }
 }

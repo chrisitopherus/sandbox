@@ -10,10 +10,10 @@
     <Position X="2.75" Y="11.5" Height="0.75" Width="1.7" />
   </Comment>
   <Comment CommentText="Network">
-    <Position X="7.651" Y="3.928" Height="0.75" Width="1.7" />
+    <Position X="16.5" Y="12.5" Height="0.75" Width="1.7" />
   </Comment>
   <Comment CommentText="Utility">
-    <Position X="5.734" Y="0.5" Height="0.75" Width="1.7" />
+    <Position X="6.795" Y="0.5" Height="0.75" Width="1.7" />
   </Comment>
   <Class Name="ConsoleWyrm.Program">
     <Position X="0.5" Y="0.5" Width="2.75" />
@@ -56,7 +56,7 @@
   <Class Name="ConsoleWyrm.Cli.ClientCommand">
     <Position X="0.5" Y="12.75" Width="3" />
     <TypeIdentifier>
-      <HashCode>AAAABAAAAAAgAAQUAAAAAAAAAAAAAAAACAAAAAIAgAA=</HashCode>
+      <HashCode>AAAABAAAAAAgAAQQAAAAAAAIAAAAAAAACAAAAAIAgAA=</HashCode>
       <FileName>Cli\ClientCommand.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -64,12 +64,13 @@
   <Class Name="ConsoleWyrm.Cli.ServerCommand">
     <Position X="3.75" Y="12.75" Width="3" />
     <TypeIdentifier>
-      <HashCode>AAAABAAAAAAgAQQAAAAAAAAAAAAAAAAACAAAAAIAgAA=</HashCode>
+      <HashCode>AAAABAAAAAAgAAQAAAAAAAAIAAAAAAAACAAAAAIAgAA=</HashCode>
       <FileName>Cli\ServerCommand.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="ConsoleWyrm.Networking.Messages.Shared.AliveMessage">
-    <Position X="5.75" Y="5.25" Width="3" />
+    <Position X="14.5" Y="13.75" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>Networking\Messages\Shared\AliveMessage.cs</FileName>
@@ -77,14 +78,14 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="ConsoleWyrm.Utility.EnumConverter">
-    <Position X="4.75" Y="1.5" Width="3.25" />
+    <Position X="4.25" Y="1.5" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAQAAAA=</HashCode>
       <FileName>Utility\EnumConverter.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ConsoleWyrm.Networking.Messages.Client.WyrmBoostOffMessage" BaseTypeListCollapsed="true">
-    <Position X="9.5" Y="5.25" Width="3" />
+    <Position X="18.25" Y="13.75" Width="3" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>Networking\Messages\Client\WyrmBoostOffMessage.cs</FileName>
@@ -92,7 +93,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="ConsoleWyrm.Networking.Messages.Client.WyrmBoostOnMessage" BaseTypeListCollapsed="true">
-    <Position X="9.5" Y="7" Width="3" />
+    <Position X="18.25" Y="15.5" Width="3" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>Networking\Messages\Client\WyrmBoostOnMessage.cs</FileName>
@@ -100,7 +101,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="ConsoleWyrm.Networking.Messages.Client.WyrmDirectionChangeMessage" BaseTypeListCollapsed="true">
-    <Position X="9.5" Y="8.75" Width="3" />
+    <Position X="18.25" Y="17.25" Width="3" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>Networking\Messages\Client\WyrmDirectionChangeMessage.cs</FileName>
@@ -108,7 +109,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="ConsoleWyrm.Networking.Messages.Server.FoodEatenMessage" BaseTypeListCollapsed="true">
-    <Position X="16.75" Y="5.25" Width="3" />
+    <Position X="25.5" Y="13.75" Width="3" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>Networking\Messages\Server\FoodEatenMessage.cs</FileName>
@@ -116,7 +117,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="ConsoleWyrm.Networking.Messages.Server.FoodSpawnedMessage" BaseTypeListCollapsed="true">
-    <Position X="13.5" Y="5.25" Width="3" />
+    <Position X="22.25" Y="13.75" Width="3" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>Networking\Messages\Server\FoodSpawnedMessage.cs</FileName>
@@ -124,7 +125,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="ConsoleWyrm.Networking.Messages.Server.GameStateMessage" BaseTypeListCollapsed="true">
-    <Position X="13.5" Y="8.75" Width="3" />
+    <Position X="22.25" Y="17.25" Width="3" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>Networking\Messages\Server\GameStateMessage.cs</FileName>
@@ -132,7 +133,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="ConsoleWyrm.Networking.Messages.Server.WyrmDiedMessage" BaseTypeListCollapsed="true">
-    <Position X="16.75" Y="7" Width="3" />
+    <Position X="25.5" Y="15.5" Width="3" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>Networking\Messages\Server\WyrmDiedMessage.cs</FileName>
@@ -140,36 +141,90 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="ConsoleWyrm.Networking.Messages.Server.WyrmsUpdatedMessage" BaseTypeListCollapsed="true">
-    <Position X="13.5" Y="7" Width="3" />
+    <Position X="22.25" Y="15.5" Width="3" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>Networking\Messages\Server\WyrmsUpdatedMessage.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
+  <Class Name="ConsoleWyrm.Utility.Extensions.MessageCodecExtensions">
+    <Position X="7.75" Y="1.5" Width="5.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Utility\Extensions\MessageCodecExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleWyrm.Utility.MessageCodecAdapter&lt;TBase, TDerived&gt;">
+    <Position X="4.25" Y="3.25" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAEAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Utility\MessageCodecAdapter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleWyrm.Utility.MessageCodecRegistry&lt;TMessage&gt;">
+    <Position X="9.25" Y="3.25" Width="6.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAIAAAAAEAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utility\MessageCodecRegistry.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleWyrm.Networking.WyrmMessageProtocol&lt;TMessage&gt;">
+    <Position X="14.25" Y="20.75" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>IAgAAAAAAABIAAAAAAAAAAAAAAAACAQAAAAAQAAAAAA=</HashCode>
+      <FileName>Networking\WyrmMessageProtocol.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleWyrm.Networking.Messages.Codecs.Shared.AliveMessageCodec">
+    <Position X="20.5" Y="20.75" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Networking\Messages\Codecs\Shared\AliveMessageCodec.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleWyrm.Networking.Messages.Codecs.Server.GameStateMessageCodec">
+    <Position X="20.5" Y="22.5" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Networking\Messages\Codecs\Server\GameStateMessageCodec.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleWyrm.Networking.Messages.Codecs.Client.WyrmBoostOffMessageCodec">
+    <Position X="25.25" Y="20.75" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Networking\Messages\Codecs\Client\WyrmBoostOffMessageCodec.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
   <Interface Name="ConsoleWyrm.Networking.Messages.IMessage&lt;TVisitor&gt;">
-    <Position X="1.25" Y="5" Width="2" />
+    <Position X="10" Y="13.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Networking\Messages\IMessage.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="ConsoleWyrm.Networking.Messages.IClientMessageVisitor">
-    <Position X="1.25" Y="6.75" Width="4" />
+    <Position X="10" Y="15.25" Width="4" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Networking\Messages\IClientMessageVisitor.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="ConsoleWyrm.Networking.Messages.IServerMessageVisitor">
-    <Position X="1.25" Y="8.5" Width="4" />
+    <Position X="10" Y="17" Width="4" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Networking\Messages\IServerMessageVisitor.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Enum Name="ConsoleWyrm.Networking.Messages.Data.MessageType">
-    <Position X="5.75" Y="7.75" Width="1.75" />
+    <Position X="14.5" Y="16.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AABAAAAAAQBAACAIAAAAAAAAAAAAAAQAAAAAAABAIIA=</HashCode>
       <FileName>Networking\Messages\Data\MessageType.cs</FileName>
