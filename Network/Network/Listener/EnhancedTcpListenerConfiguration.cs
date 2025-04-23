@@ -1,4 +1,5 @@
-﻿using Network.Client;
+﻿using Network.Architecture.Interfaces;
+using Network.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 namespace Network.Listener;
 
 public class EnhancedTcpListenerConfiguration<TMessage>
+    where TMessage : IMessage
 {
     public EnhancedTcpListenerConfiguration(IPEndPoint endPoint, EnhancedTcpClientConfiguration<TMessage> clientConfiguration)
     {

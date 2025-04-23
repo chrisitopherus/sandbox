@@ -1,4 +1,5 @@
 ﻿using Network.Architecture;
+using Network.Architecture.Interfaces;
 using Network.Client;
 using Network.Util;
 using System;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 namespace Network.Listener;
 
 public class EnhancedTcpListener<TMessage> : LifecycleComponent
+    where TMessage : IMessage
 {
     private TcpListener listener;
     private readonly EnhancedTcpListenerConfiguration<TMessage> configuration;

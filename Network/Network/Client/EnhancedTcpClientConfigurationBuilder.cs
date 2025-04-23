@@ -1,4 +1,5 @@
 ﻿using Helpers.Validation;
+using Network.Architecture.Interfaces;
 using Network.Architecture.Interfaces.Protocol;
 using Network.Stream;
 using Network.Util;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 namespace Network.Client;
 
 public class EnhancedTcpClientConfigurationBuilder<TMessage>
+    where TMessage : IMessage
 {
     private IMessageProtocol<TMessage> messageProtocol;
     private int keepAliveMessageIntervalMs = 1000;

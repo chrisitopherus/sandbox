@@ -1,4 +1,5 @@
 ﻿using Helpers.Validation;
+using Network.Architecture.Interfaces;
 using Network.Architecture.Interfaces.Protocol;
 using Network.Util;
 using System;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 namespace Network.Stream;
 
 public class EnhancedNetworkStreamConfiguration<TMessage>
+    where TMessage : IMessage
 {
     public EnhancedNetworkStreamConfiguration(int networkBufferSize, int pollDelayMs, IMessageProtocol<TMessage> messageProtocol)
     {

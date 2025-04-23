@@ -1,4 +1,5 @@
 ﻿using Helpers.Validation;
+using Network.Architecture.Interfaces;
 using Network.Client;
 using Network.Util;
 using System;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 namespace Network.Listener;
 
 public class EnhancedTcpListenerConfigurationBuilder<TMessage>
+    where TMessage : IMessage
 {
     private int port;
     private IPAddress? ip;

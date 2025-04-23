@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 namespace Network.Client;
 
 public class EnhancedTcpClient<TMessage> : LifecycleComponent, IMessageSender<TMessage>
+    where TMessage : IMessage
 {
     private readonly TcpClient client;
     private readonly EnhancedTcpClientConfiguration<TMessage> configuration;

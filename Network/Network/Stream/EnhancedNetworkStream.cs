@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 namespace Network.Stream;
 
 public class EnhancedNetworkStream<TMessage> : LifecycleComponent, IMessageSender<TMessage>
+    where TMessage : IMessage
 {
     private NetworkStream stream;
     private EnhancedNetworkStreamConfiguration<TMessage> configuration;

@@ -1,4 +1,5 @@
 ﻿using Helpers.Validation;
+using Network.Architecture.Interfaces;
 using Network.Architecture.Interfaces.Protocol;
 using Network.Util;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 namespace Network.Stream;
 
 public class EnhancedNetworkStreamConfigurationBuilder<TMessage>
+    where TMessage : IMessage
 {
     private int networkBufferSize = 4096;
     private int pollDelayMs = 100;

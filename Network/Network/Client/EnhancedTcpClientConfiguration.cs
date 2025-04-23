@@ -1,4 +1,5 @@
 ﻿using Helpers.Validation;
+using Network.Architecture.Interfaces;
 using Network.Architecture.Interfaces.Protocol;
 using Network.Stream;
 using Network.Util;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 namespace Network.Client;
 
 public class EnhancedTcpClientConfiguration<TMessage> : EnhancedNetworkStreamConfiguration<TMessage>
+    where TMessage : IMessage
 {
     public EnhancedTcpClientConfiguration(IMessageProtocol<TMessage> messageProtocol, int keepAliveMessageIntervalMs, int networkBufferSize, int pollDelayMs)
         : base(networkBufferSize, pollDelayMs, messageProtocol)
