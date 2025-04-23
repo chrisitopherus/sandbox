@@ -17,14 +17,14 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace ConsoleWyrm.Networking;
 
 public class WyrmMessageProtocol<TMessage> : IMessageProtocol<TMessage>
-    where TMessage : IMessage
+    where TMessage : ICustomMessage
 {
-    private readonly MessageCodecRegistry<TMessage> codecRegistry;
+    private readonly MessageDecoderRegistry<TMessage> codecRegistry;
     private readonly int headerByteSize = 5;
     private readonly AliveMessageCodec aliveMessageCodec = new();
     private readonly AliveMessage aliveMessage = new();
 
-    public WyrmMessageProtocol(MessageCodecRegistry<TMessage> messageCodecRegistry)
+    public WyrmMessageProtocol(MessageDecoderRegistry<TMessage> messageCodecRegistry)
     {
         this.codecRegistry = messageCodecRegistry;
         this.AliveMessageBytes = this.aliveMessageCodec.Encode(this.aliveMessage);
@@ -39,14 +39,13 @@ public class WyrmMessageProtocol<TMessage> : IMessageProtocol<TMessage>
     {
         var span = data.Span;
         MessageType type = this.ReadMessageType(ref span);
-        IMessageCodec<TMessage> messageCodec = this.codecRegistry.GetValue(type);
-        return messageCodec.Decode(data);
+        IMessageDecoder<TMessage> messageDecoder = this.codecRegistry.GetMessageDecoder(type);
+        return messageDecoder.Decode(data);
     }
 
     public ReadOnlyMemory<byte> Encode(TMessage message)
     {
-        IMessageCodec<TMessage> messageCodec = this.codecRegistry.GetValue(message.Type);
-        return messageCodec.Encode(message);
+        return message.Encode();
     }
 
     public int GetMessageSize(ReadOnlyMemory<byte> buffer)
