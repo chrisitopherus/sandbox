@@ -123,6 +123,13 @@
       <FileName>Architecture\Interfaces\IMessage.cs</FileName>
     </TypeIdentifier>
   </Interface>
+  <Interface Name="Network.Architecture.Interfaces.Protocol.IMessageDecoderRegistry&lt;TKey, TMessage&gt;">
+    <Position X="16.75" Y="3.75" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Architecture\Interfaces\Protocol\IMessageDecoderRegistry.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
   <Enum Name="Network.Architecture.LifecycleState">
     <Position X="0.5" Y="0.5" Width="1.25" />
     <TypeIdentifier>
