@@ -1,13 +1,13 @@
 ﻿using CLI;
 using CLI.Interfaces;
 using ConsoleWyrm.Cli.Modifier;
+using ConsoleWyrm.Networking;
 using ConsoleWyrm.Networking.Messages;
 using ConsoleWyrm.Networking.Messages.Client;
 using ConsoleWyrm.Networking.Messages.Codecs.Client;
 using ConsoleWyrm.Networking.Messages.Codecs.Server;
 using ConsoleWyrm.Networking.Messages.Data;
 using ConsoleWyrm.Utility;
-using ConsoleWyrm.Utility.Extensions;
 using Helpers.Utility;
 using Network.Architecture.Interfaces.Protocol;
 using System;
@@ -21,8 +21,8 @@ namespace ConsoleWyrm.Cli;
 
 public class ServerCommand : ICommand
 {
-    private readonly IPModifier ipModifer = new IPModifier(["-ip", "--address"]) { IsFlag = false, IsRequired = true };
-    private readonly PortModifier portModifier = new PortModifier(["-p", "--port"]) { IsFlag = false, IsRequired = true };
+    private readonly IPModifier ipModifer = new(["-ip", "--address"]) { IsFlag = false, IsRequired = true };
+    private readonly PortModifier portModifier = new(["-p", "--port"]) { IsFlag = false, IsRequired = true };
 
     public ServerCommand(string[] identifiers)
     {
@@ -42,13 +42,13 @@ public class ServerCommand : ICommand
     {
         int? port = ctx.GetModifierValue(this.portModifier);
         IPAddress? ip = ctx.GetModifierValue(this.ipModifer);
-        MessageCodecRegistry<IMessage<IClientMessageVisitor>> codecRegistry = this.InitializeMessageCodecRegistry();
+        MessageDecoderRegistry<ICustomMessage<IClientMessageVisitor>> decoderRegistry = this.InitializeMessageDecoderRegistry();
+        WyrmMessageProtocol<ICustomMessage<IClientMessageVisitor>> messageProtocol = new(decoderRegistry);
     }
 
-    private MessageCodecRegistry<IMessage<IClientMessageVisitor>> InitializeMessageCodecRegistry()
+    private MessageDecoderRegistry<ICustomMessage<IClientMessageVisitor>> InitializeMessageDecoderRegistry()
     {
-        var wyrmBoostOffMessageCodec = new WyrmBoostOffMessageCodec().Adapt<IMessage<IClientMessageVisitor>, WyrmBoostOffMessage>();
-        return new MessageCodecRegistry<IMessage<IClientMessageVisitor>>()
-            .Register(MessageType.GameState, wyrmBoostOffMessageCodec);
+        return new MessageDecoderRegistry<ICustomMessage<IClientMessageVisitor>>()
+            .Register(MessageType.WyrmBoostOff, new WyrmBoostOffMessageCodec());
     }
 }
