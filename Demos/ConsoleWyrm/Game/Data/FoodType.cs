@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ConsoleWyrm.Game.Data;
 
 // food like steroid(red), pickle(green), esmacho(either rgb or blue)
-public enum FoodType
+public enum FoodType : byte
 {
     Steroid,
     Pickle,
