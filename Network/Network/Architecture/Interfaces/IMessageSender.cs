@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Network.Architecture.Interfaces;
 
 public interface IMessageSender<TMessage>
+    where TMessage : IMessage
 {
     void Send(TMessage message);
 

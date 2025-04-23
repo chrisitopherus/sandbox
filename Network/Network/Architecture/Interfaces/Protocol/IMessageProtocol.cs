@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Network.Architecture.Interfaces.Protocol;
 
 public interface IMessageProtocol<TMessage> : IMessageCodec<TMessage>
+    where TMessage : IMessage
 {
     ReadOnlyMemory<byte> AliveMessageBytes { get; }
 

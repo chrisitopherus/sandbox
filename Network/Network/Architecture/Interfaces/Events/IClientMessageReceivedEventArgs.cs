@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Network.Architecture.Interfaces.Events;
 
 public interface IClientMessageReceivedEventArgs<TMessage>
+    where TMessage : IMessage
 {
     TMessage Message { get; }
 }

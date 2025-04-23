@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Network.Architecture.Interfaces.Protocol;
 
 public interface IMessageDecoder<TMessage>
+    where TMessage : IMessage
 {
     TMessage Decode(ReadOnlyMemory<byte> data);
 }

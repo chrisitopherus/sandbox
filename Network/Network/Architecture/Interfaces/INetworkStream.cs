@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace Network.Architecture.Interfaces;
 
 public interface INetworkStream<TMessage> : ILifecycleComponent, IMessageSender<TMessage>
+    where TMessage : IMessage
 {
     event EventHandler<INetworkStreamDataReceivedEventArgs> DataReceived;
 }

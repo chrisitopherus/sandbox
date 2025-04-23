@@ -7,5 +7,6 @@ using System.Threading.Tasks;
 namespace Network.Architecture.Interfaces.Protocol;
 
 public interface IMessageCodec<TMessage> : IMessageEncoder<TMessage>, IMessageDecoder<TMessage>
+    where TMessage : IMessage
 {
 }

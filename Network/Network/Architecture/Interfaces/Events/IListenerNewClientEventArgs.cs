@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Network.Architecture.Interfaces.Events;
 
 public interface IListenerNewClientEventArgs<TMessage>
+    where TMessage : IMessage
 {
     IClient<TMessage> Client { get; }
 }

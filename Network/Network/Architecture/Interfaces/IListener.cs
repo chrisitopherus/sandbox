@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace Network.Architecture.Interfaces;
 
 public interface IListener<TMessage> : ILifecycleComponent
+    where TMessage : IMessage
 {
     event EventHandler<IListenerNewClientEventArgs<TMessage>> NewClient;
 }
