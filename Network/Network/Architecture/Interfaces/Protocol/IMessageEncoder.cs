@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Network.Architecture.Interfaces.Protocol;
 
-public interface IMessageEncoder<TMessage>
+public interface IMessageEncoder<in TMessage>
     where TMessage : IMessage
 {
     ReadOnlyMemory<byte> Encode(TMessage message);
