@@ -7,12 +7,17 @@ using ConsoleWyrm.Networking.Messages.Data;
 
 namespace ConsoleWyrm.Networking.Messages.Client;
 
-public class WyrmBoostOnMessage : IMessage<IClientMessageVisitor>
+public class WyrmBoostOnMessage : ICustomMessage<IClientMessageVisitor>
 {
-    public MessageType Type => MessageType.WyrmBoostOn;
+    public MessageType Type { get; } = MessageType.WyrmBoostOn;
 
     public void Accept(IClientMessageVisitor visitor)
     {
         visitor.Visit(this);
+    }
+
+    public ReadOnlyMemory<byte> Encode()
+    {
+        throw new NotImplementedException();
     }
 }

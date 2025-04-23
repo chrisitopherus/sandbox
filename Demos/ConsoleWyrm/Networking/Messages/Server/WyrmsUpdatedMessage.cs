@@ -7,12 +7,17 @@ using System.Threading.Tasks;
 
 namespace ConsoleWyrm.Networking.Messages.Server;
 
-public class WyrmsUpdatedMessage : IMessage<IServerMessageVisitor>
+public class WyrmsUpdatedMessage : ICustomMessage<IServerMessageVisitor>
 {
-    public MessageType Type => MessageType.WyrmsUpdated;
+    public MessageType Type { get; } = MessageType.WyrmsUpdated;
 
     public void Accept(IServerMessageVisitor visitor)
     {
         visitor.Visit(this);
+    }
+
+    public ReadOnlyMemory<byte> Encode()
+    {
+        throw new NotImplementedException();
     }
 }

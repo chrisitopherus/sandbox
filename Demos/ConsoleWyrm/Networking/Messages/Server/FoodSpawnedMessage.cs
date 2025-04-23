@@ -7,12 +7,17 @@ using System.Threading.Tasks;
 
 namespace ConsoleWyrm.Networking.Messages.Server;
 
-public class FoodSpawnedMessage : IMessage<IServerMessageVisitor>
+public class FoodSpawnedMessage : ICustomMessage<IServerMessageVisitor>
 {
-    public MessageType Type => MessageType.FoodSpawned;
+    public MessageType Type { get; } = MessageType.FoodSpawned;
 
     public void Accept(IServerMessageVisitor visitor)
     {
         visitor.Visit(this);
+    }
+
+    public ReadOnlyMemory<byte> Encode()
+    {
+        throw new NotImplementedException();
     }
 }
