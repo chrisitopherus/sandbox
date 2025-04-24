@@ -1,7 +1,8 @@
 ﻿using Network.Architecture;
 using Network.Architecture.Interfaces;
-using Network.Architecture.Interfaces.Protocol;
+using Network.Client.Configuration;
 using Network.Stream;
+using Network.Stream.Symmetric;
 using Network.Util;
 using System;
 using System.Collections.Generic;
@@ -12,15 +13,16 @@ using System.Threading.Tasks;
 
 namespace Network.Client;
 
-public class SymmetricTcpClient<TMessage> : LifecycleComponent, IMessageSender<TMessage>
-    where TMessage : IMessage
+public class EnhancedTcpClient<TSendMessage, TReceiveMessage> : LifecycleComponent, IMessageSender<TSendMessage>
+    where TSendMessage : IMessage
+    where TReceiveMessage : IMessage
 {
     private readonly TcpClient client;
-    private readonly SymmetricTcpClientConfiguration<TMessage> configuration;
-    private readonly SymmetricNetworkStream<TMessage> networkStream;
+    private readonly EnhancedTcpClientConfiguration<TSendMessage, TReceiveMessage> configuration;
+    private readonly EnhancedNetworkStream<TSendMessage, TReceiveMessage> networkStream;
     private CancellationTokenSource? cancellationTokenSource;
 
-    public SymmetricTcpClient(TcpClient client, SymmetricTcpClientConfiguration<TMessage> configuration)
+    public EnhancedTcpClient(TcpClient client, EnhancedTcpClientConfiguration<TSendMessage, TReceiveMessage> configuration)
     {
         this.client = client;
         if (!client.Connected)
@@ -29,14 +31,13 @@ public class SymmetricTcpClient<TMessage> : LifecycleComponent, IMessageSender<T
         }
 
         this.configuration = configuration;
-        this.networkStream = new SymmetricNetworkStream<TMessage>(client.GetStream(), configuration);
-
+        this.networkStream = new EnhancedNetworkStream<TSendMessage, TReceiveMessage>(client.GetStream(), configuration);
         this.State = LifecycleState.Initialized;
     }
 
-    public event EventHandler<SymmetricTcpClientMessageReceivedEventArgs<TMessage>>? MessageReceived;
+    public event EventHandler<TcpClientMessageReceivedEventArgs<TReceiveMessage>>? MessageReceived;
 
-    public void Send(TMessage message)
+    public void Send(TSendMessage message)
     {
         try
         {
@@ -48,7 +49,7 @@ public class SymmetricTcpClient<TMessage> : LifecycleComponent, IMessageSender<T
         }
     }
 
-    public async Task SendAsync(TMessage message, CancellationToken cancellationToken = default)
+    public async Task SendAsync(TSendMessage message, CancellationToken cancellationToken = default)
     {
         try
         {
@@ -110,7 +111,7 @@ public class SymmetricTcpClient<TMessage> : LifecycleComponent, IMessageSender<T
         this.cancellationTokenSource = null;
     }
 
-    protected virtual void FireOnMessageReceived(SymmetricTcpClientMessageReceivedEventArgs<TMessage> e)
+    protected virtual void FireOnMessageReceived(TcpClientMessageReceivedEventArgs<TReceiveMessage> e)
     {
         this.MessageReceived?.Invoke(this, e);
     }
@@ -123,17 +124,17 @@ public class SymmetricTcpClient<TMessage> : LifecycleComponent, IMessageSender<T
         }
     }
 
-    private void EnhancedNetworkStreamDataReceivedHandler(object? sender, SymmetricNetworkStreamDataReceivedEventArgs e)
+    private void EnhancedNetworkStreamDataReceivedHandler(object? sender, NetworkStreamDataReceivedEventArgs e)
     {
-        TMessage message = this.configuration.MessageProtocol.Decode(e.Data);
-        this.FireOnMessageReceived(new SymmetricTcpClientMessageReceivedEventArgs<TMessage>(message));
+        TReceiveMessage message = this.configuration.MessageProtocol.Decode(e.Data);
+        this.FireOnMessageReceived(new TcpClientMessageReceivedEventArgs<TReceiveMessage>(message));
     }
 
     private async Task KeepAliveAsync(CancellationToken cancellationToken = default)
     {
         try
         {
-            ReadOnlyMemory<byte> aliveMessageBytes= this.configuration.MessageProtocol.AliveMessageBytes;
+            ReadOnlyMemory<byte> aliveMessageBytes = this.configuration.MessageProtocol.AliveMessageBytes;
             while (!cancellationToken.IsCancellationRequested)
             {
                 await Task.Delay(1000, cancellationToken);

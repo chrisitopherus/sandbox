@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Network.Stream;
 
-public class SymmetricNetworkStreamDataReceivedEventArgs : EventArgs
+public class NetworkStreamDataReceivedEventArgs : EventArgs
 {
-    public SymmetricNetworkStreamDataReceivedEventArgs(ReadOnlyMemory<byte> data)
+    public NetworkStreamDataReceivedEventArgs(ReadOnlyMemory<byte> data)
     {
-        this.Data = data;
+        Data = data;
     }
 
     public ReadOnlyMemory<byte> Data;

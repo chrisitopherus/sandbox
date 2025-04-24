@@ -7,28 +7,10 @@ using System.Threading.Tasks;
 namespace Network.Architecture.Interfaces.Protocol;
 
 /// <summary>
-/// Defines a binary message protocol for communication.
+/// Defines a binary symmetric message protocol for communication.
 /// </summary>
 /// <typeparam name="TMessage">The type of message that the protocol uses.</typeparam>
-public interface ISymmetricMessageProtocol<TMessage> : ISymmetricMessageCodec<TMessage>
+public interface ISymmetricMessageProtocol<TMessage> : IMessageProtocol<TMessage, TMessage>
     where TMessage : IMessage
 {
-    /// <summary>
-    /// Gets the bytes of the alive message.
-    /// </summary>
-    ReadOnlyMemory<byte> AliveMessageBytes { get; }
-
-    /// <summary>
-    /// Checks if <paramref name="data"/> is an alive message.
-    /// </summary>
-    /// <param name="data">The data to check, typically received from a network stream.</param>
-    /// <returns><see langword="true"/> if <paramref name="data"/> is recognized as an alive message; otherwise <see langword="false"/>.</returns>
-    bool IsAliveMessage(ReadOnlyMemory<byte> data);
-
-    /// <summary>
-    /// Gets he total size of a message from the beginning of the given <paramref name="buffer"/>.
-    /// </summary>
-    /// <param name="buffer">THe buffer containing a binary message.</param>
-    /// <returns>The size of the <typeparamref name="TMessage"/> in bytes.</returns>
-    int GetMessageSize(ReadOnlyMemory<byte> buffer);
 }

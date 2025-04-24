@@ -1,7 +1,7 @@
 ﻿using Helpers.Validation;
 using Network.Architecture.Interfaces;
 using Network.Architecture.Interfaces.Protocol;
-using Network.Stream;
+using Network.Stream.Configuration;
 using Network.Util;
 using System;
 using System.Collections.Generic;
@@ -9,21 +9,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Network.Client;
+namespace Network.Client.Configuration;
 
-public class SymmetricTcpClientConfiguration<TMessage> : SymmetricNetworkStreamConfiguration<TMessage>
+public class SymmetricTcpClientConfiguration<TMessage> : EnhancedTcpClientConfiguration<TMessage, TMessage>
     where TMessage : IMessage
 {
     public SymmetricTcpClientConfiguration(ISymmetricMessageProtocol<TMessage> messageProtocol, int keepAliveMessageIntervalMs, int networkBufferSize, int pollDelayMs)
-        : base(networkBufferSize, pollDelayMs, messageProtocol)
+        : base(messageProtocol, keepAliveMessageIntervalMs, networkBufferSize, pollDelayMs)
     {
-        Validator.NotLessThan(keepAliveMessageIntervalMs, 0, nameof(keepAliveMessageIntervalMs));
-        this.KeepAliveMessageIntervalMs = keepAliveMessageIntervalMs;
     }
 
-    public int KeepAliveMessageIntervalMs { get; }
-
-    public new static SymmetricTcpClientConfiguration<TMessage> CreateDefault(ISymmetricMessageProtocol<TMessage> protocol)
+    public static SymmetricTcpClientConfiguration<TMessage> CreateDefault(ISymmetricMessageProtocol<TMessage> protocol)
     {
         return new SymmetricTcpClientConfiguration<TMessage>(protocol, 1000, 4096, 100);
     }

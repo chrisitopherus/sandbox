@@ -1,6 +1,7 @@
 ﻿using Network.Architecture;
 using Network.Architecture.Interfaces;
 using Network.Architecture.Interfaces.Protocol;
+using Network.Stream.Configuration;
 using Network.Util;
 using System;
 using System.Collections.Generic;
@@ -13,22 +14,23 @@ using System.Threading.Tasks;
 
 namespace Network.Stream;
 
-public class SymmetricNetworkStream<TMessage> : LifecycleComponent, IMessageSender<TMessage>
-    where TMessage : IMessage
+public class EnhancedNetworkStream<TSendMessage, TReceiveMessage> : LifecycleComponent, IMessageSender<TSendMessage>
+    where TSendMessage : IMessage
+    where TReceiveMessage : IMessage
 {
     private NetworkStream stream;
-    private SymmetricNetworkStreamConfiguration<TMessage> configuration;
+    private EnhancedNetworkStreamConfiguration<TSendMessage, TReceiveMessage> configuration;
 
     private CancellationTokenSource? cancellationTokenSource;
 
-    public SymmetricNetworkStream(NetworkStream networkStream, SymmetricNetworkStreamConfiguration<TMessage> configuration)
+    public EnhancedNetworkStream(NetworkStream networkStream, EnhancedNetworkStreamConfiguration<TSendMessage, TReceiveMessage> configuration)
     {
         this.stream = networkStream;
         this.configuration = configuration;
-        this.state = LifecycleState.Initialized;
+        this.State = LifecycleState.Initialized;
     }
 
-    public event EventHandler<SymmetricNetworkStreamDataReceivedEventArgs>? DataReceived;
+    public event EventHandler<NetworkStreamDataReceivedEventArgs>? DataReceived;
 
     public override void Start()
     {
@@ -46,14 +48,15 @@ public class SymmetricNetworkStream<TMessage> : LifecycleComponent, IMessageSend
     {
         if (this.state != LifecycleState.Started)
         {
-            throw new InvalidOperationException("Network stream is to running.");
+            throw new InvalidOperationException("Network stream is not running.");
         }
 
         this.cancellationTokenSource?.Cancel();
         this.cancellationTokenSource = null;
+        this.State = LifecycleState.Stopped;
     }
 
-    public void Send(TMessage message)
+    public void Send(TSendMessage message)
     {
         try
         {
@@ -62,16 +65,16 @@ public class SymmetricNetworkStream<TMessage> : LifecycleComponent, IMessageSend
         }
         catch
         {
-            this.Stop();
+            Stop();
         }
     }
 
-    public async Task SendAsync(TMessage message, CancellationToken cancellationToken = default)
+    public async Task SendAsync(TSendMessage message, CancellationToken cancellationToken = default)
     {
         try
         {
             ReadOnlyMemory<byte> encodedMessage = this.configuration.MessageProtocol.Encode(message);
-            await this.stream.WriteAsync(encodedMessage, cancellationToken);
+            await stream.WriteAsync(encodedMessage, cancellationToken);
         }
         catch (OperationCanceledException)
         {
@@ -79,7 +82,7 @@ public class SymmetricNetworkStream<TMessage> : LifecycleComponent, IMessageSend
         }
         catch
         {
-            this.Stop();
+            Stop();
         }
     }
 
@@ -87,7 +90,7 @@ public class SymmetricNetworkStream<TMessage> : LifecycleComponent, IMessageSend
     {
         try
         {
-            await this.stream.WriteAsync(data, cancellationToken);
+            await stream.WriteAsync(data, cancellationToken);
         }
         catch (OperationCanceledException)
         {
@@ -95,11 +98,11 @@ public class SymmetricNetworkStream<TMessage> : LifecycleComponent, IMessageSend
         }
         catch
         {
-            this.Stop();
+            Stop();
         }
     }
 
-    protected virtual void FireOnDataReceived(SymmetricNetworkStreamDataReceivedEventArgs e)
+    protected virtual void FireOnDataReceived(NetworkStreamDataReceivedEventArgs e)
     {
         this.DataReceived?.Invoke(this, e);
     }
@@ -160,7 +163,7 @@ public class SymmetricNetworkStream<TMessage> : LifecycleComponent, IMessageSend
                 ReadOnlyMemory<byte> data = receivedData.AsMemory(0, messageSize);
                 if (!this.configuration.MessageProtocol.IsAliveMessage(data) || !this.configuration.FilterAliveMessages)
                 {
-                    this.FireOnDataReceived(new SymmetricNetworkStreamDataReceivedEventArgs(data));
+                    this.FireOnDataReceived(new NetworkStreamDataReceivedEventArgs(data));
                 }
 
                 byte[] unusedData = receivedData[messageSize..];

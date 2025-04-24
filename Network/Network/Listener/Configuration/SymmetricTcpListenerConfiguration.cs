@@ -1,5 +1,5 @@
 ﻿using Network.Architecture.Interfaces;
-using Network.Client;
+using Network.Client.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,17 +7,13 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Network.Listener;
+namespace Network.Listener.Configuration;
 
-public class SymmetricTcpListenerConfiguration<TMessage>
+public class SymmetricTcpListenerConfiguration<TMessage> : EnhancedTcpListenerConfiguration<TMessage, TMessage>
     where TMessage : IMessage
 {
     public SymmetricTcpListenerConfiguration(IPEndPoint endPoint, SymmetricTcpClientConfiguration<TMessage> clientConfiguration)
+        : base(endPoint, clientConfiguration)
     {
-        this.EndPoint = endPoint;
-        this.ClientConfiguration = clientConfiguration;
     }
-
-    public IPEndPoint EndPoint { get; }
-    public SymmetricTcpClientConfiguration<TMessage> ClientConfiguration { get; }
 }

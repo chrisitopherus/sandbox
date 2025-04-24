@@ -1,31 +1,32 @@
 ﻿using Network.Architecture;
 using Network.Architecture.Interfaces;
 using Network.Client;
+using Network.Listener.Configuration;
 using Network.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.Headers;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Network.Listener;
 
-public class SymmetricTcpListener<TMessage> : LifecycleComponent
-    where TMessage : IMessage
+public class EnhancedTcpListener<TSendMessage, TReceiveMessage> : LifecycleComponent
+    where TSendMessage : IMessage
+    where TReceiveMessage : IMessage
 {
     private TcpListener listener;
-    private readonly SymmetricTcpListenerConfiguration<TMessage> configuration;
+    private readonly EnhancedTcpListenerConfiguration<TSendMessage, TReceiveMessage> configuration;
     private CancellationTokenSource? cancellationTokenSource;
-    public SymmetricTcpListener(SymmetricTcpListenerConfiguration<TMessage> configuration)
+    public EnhancedTcpListener(EnhancedTcpListenerConfiguration<TSendMessage, TReceiveMessage> configuration)
     {
         this.listener = new TcpListener(configuration.EndPoint);
         this.configuration = configuration;
         this.State = LifecycleState.Initialized;
     }
 
-    public event EventHandler<SymmetricTcpListenerNewClientEventArgs<TMessage>>? NewClient;
+    public virtual event EventHandler<EnhancedTcpListenerNewClientEventArgs<TSendMessage, TReceiveMessage>>? NewClient;
 
     public override void Start()
     {
@@ -48,9 +49,10 @@ public class SymmetricTcpListener<TMessage> : LifecycleComponent
 
         this.cancellationTokenSource?.Cancel();
         this.cancellationTokenSource = null;
+        this.State = LifecycleState.Stopped;
     }
 
-    protected virtual void FireOnNewClient(SymmetricTcpListenerNewClientEventArgs<TMessage> e)
+    protected virtual void FireOnNewClient(EnhancedTcpListenerNewClientEventArgs<TSendMessage, TReceiveMessage> e)
     {
         this.NewClient?.Invoke(this, e);
     }
@@ -63,8 +65,8 @@ public class SymmetricTcpListener<TMessage> : LifecycleComponent
             {
                 this.listener.Start();
                 TcpClient tcpClient = await this.listener.AcceptTcpClientAsync(cancellationToken);
-                EnhancedTcpClient<TMessage> client = new EnhancedTcpClient<TMessage>(tcpClient, this.configuration.ClientConfiguration);
-                this.FireOnNewClient(new SymmetricTcpListenerNewClientEventArgs<TMessage>(client));
+                EnhancedTcpClient<TSendMessage, TReceiveMessage> client = new(tcpClient, this.configuration.ClientConfiguration);
+                this.FireOnNewClient(new EnhancedTcpListenerNewClientEventArgs<TSendMessage, TReceiveMessage>(client));
             }
         }
         catch (OperationCanceledException)
