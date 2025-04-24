@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Network.Architecture.Interfaces.Protocol;
 
 /// <summary>
-/// Defines a binary symmetric message protocol for communication.
+/// Defines a symmetric binary message protocol for communication.
 /// </summary>
 /// <typeparam name="TMessage">The type of message that the protocol uses.</typeparam>
 public interface ISymmetricMessageProtocol<TMessage> : IMessageProtocol<TMessage, TMessage>

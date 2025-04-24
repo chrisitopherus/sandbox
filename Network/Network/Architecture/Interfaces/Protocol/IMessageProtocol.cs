@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Network.Architecture.Interfaces.Protocol;
 
 /// <summary>
-/// Defines a message protocol used for communication.
+/// Defines an asymmetric binary message protocol used for communication.
 /// </summary>
 /// <typeparam name="TSendMessage">The type of message that is sent.</typeparam>
 /// <typeparam name="TReceiveMessage">The type of message that is received.</typeparam>
