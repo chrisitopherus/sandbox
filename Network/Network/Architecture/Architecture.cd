@@ -1,7 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Comment CommentText="Protocol">
+    <Position X="21.25" Y="0.5" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Symmetric">
+    <Position X="5.988" Y="0.5" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Asymmetric">
+    <Position X="6.559" Y="12.119" Height="0.75" Width="1.7" />
+  </Comment>
   <Interface Name="Network.Architecture.Interfaces.ILifecycleComponent">
-    <Position X="2.5" Y="0.5" Width="2.75" />
+    <Position X="5.5" Y="8.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACIAAAAAAAAAAAAAAAIAAAAAIAAABAAAAAA=</HashCode>
       <FileName>Architecture\Interfaces\ILifecycleComponent.cs</FileName>
@@ -11,30 +20,55 @@
     </ShowAsAssociation>
   </Interface>
   <Interface Name="Network.Architecture.Interfaces.IMessageSender&lt;TMessage&gt;">
-    <Position X="5.5" Y="0.5" Width="4.75" />
+    <Position X="0.5" Y="8.75" Width="4.75" />
     <TypeIdentifier>
       <HashCode>AABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Architecture\Interfaces\IMessageSender.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Network.Architecture.Interfaces.INetworkStream&lt;TMessage&gt;">
-    <Position X="3.75" Y="3" Width="4.5" />
+    <Position X="4.5" Y="3.75" Width="4.75" />
+    <InheritanceLine Type="Network.Architecture.Interfaces.ILifecycleComponent" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="5.938" Y="8.5" />
+        <Point X="5.938" Y="7.483" />
+        <Point X="4.217" Y="7.483" />
+        <Point X="4.217" Y="5.487" />
+        <Point X="6.875" Y="5.487" />
+        <Point X="6.875" Y="5.112" />
+      </Path>
+    </InheritanceLine>
+    <InheritanceLine Type="Network.Architecture.Interfaces.IMessageSender&lt;TMessage&gt;" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="2.875" Y="8.75" />
+        <Point X="2.875" Y="4.375" />
+        <Point X="4.5" Y="4.375" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Architecture\Interfaces\INetworkStream.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Network.Architecture.Interfaces.IClient&lt;TMessage&gt;">
-    <Position X="3.5" Y="4.5" Width="4.75" />
+    <Position X="4.5" Y="1.75" Width="4.75" />
     <InheritanceLine Type="Network.Architecture.Interfaces.ILifecycleComponent" ManuallyRouted="true" FixedFromPoint="true">
       <Path>
-        <Point X="2.812" Y="2.44" />
-        <Point X="2.812" Y="2.905" />
-        <Point X="3.2" Y="2.905" />
-        <Point X="3.2" Y="5.181" />
-        <Point X="3.251" Y="5.181" Type="JumpStart" />
-        <Point X="3.417" Y="5.181" Type="JumpEnd" />
-        <Point X="3.5" Y="5.181" />
+        <Point X="7.688" Y="8.5" />
+        <Point X="7.688" Y="7.483" />
+        <Point X="10.157" Y="7.483" />
+        <Point X="10.157" Y="3.256" />
+        <Point X="6.875" Y="3.256" />
+        <Point X="6.875" Y="3.112" />
+      </Path>
+    </InheritanceLine>
+    <InheritanceLine Type="Network.Architecture.Interfaces.IMessageSender&lt;TMessage&gt;" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="0.875" Y="8.75" />
+        <Point X="0.875" Y="6.942" />
+        <Point X="0.875" Y="6.942" />
+        <Point X="0.875" Y="2.375" />
+        <Point X="4.5" Y="2.375" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -43,29 +77,25 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="Network.Architecture.Interfaces.Events.IClientMessageReceivedEventArgs&lt;TMessage&gt;">
-    <Position X="9" Y="3" Width="3.25" />
+    <Position X="10.5" Y="2" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
       <FileName>Architecture\Interfaces\Events\IClientMessageReceivedEventArgs.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Network.Architecture.Interfaces.Events.INetworkStreamDataReceivedEventArgs">
-    <Position X="9" Y="4.75" Width="3" />
+    <Position X="10.5" Y="4" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
       <FileName>Architecture\Interfaces\Events\INetworkStreamDataReceivedEventArgs.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Network.Architecture.Interfaces.IListener&lt;TMessage&gt;">
-    <Position X="3.5" Y="6.25" Width="2.75" />
+    <Position X="4.5" Y="6" Width="4.75" />
     <InheritanceLine Type="Network.Architecture.Interfaces.ILifecycleComponent" ManuallyRouted="true">
       <Path>
-        <Point X="3.875" Y="2.44" />
-        <Point X="3.875" Y="2.7" />
-        <Point X="3.334" Y="2.7" />
-        <Point X="3.334" Y="6.058" />
-        <Point X="4.875" Y="6.058" />
-        <Point X="4.875" Y="6.25" />
+        <Point X="6.875" Y="8.5" />
+        <Point X="6.875" Y="7.233" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -74,70 +104,92 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="Network.Architecture.Interfaces.Events.IListenerNewClientEventArgs&lt;TMessage&gt;">
-    <Position X="9" Y="6.25" Width="3" />
+    <Position X="10.5" Y="6.25" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
       <FileName>Architecture\Interfaces\Events\IListenerNewClientEventArgs.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Network.Architecture.Interfaces.Protocol.IMessageDecoder&lt;TMessage&gt;">
-    <Position X="16" Y="0.75" Width="3.25" />
+    <Position X="20" Y="1.75" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
       <FileName>Architecture\Interfaces\Protocol\IMessageDecoder.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Network.Architecture.Interfaces.Protocol.IMessageEncoder&lt;TMessage&gt;">
-    <Position X="16" Y="2.25" Width="3.75" />
+    <Position X="19.75" Y="3.5" Width="3.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Architecture\Interfaces\Protocol\IMessageEncoder.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Network.Architecture.Interfaces.Protocol.ISymmetricMessageProtocol&lt;TMessage&gt;">
-    <Position X="12.5" Y="2" Width="3.25" />
+    <Position X="16" Y="3.5" Width="3.25" />
+    <InheritanceLine Type="Network.Architecture.Interfaces.Protocol.ISymmetricMessageCodec&lt;TMessage&gt;" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="17.312" Y="2.57" />
+        <Point X="17.312" Y="3.376" />
+        <Point X="17.312" Y="3.376" />
+        <Point X="17.312" Y="3.5" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>IAAAAAAAAAAIAAAAAAAAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
       <FileName>Architecture\Interfaces\Protocol\ISymmetricMessageProtocol.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Network.Architecture.Interfaces.IMessage">
-    <Position X="0.5" Y="3" Width="2.5" />
+    <Position X="11.25" Y="8.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Architecture\Interfaces\IMessage.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Network.Architecture.Interfaces.Protocol.IMessageDecoderRegistry&lt;TKey, TMessage&gt;">
-    <Position X="15.5" Y="4.25" Width="4.75" />
+    <Position X="19.25" Y="6.25" Width="4.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
       <FileName>Architecture\Interfaces\Protocol\IMessageDecoderRegistry.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Network.Architecture.Interfaces.Protocol.ISymmetricMessageCodec&lt;TMessage&gt;" Collapsed="true">
-    <Position X="13" Y="0.5" Width="2.5" />
+    <Position X="16.5" Y="1.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Architecture\Interfaces\Protocol\ISymmetricMessageCodec.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Network.Architecture.Interfaces.Protocol.Duplex.IAsymmetricMessageCodec&lt;TSendMessage, TReceiveMessage&gt;" Collapsed="true">
-    <Position X="20.75" Y="0.5" Width="4.5" />
+    <Position X="24.25" Y="1.75" Width="4.5" />
+    <InheritanceLine Type="Network.Architecture.Interfaces.Protocol.IMessageEncoder&lt;TMessage&gt;" FixedToPoint="true">
+      <Path>
+        <Point X="21.625" Y="3.5" />
+        <Point X="21.625" Y="3.125" />
+        <Point X="25.812" Y="3.125" />
+        <Point X="25.812" Y="2.57" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Architecture\Interfaces\Protocol\Duplex\IAsymmetricMessageCodec.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Network.Architecture.Interfaces.Protocol.Duplex.IAsymmetricMessageProtocol&lt;TSendMessage, TReceiveMessage&gt;">
-    <Position X="21" Y="2.75" Width="4" />
+    <Position X="24" Y="3.5" Width="4" />
+    <InheritanceLine Type="Network.Architecture.Interfaces.Protocol.Duplex.IAsymmetricMessageCodec&lt;TSendMessage, TReceiveMessage&gt;" FixedToPoint="true">
+      <Path>
+        <Point X="26.5" Y="2.57" />
+        <Point X="26.5" Y="3.5" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>IAAAAAAAAAAIAAAAAAAAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
       <FileName>Architecture\Interfaces\Protocol\Duplex\IAsymmetricMessageProtocol.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Enum Name="Network.Architecture.LifecycleState">
-    <Position X="0.5" Y="0.5" Width="1.25" />
+    <Position X="9.25" Y="9" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAAAEAAAAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Architecture\LifecycleState.cs</FileName>
