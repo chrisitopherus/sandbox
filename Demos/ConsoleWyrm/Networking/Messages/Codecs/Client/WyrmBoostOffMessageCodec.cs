@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleWyrm.Networking.Messages.Codecs.Client;
 
-public class WyrmBoostOffMessageCodec : IMessageCodec<WyrmBoostOffMessage>
+public class WyrmBoostOffMessageCodec : ISymmetricMessageCodec<WyrmBoostOffMessage>
 {
     public WyrmBoostOffMessage Decode(ReadOnlyMemory<byte> data)
     {

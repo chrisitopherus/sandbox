@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleWyrm.Networking.Messages.Codecs.Server;
 
-public class GameStateMessageCodec : IMessageCodec<GameStateMessage>
+public class GameStateMessageCodec : ISymmetricMessageCodec<GameStateMessage>
 {
     public GameStateMessage Decode(ReadOnlyMemory<byte> data)
     {

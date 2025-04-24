@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleWyrm.Networking.Messages.Codecs.Shared;
 
-public class AliveMessageCodec : IMessageCodec<AliveMessage>
+public class AliveMessageCodec : ISymmetricMessageCodec<AliveMessage>
 {
     public AliveMessage Decode(ReadOnlyMemory<byte> data)
     {

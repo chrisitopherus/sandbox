@@ -16,7 +16,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ConsoleWyrm.Networking;
 
-public class WyrmMessageProtocol<TMessage> : IMessageProtocol<TMessage>
+public class WyrmMessageProtocol<TMessage> : ISymmetricMessageProtocol<TMessage>
     where TMessage : ICustomMessage
 {
     private readonly MessageDecoderRegistry<TMessage> codecRegistry;
