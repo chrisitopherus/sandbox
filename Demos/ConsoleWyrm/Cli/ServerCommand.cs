@@ -42,13 +42,13 @@ public class ServerCommand : ICommand
     {
         int? port = ctx.GetModifierValue(this.portModifier);
         IPAddress? ip = ctx.GetModifierValue(this.ipModifer);
-        MessageDecoderRegistry<ICustomMessage<IClientMessageVisitor>> decoderRegistry = this.InitializeMessageDecoderRegistry();
-        WyrmMessageProtocol<ICustomMessage<IClientMessageVisitor>> messageProtocol = new(decoderRegistry);
+        MessageDecoderRegistry<IClientMessage> decoderRegistry = this.InitializeMessageDecoderRegistry();
+        WyrmMessageProtocol<IClientMessage> messageProtocol = new(decoderRegistry);
     }
 
-    private MessageDecoderRegistry<ICustomMessage<IClientMessageVisitor>> InitializeMessageDecoderRegistry()
+    private MessageDecoderRegistry<IClientMessage> InitializeMessageDecoderRegistry()
     {
-        return new MessageDecoderRegistry<ICustomMessage<IClientMessageVisitor>>()
+        return new MessageDecoderRegistry<IClientMessage>()
             .Register(MessageType.WyrmBoostOff, new WyrmBoostOffMessageCodec());
     }
 }

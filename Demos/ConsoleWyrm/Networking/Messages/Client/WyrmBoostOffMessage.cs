@@ -9,7 +9,7 @@ using Network.Architecture.Interfaces.Protocol;
 
 namespace ConsoleWyrm.Networking.Messages.Client;
 
-public class WyrmBoostOffMessage : ICustomMessage<IClientMessageVisitor>
+public class WyrmBoostOffMessage : IClientMessage
 {
     private readonly WyrmBoostOffMessageCodec codec = new();
 

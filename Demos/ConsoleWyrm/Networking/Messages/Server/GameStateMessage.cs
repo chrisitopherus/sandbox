@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleWyrm.Networking.Messages.Server;
 
-public class GameStateMessage : ICustomMessage<IServerMessageVisitor>
+public class GameStateMessage : IServerMessage
 {
     private readonly GameStateMessageCodec codec = new();
 

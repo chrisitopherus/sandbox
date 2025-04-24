@@ -7,7 +7,7 @@ using ConsoleWyrm.Networking.Messages.Data;
 
 namespace ConsoleWyrm.Networking.Messages.Client;
 
-public class WyrmDirectionChangeMessage : ICustomMessage<IClientMessageVisitor>
+public class WyrmDirectionChangeMessage : IClientMessage
 {
     public MessageType Type { get; } = MessageType.WyrmDirectionChange;
 

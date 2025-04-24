@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleWyrm.Networking.Messages.Server;
 
-public class WyrmsUpdatedMessage : ICustomMessage<IServerMessageVisitor>
+public class WyrmsUpdatedMessage : IServerMessage
 {
     public MessageType Type { get; } = MessageType.WyrmsUpdated;
 

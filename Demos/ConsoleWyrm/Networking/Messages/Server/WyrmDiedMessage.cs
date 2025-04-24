@@ -7,7 +7,7 @@ using ConsoleWyrm.Networking.Messages.Data;
 
 namespace ConsoleWyrm.Networking.Messages.Server;
 
-public class WyrmDiedMessage : ICustomMessage<IServerMessageVisitor>
+public class WyrmDiedMessage : IServerMessage
 {
     public MessageType Type { get; } = MessageType.WyrmDied;
 

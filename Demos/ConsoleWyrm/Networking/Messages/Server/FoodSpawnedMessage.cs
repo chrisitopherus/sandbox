@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleWyrm.Networking.Messages.Server;
 
-public class FoodSpawnedMessage : ICustomMessage<IServerMessageVisitor>
+public class FoodSpawnedMessage : IServerMessage
 {
     public MessageType Type { get; } = MessageType.FoodSpawned;
 

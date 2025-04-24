@@ -32,12 +32,12 @@ public class ClientCommand : ICommand
         string? username = ctx.GetModifierValue(this.usernameModifier);
         int? port = ctx.GetModifierValue(this.portModifier);
         IPAddress? ip = ctx.GetModifierValue(this.ipModifer);
-        MessageDecoderRegistry<ICustomMessage<IServerMessageVisitor>> decoderRegistry = this.InitializeMessageDecoderRegistry();
+        MessageDecoderRegistry<IServerMessage> decoderRegistry = this.InitializeMessageDecoderRegistry();
     }
 
-    private MessageDecoderRegistry<ICustomMessage<IServerMessageVisitor>> InitializeMessageDecoderRegistry()
+    private MessageDecoderRegistry<IServerMessage> InitializeMessageDecoderRegistry()
     {
-        return new MessageDecoderRegistry<ICustomMessage<IServerMessageVisitor>>()
+        return new MessageDecoderRegistry<IServerMessage>()
             .Register(MessageType.GameState, new GameStateMessageCodec());
     }
 }

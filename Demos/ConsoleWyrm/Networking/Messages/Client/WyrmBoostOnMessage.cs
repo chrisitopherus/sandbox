@@ -7,7 +7,7 @@ using ConsoleWyrm.Networking.Messages.Data;
 
 namespace ConsoleWyrm.Networking.Messages.Client;
 
-public class WyrmBoostOnMessage : ICustomMessage<IClientMessageVisitor>
+public class WyrmBoostOnMessage : IClientMessage
 {
     public MessageType Type { get; } = MessageType.WyrmBoostOn;
 
