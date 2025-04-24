@@ -12,15 +12,15 @@ using System.Threading.Tasks;
 
 namespace Network.Client;
 
-public class EnhancedTcpClient<TMessage> : LifecycleComponent, IMessageSender<TMessage>
+public class SymmetricTcpClient<TMessage> : LifecycleComponent, IMessageSender<TMessage>
     where TMessage : IMessage
 {
     private readonly TcpClient client;
-    private readonly EnhancedTcpClientConfiguration<TMessage> configuration;
-    private readonly EnhancedNetworkStream<TMessage> networkStream;
+    private readonly SymmetricTcpClientConfiguration<TMessage> configuration;
+    private readonly SymmetricNetworkStream<TMessage> networkStream;
     private CancellationTokenSource? cancellationTokenSource;
 
-    public EnhancedTcpClient(TcpClient client, EnhancedTcpClientConfiguration<TMessage> configuration)
+    public SymmetricTcpClient(TcpClient client, SymmetricTcpClientConfiguration<TMessage> configuration)
     {
         this.client = client;
         if (!client.Connected)
@@ -29,12 +29,12 @@ public class EnhancedTcpClient<TMessage> : LifecycleComponent, IMessageSender<TM
         }
 
         this.configuration = configuration;
-        this.networkStream = new EnhancedNetworkStream<TMessage>(client.GetStream(), configuration);
+        this.networkStream = new SymmetricNetworkStream<TMessage>(client.GetStream(), configuration);
 
         this.State = LifecycleState.Initialized;
     }
 
-    public event EventHandler<EnhancedTcpClientMessageReceivedEventArgs<TMessage>>? MessageReceived;
+    public event EventHandler<SymmetricTcpClientMessageReceivedEventArgs<TMessage>>? MessageReceived;
 
     public void Send(TMessage message)
     {
@@ -110,7 +110,7 @@ public class EnhancedTcpClient<TMessage> : LifecycleComponent, IMessageSender<TM
         this.cancellationTokenSource = null;
     }
 
-    protected virtual void FireOnMessageReceived(EnhancedTcpClientMessageReceivedEventArgs<TMessage> e)
+    protected virtual void FireOnMessageReceived(SymmetricTcpClientMessageReceivedEventArgs<TMessage> e)
     {
         this.MessageReceived?.Invoke(this, e);
     }
@@ -123,10 +123,10 @@ public class EnhancedTcpClient<TMessage> : LifecycleComponent, IMessageSender<TM
         }
     }
 
-    private void EnhancedNetworkStreamDataReceivedHandler(object? sender, EnhancedNetworkStreamDataReceivedEventArgs e)
+    private void EnhancedNetworkStreamDataReceivedHandler(object? sender, SymmetricNetworkStreamDataReceivedEventArgs e)
     {
         TMessage message = this.configuration.MessageProtocol.Decode(e.Data);
-        this.FireOnMessageReceived(new EnhancedTcpClientMessageReceivedEventArgs<TMessage>(message));
+        this.FireOnMessageReceived(new SymmetricTcpClientMessageReceivedEventArgs<TMessage>(message));
     }
 
     private async Task KeepAliveAsync(CancellationToken cancellationToken = default)

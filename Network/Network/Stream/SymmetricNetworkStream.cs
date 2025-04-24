@@ -13,22 +13,22 @@ using System.Threading.Tasks;
 
 namespace Network.Stream;
 
-public class EnhancedNetworkStream<TMessage> : LifecycleComponent, IMessageSender<TMessage>
+public class SymmetricNetworkStream<TMessage> : LifecycleComponent, IMessageSender<TMessage>
     where TMessage : IMessage
 {
     private NetworkStream stream;
-    private EnhancedNetworkStreamConfiguration<TMessage> configuration;
+    private SymmetricNetworkStreamConfiguration<TMessage> configuration;
 
     private CancellationTokenSource? cancellationTokenSource;
 
-    public EnhancedNetworkStream(NetworkStream networkStream, EnhancedNetworkStreamConfiguration<TMessage> configuration)
+    public SymmetricNetworkStream(NetworkStream networkStream, SymmetricNetworkStreamConfiguration<TMessage> configuration)
     {
         this.stream = networkStream;
         this.configuration = configuration;
         this.state = LifecycleState.Initialized;
     }
 
-    public event EventHandler<EnhancedNetworkStreamDataReceivedEventArgs>? DataReceived;
+    public event EventHandler<SymmetricNetworkStreamDataReceivedEventArgs>? DataReceived;
 
     public override void Start()
     {
@@ -99,7 +99,7 @@ public class EnhancedNetworkStream<TMessage> : LifecycleComponent, IMessageSende
         }
     }
 
-    protected virtual void FireOnDataReceived(EnhancedNetworkStreamDataReceivedEventArgs e)
+    protected virtual void FireOnDataReceived(SymmetricNetworkStreamDataReceivedEventArgs e)
     {
         this.DataReceived?.Invoke(this, e);
     }
@@ -160,7 +160,7 @@ public class EnhancedNetworkStream<TMessage> : LifecycleComponent, IMessageSende
                 ReadOnlyMemory<byte> data = receivedData.AsMemory(0, messageSize);
                 if (!this.configuration.MessageProtocol.IsAliveMessage(data) || !this.configuration.FilterAliveMessages)
                 {
-                    this.FireOnDataReceived(new EnhancedNetworkStreamDataReceivedEventArgs(data));
+                    this.FireOnDataReceived(new SymmetricNetworkStreamDataReceivedEventArgs(data));
                 }
 
                 byte[] unusedData = receivedData[messageSize..];

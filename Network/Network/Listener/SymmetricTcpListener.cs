@@ -12,20 +12,20 @@ using System.Threading.Tasks;
 
 namespace Network.Listener;
 
-public class EnhancedTcpListener<TMessage> : LifecycleComponent
+public class SymmetricTcpListener<TMessage> : LifecycleComponent
     where TMessage : IMessage
 {
     private TcpListener listener;
-    private readonly EnhancedTcpListenerConfiguration<TMessage> configuration;
+    private readonly SymmetricTcpListenerConfiguration<TMessage> configuration;
     private CancellationTokenSource? cancellationTokenSource;
-    public EnhancedTcpListener(EnhancedTcpListenerConfiguration<TMessage> configuration)
+    public SymmetricTcpListener(SymmetricTcpListenerConfiguration<TMessage> configuration)
     {
         this.listener = new TcpListener(configuration.EndPoint);
         this.configuration = configuration;
         this.State = LifecycleState.Initialized;
     }
 
-    public event EventHandler<EnhancedTcpListenerNewClientEventArgs<TMessage>>? NewClient;
+    public event EventHandler<SymmetricTcpListenerNewClientEventArgs<TMessage>>? NewClient;
 
     public override void Start()
     {
@@ -50,7 +50,7 @@ public class EnhancedTcpListener<TMessage> : LifecycleComponent
         this.cancellationTokenSource = null;
     }
 
-    protected virtual void FireOnNewClient(EnhancedTcpListenerNewClientEventArgs<TMessage> e)
+    protected virtual void FireOnNewClient(SymmetricTcpListenerNewClientEventArgs<TMessage> e)
     {
         this.NewClient?.Invoke(this, e);
     }
@@ -64,7 +64,7 @@ public class EnhancedTcpListener<TMessage> : LifecycleComponent
                 this.listener.Start();
                 TcpClient tcpClient = await this.listener.AcceptTcpClientAsync(cancellationToken);
                 EnhancedTcpClient<TMessage> client = new EnhancedTcpClient<TMessage>(tcpClient, this.configuration.ClientConfiguration);
-                this.FireOnNewClient(new EnhancedTcpListenerNewClientEventArgs<TMessage>(client));
+                this.FireOnNewClient(new SymmetricTcpListenerNewClientEventArgs<TMessage>(client));
             }
         }
         catch (OperationCanceledException)

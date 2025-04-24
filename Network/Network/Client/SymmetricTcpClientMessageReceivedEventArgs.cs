@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Network.Client;
 
-public class EnhancedTcpClientMessageReceivedEventArgs<TMessage> : EventArgs
+public class SymmetricTcpClientMessageReceivedEventArgs<TMessage> : EventArgs
     where TMessage : IMessage
 {
-    public EnhancedTcpClientMessageReceivedEventArgs(TMessage message)
+    public SymmetricTcpClientMessageReceivedEventArgs(TMessage message)
     {
         this.Message = message;
     }

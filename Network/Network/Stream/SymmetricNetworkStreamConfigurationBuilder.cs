@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Network.Stream;
 
-public class EnhancedNetworkStreamConfigurationBuilder<TMessage>
+public class SymmetricNetworkStreamConfigurationBuilder<TMessage>
     where TMessage : IMessage
 {
     private int networkBufferSize = 4096;
@@ -18,41 +18,41 @@ public class EnhancedNetworkStreamConfigurationBuilder<TMessage>
     private bool filterAliveMessages = true;
     private IMessageProtocol<TMessage> messageProtocol;
 
-    public EnhancedNetworkStreamConfigurationBuilder(IMessageProtocol<TMessage> messageProtocol)
+    public SymmetricNetworkStreamConfigurationBuilder(IMessageProtocol<TMessage> messageProtocol)
     {
         Validator.NotNull(messageProtocol, nameof(messageProtocol));
         this.messageProtocol = messageProtocol;
     }
 
-    public EnhancedNetworkStreamConfigurationBuilder<TMessage> WithBufferSize(int bufferSize)
+    public SymmetricNetworkStreamConfigurationBuilder<TMessage> WithBufferSize(int bufferSize)
     {
         Validator.NotLessThan(bufferSize, 0, nameof(bufferSize));
         this.networkBufferSize = bufferSize;
         return this;
     }
 
-    public EnhancedNetworkStreamConfigurationBuilder<TMessage> WithPollDelay(int pollDelayMs)
+    public SymmetricNetworkStreamConfigurationBuilder<TMessage> WithPollDelay(int pollDelayMs)
     {
         Validator.NotLessThan(pollDelayMs, 0, nameof(pollDelayMs));
         this.pollDelayMs = pollDelayMs;
         return this;
     }
 
-    public EnhancedNetworkStreamConfigurationBuilder<TMessage> WithProtocol(IMessageProtocol<TMessage> messageProtocol)
+    public SymmetricNetworkStreamConfigurationBuilder<TMessage> WithProtocol(IMessageProtocol<TMessage> messageProtocol)
     {
         Validator.NotNull(messageProtocol, nameof(messageProtocol));
         this.messageProtocol = messageProtocol;
         return this;
     }
 
-    public EnhancedNetworkStreamConfigurationBuilder<TMessage> DeactiveAliveMessageFilter()
+    public SymmetricNetworkStreamConfigurationBuilder<TMessage> DeactiveAliveMessageFilter()
     {
         this.filterAliveMessages = false;
         return this;
     }
 
-    public EnhancedNetworkStreamConfiguration<TMessage> Create()
+    public SymmetricNetworkStreamConfiguration<TMessage> Create()
     {
-        return new EnhancedNetworkStreamConfiguration<TMessage>(this.networkBufferSize, this.pollDelayMs, this.messageProtocol) { FilterAliveMessages = this.filterAliveMessages};
+        return new SymmetricNetworkStreamConfiguration<TMessage>(this.networkBufferSize, this.pollDelayMs, this.messageProtocol) { FilterAliveMessages = this.filterAliveMessages};
     }
 }

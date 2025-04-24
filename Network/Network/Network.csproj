@@ -10,4 +10,10 @@
     <ProjectReference Include="..\..\Helpers\Helpers\Helpers.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Client\Duplex\" />
+    <Folder Include="Listener\Duplex\" />
+    <Folder Include="Stream\Duplex\" />
+  </ItemGroup>
+
 </Project>

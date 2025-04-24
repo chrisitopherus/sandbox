@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Network.Listener;
 
-public class EnhancedTcpListenerNewClientEventArgs<TMessage>
+public class SymmetricTcpListenerNewClientEventArgs<TMessage>
     where TMessage : IMessage
 {
-    public EnhancedTcpListenerNewClientEventArgs(EnhancedTcpClient<TMessage> client)
+    public SymmetricTcpListenerNewClientEventArgs(EnhancedTcpClient<TMessage> client)
     {
         this.Client = client;
     }

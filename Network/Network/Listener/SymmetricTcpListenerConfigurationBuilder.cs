@@ -11,28 +11,28 @@ using System.Threading.Tasks;
 
 namespace Network.Listener;
 
-public class EnhancedTcpListenerConfigurationBuilder<TMessage>
+public class SymmetricTcpListenerConfigurationBuilder<TMessage>
     where TMessage : IMessage
 {
     private int port;
     private IPAddress? ip;
-    private EnhancedTcpClientConfiguration<TMessage>? clientConfiguration;
+    private SymmetricTcpClientConfiguration<TMessage>? clientConfiguration;
 
-    public EnhancedTcpListenerConfigurationBuilder<TMessage> WithClientConfiguration(EnhancedTcpClientConfiguration<TMessage> clientConfiguration)
+    public SymmetricTcpListenerConfigurationBuilder<TMessage> WithClientConfiguration(SymmetricTcpClientConfiguration<TMessage> clientConfiguration)
     {
         Validator.NotNull(clientConfiguration, nameof(clientConfiguration));
         this.clientConfiguration = clientConfiguration;
         return this;
     }
 
-    public EnhancedTcpListenerConfigurationBuilder<TMessage> WithIP(IPAddress ip)
+    public SymmetricTcpListenerConfigurationBuilder<TMessage> WithIP(IPAddress ip)
     {
         Validator.NotNull(ip, nameof(ip));
         this.ip = ip;
         return this;
     }
 
-    public EnhancedTcpListenerConfigurationBuilder<TMessage> WithPort(int port)
+    public SymmetricTcpListenerConfigurationBuilder<TMessage> WithPort(int port)
     {
         Validator.NotLessThan(port, IPEndPoint.MinPort, nameof(port));
         Validator.NotGreaterThan(port, IPEndPoint.MaxPort, nameof(port));
@@ -40,7 +40,7 @@ public class EnhancedTcpListenerConfigurationBuilder<TMessage>
         return this;
     }
 
-    public EnhancedTcpListenerConfiguration<TMessage> Create()
+    public SymmetricTcpListenerConfiguration<TMessage> Create()
     {
         if (this.ip == null)
         {
@@ -54,6 +54,6 @@ public class EnhancedTcpListenerConfigurationBuilder<TMessage>
 
         IPEndPoint endPoint = new IPEndPoint(this.ip, this.port);
 
-        return new EnhancedTcpListenerConfiguration<TMessage>(endPoint, this.clientConfiguration);
+        return new SymmetricTcpListenerConfiguration<TMessage>(endPoint, this.clientConfiguration);
     }
 }

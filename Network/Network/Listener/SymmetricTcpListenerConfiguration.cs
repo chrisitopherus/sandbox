@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace Network.Listener;
 
-public class EnhancedTcpListenerConfiguration<TMessage>
+public class SymmetricTcpListenerConfiguration<TMessage>
     where TMessage : IMessage
 {
-    public EnhancedTcpListenerConfiguration(IPEndPoint endPoint, EnhancedTcpClientConfiguration<TMessage> clientConfiguration)
+    public SymmetricTcpListenerConfiguration(IPEndPoint endPoint, SymmetricTcpClientConfiguration<TMessage> clientConfiguration)
     {
         this.EndPoint = endPoint;
         this.ClientConfiguration = clientConfiguration;
     }
 
     public IPEndPoint EndPoint { get; }
-    public EnhancedTcpClientConfiguration<TMessage> ClientConfiguration { get; }
+    public SymmetricTcpClientConfiguration<TMessage> ClientConfiguration { get; }
 }

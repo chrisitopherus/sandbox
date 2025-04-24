@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Network.Client;
 
-public class EnhancedTcpClientConfigurationBuilder<TMessage>
+public class SymmetricTcpClientConfigurationBuilder<TMessage>
     where TMessage : IMessage
 {
     private IMessageProtocol<TMessage> messageProtocol;
@@ -20,47 +20,47 @@ public class EnhancedTcpClientConfigurationBuilder<TMessage>
     private int pollDelayMs = 100;
     private bool filterAliveMessages = true;
 
-    public EnhancedTcpClientConfigurationBuilder(IMessageProtocol<TMessage> messageProtocol)
+    public SymmetricTcpClientConfigurationBuilder(IMessageProtocol<TMessage> messageProtocol)
     {
         Validator.NotNull(messageProtocol, nameof(messageProtocol));
         this.messageProtocol = messageProtocol;
     }
 
-    public EnhancedTcpClientConfigurationBuilder<TMessage> WithMessageProtocol(IMessageProtocol<TMessage> messageProtocol)
+    public SymmetricTcpClientConfigurationBuilder<TMessage> WithMessageProtocol(IMessageProtocol<TMessage> messageProtocol)
     {
         Validator.NotNull(messageProtocol, nameof(messageProtocol));
         this.messageProtocol = messageProtocol;
         return this;
     }
 
-    public EnhancedTcpClientConfigurationBuilder<TMessage> WithKeepAliveMessageInterval(int keepAliveMessageIntervalMs)
+    public SymmetricTcpClientConfigurationBuilder<TMessage> WithKeepAliveMessageInterval(int keepAliveMessageIntervalMs)
     {
         Validator.NotLessThan(keepAliveMessageIntervalMs, 0, nameof(keepAliveMessageIntervalMs));
         this.keepAliveMessageIntervalMs = keepAliveMessageIntervalMs;
         return this;
     }
 
-    public EnhancedTcpClientConfigurationBuilder<TMessage> WithPollDelay(int pollDelayMs)
+    public SymmetricTcpClientConfigurationBuilder<TMessage> WithPollDelay(int pollDelayMs)
     {
         Validator.NotLessThan(pollDelayMs, 0, nameof(pollDelayMs));
         this.pollDelayMs = pollDelayMs;
         return this;
     }
 
-    public EnhancedTcpClientConfigurationBuilder<TMessage> WithNetworkBufferSize(int networkBufferSize)
+    public SymmetricTcpClientConfigurationBuilder<TMessage> WithNetworkBufferSize(int networkBufferSize)
     {
         Validator.NotLessThan(networkBufferSize, 0, nameof(networkBufferSize));
         this.networkBufferSize = networkBufferSize;
         return this;
     }
 
-    public EnhancedTcpClientConfigurationBuilder<TMessage> DeactiveAliveMessageFilter()
+    public SymmetricTcpClientConfigurationBuilder<TMessage> DeactiveAliveMessageFilter()
     {
         this.filterAliveMessages = false;
         return this;
     }
 
-    public EnhancedTcpClientConfigurationBuilder<TMessage> WithNetworkStreamConfiguration(EnhancedNetworkStreamConfiguration<TMessage> configuration)
+    public SymmetricTcpClientConfigurationBuilder<TMessage> WithNetworkStreamConfiguration(SymmetricNetworkStreamConfiguration<TMessage> configuration)
     {
         Validator.NotNull(configuration, nameof(configuration));
         this.messageProtocol = configuration.MessageProtocol;
@@ -70,8 +70,8 @@ public class EnhancedTcpClientConfigurationBuilder<TMessage>
         return this;
     }
 
-    public EnhancedTcpClientConfiguration<TMessage> Create()
+    public SymmetricTcpClientConfiguration<TMessage> Create()
     {
-        return new EnhancedTcpClientConfiguration<TMessage>(this.messageProtocol, this.keepAliveMessageIntervalMs, this.networkBufferSize, this.pollDelayMs) { FilterAliveMessages = this.filterAliveMessages};
+        return new SymmetricTcpClientConfiguration<TMessage>(this.messageProtocol, this.keepAliveMessageIntervalMs, this.networkBufferSize, this.pollDelayMs) { FilterAliveMessages = this.filterAliveMessages};
     }
 }

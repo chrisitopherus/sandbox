@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace Network.Client;
 
-public class EnhancedTcpClientConfiguration<TMessage> : EnhancedNetworkStreamConfiguration<TMessage>
+public class SymmetricTcpClientConfiguration<TMessage> : SymmetricNetworkStreamConfiguration<TMessage>
     where TMessage : IMessage
 {
-    public EnhancedTcpClientConfiguration(IMessageProtocol<TMessage> messageProtocol, int keepAliveMessageIntervalMs, int networkBufferSize, int pollDelayMs)
+    public SymmetricTcpClientConfiguration(IMessageProtocol<TMessage> messageProtocol, int keepAliveMessageIntervalMs, int networkBufferSize, int pollDelayMs)
         : base(networkBufferSize, pollDelayMs, messageProtocol)
     {
         Validator.NotLessThan(keepAliveMessageIntervalMs, 0, nameof(keepAliveMessageIntervalMs));
@@ -23,8 +23,8 @@ public class EnhancedTcpClientConfiguration<TMessage> : EnhancedNetworkStreamCon
 
     public int KeepAliveMessageIntervalMs { get; }
 
-    public new static EnhancedTcpClientConfiguration<TMessage> CreateDefault(IMessageProtocol<TMessage> protocol)
+    public new static SymmetricTcpClientConfiguration<TMessage> CreateDefault(IMessageProtocol<TMessage> protocol)
     {
-        return new EnhancedTcpClientConfiguration<TMessage>(protocol, 1000, 4096, 100);
+        return new SymmetricTcpClientConfiguration<TMessage>(protocol, 1000, 4096, 100);
     }
 }
