@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ConsoleWyrm.Networking.Messages.Data;
-using Network.Architecture.Interfaces;
 
 namespace ConsoleWyrm.Networking.Messages;
 
-public interface ICustomMessage : IMessage
+public interface IClientMessage : ICustomMessage
 {
-    MessageType Type { get; }
+    void Accept(IClientMessageVisitor visitor);
 }
