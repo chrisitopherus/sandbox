@@ -93,7 +93,6 @@ public class EnhancedTcpClient<TSendMessage, TReceiveMessage> : LifecycleCompone
         this.networkStream.DataReceived += this.EnhancedNetworkStreamDataReceivedHandler;
 
         this.State = LifecycleState.Started;
-
         Task _ = Task.Run(() => this.KeepAliveAsync(this.cancellationTokenSource.Token));
     }
 
@@ -109,6 +108,7 @@ public class EnhancedTcpClient<TSendMessage, TReceiveMessage> : LifecycleCompone
 
         this.cancellationTokenSource?.Cancel();
         this.cancellationTokenSource = null;
+        this.State = LifecycleState.Stopped;
     }
 
     protected virtual void FireOnMessageReceived(TcpClientMessageReceivedEventArgs<TReceiveMessage> e)
