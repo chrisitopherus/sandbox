@@ -14,7 +14,7 @@ namespace Network.Client;
 public class SymmetricTcpClientConfiguration<TMessage> : SymmetricNetworkStreamConfiguration<TMessage>
     where TMessage : IMessage
 {
-    public SymmetricTcpClientConfiguration(IMessageProtocol<TMessage> messageProtocol, int keepAliveMessageIntervalMs, int networkBufferSize, int pollDelayMs)
+    public SymmetricTcpClientConfiguration(ISymmetricMessageProtocol<TMessage> messageProtocol, int keepAliveMessageIntervalMs, int networkBufferSize, int pollDelayMs)
         : base(networkBufferSize, pollDelayMs, messageProtocol)
     {
         Validator.NotLessThan(keepAliveMessageIntervalMs, 0, nameof(keepAliveMessageIntervalMs));
@@ -23,7 +23,7 @@ public class SymmetricTcpClientConfiguration<TMessage> : SymmetricNetworkStreamC
 
     public int KeepAliveMessageIntervalMs { get; }
 
-    public new static SymmetricTcpClientConfiguration<TMessage> CreateDefault(IMessageProtocol<TMessage> protocol)
+    public new static SymmetricTcpClientConfiguration<TMessage> CreateDefault(ISymmetricMessageProtocol<TMessage> protocol)
     {
         return new SymmetricTcpClientConfiguration<TMessage>(protocol, 1000, 4096, 100);
     }

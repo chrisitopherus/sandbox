@@ -10,7 +10,7 @@ namespace Network.Architecture.Interfaces.Protocol;
 /// Defines a message codec.
 /// </summary>
 /// <typeparam name="TMessage">The type of message that is either encoded or decoded</typeparam>
-public interface IMessageCodec<TMessage> : IMessageEncoder<TMessage>, IMessageDecoder<TMessage>
+public interface ISymmetricMessageCodec<TMessage> : IMessageEncoder<TMessage>, IMessageDecoder<TMessage>
     where TMessage : IMessage
 {
 }

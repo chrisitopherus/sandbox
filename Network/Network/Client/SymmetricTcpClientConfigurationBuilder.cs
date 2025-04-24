@@ -14,19 +14,19 @@ namespace Network.Client;
 public class SymmetricTcpClientConfigurationBuilder<TMessage>
     where TMessage : IMessage
 {
-    private IMessageProtocol<TMessage> messageProtocol;
+    private ISymmetricMessageProtocol<TMessage> messageProtocol;
     private int keepAliveMessageIntervalMs = 1000;
     private int networkBufferSize = 4096;
     private int pollDelayMs = 100;
     private bool filterAliveMessages = true;
 
-    public SymmetricTcpClientConfigurationBuilder(IMessageProtocol<TMessage> messageProtocol)
+    public SymmetricTcpClientConfigurationBuilder(ISymmetricMessageProtocol<TMessage> messageProtocol)
     {
         Validator.NotNull(messageProtocol, nameof(messageProtocol));
         this.messageProtocol = messageProtocol;
     }
 
-    public SymmetricTcpClientConfigurationBuilder<TMessage> WithMessageProtocol(IMessageProtocol<TMessage> messageProtocol)
+    public SymmetricTcpClientConfigurationBuilder<TMessage> WithMessageProtocol(ISymmetricMessageProtocol<TMessage> messageProtocol)
     {
         Validator.NotNull(messageProtocol, nameof(messageProtocol));
         this.messageProtocol = messageProtocol;

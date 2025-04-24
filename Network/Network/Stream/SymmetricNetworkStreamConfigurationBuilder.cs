@@ -16,9 +16,9 @@ public class SymmetricNetworkStreamConfigurationBuilder<TMessage>
     private int networkBufferSize = 4096;
     private int pollDelayMs = 100;
     private bool filterAliveMessages = true;
-    private IMessageProtocol<TMessage> messageProtocol;
+    private ISymmetricMessageProtocol<TMessage> messageProtocol;
 
-    public SymmetricNetworkStreamConfigurationBuilder(IMessageProtocol<TMessage> messageProtocol)
+    public SymmetricNetworkStreamConfigurationBuilder(ISymmetricMessageProtocol<TMessage> messageProtocol)
     {
         Validator.NotNull(messageProtocol, nameof(messageProtocol));
         this.messageProtocol = messageProtocol;
@@ -38,7 +38,7 @@ public class SymmetricNetworkStreamConfigurationBuilder<TMessage>
         return this;
     }
 
-    public SymmetricNetworkStreamConfigurationBuilder<TMessage> WithProtocol(IMessageProtocol<TMessage> messageProtocol)
+    public SymmetricNetworkStreamConfigurationBuilder<TMessage> WithProtocol(ISymmetricMessageProtocol<TMessage> messageProtocol)
     {
         Validator.NotNull(messageProtocol, nameof(messageProtocol));
         this.messageProtocol = messageProtocol;

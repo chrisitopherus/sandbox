@@ -14,7 +14,7 @@ namespace Network.Stream;
 public class SymmetricNetworkStreamConfiguration<TMessage>
     where TMessage : IMessage
 {
-    public SymmetricNetworkStreamConfiguration(int networkBufferSize, int pollDelayMs, IMessageProtocol<TMessage> messageProtocol)
+    public SymmetricNetworkStreamConfiguration(int networkBufferSize, int pollDelayMs, ISymmetricMessageProtocol<TMessage> messageProtocol)
     {
         Validator.NotLessThan(networkBufferSize, 0, nameof(networkBufferSize));
         Validator.NotLessThan(pollDelayMs, 0, nameof(pollDelayMs));
@@ -31,9 +31,9 @@ public class SymmetricNetworkStreamConfiguration<TMessage>
 
     public bool FilterAliveMessages { get; set; } = true;
 
-    public IMessageProtocol<TMessage> MessageProtocol { get; }
+    public ISymmetricMessageProtocol<TMessage> MessageProtocol { get; }
 
-    public static SymmetricNetworkStreamConfiguration<TMessage> CreateDefault(IMessageProtocol<TMessage> protocol)
+    public static SymmetricNetworkStreamConfiguration<TMessage> CreateDefault(ISymmetricMessageProtocol<TMessage> protocol)
     {
         return new SymmetricNetworkStreamConfiguration<TMessage>(4096, 100, protocol);
     }

@@ -10,7 +10,7 @@ namespace Network.Architecture.Interfaces.Protocol;
 /// Defines a binary message protocol for communication.
 /// </summary>
 /// <typeparam name="TMessage">The type of message that the protocol uses.</typeparam>
-public interface IMessageProtocol<TMessage> : IMessageCodec<TMessage>
+public interface ISymmetricMessageProtocol<TMessage> : ISymmetricMessageCodec<TMessage>
     where TMessage : IMessage
 {
     /// <summary>
