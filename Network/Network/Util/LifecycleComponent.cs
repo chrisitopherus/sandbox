@@ -46,24 +46,16 @@ public abstract class LifecycleComponent : ILifecycleComponent
         }
     }
 
-    /// <summary>
     /// <inheritdoc />
-    /// </summary>
     public event EventHandler? Started;
 
-    /// <summary>
     /// <inheritdoc />
-    /// </summary>
     public event EventHandler? Stopped;
 
-    /// <summary>
     /// <inheritdoc />
-    /// </summary>
     public abstract void Start();
 
-    /// <summary>
     /// <inheritdoc />
-    /// </summary>
     public abstract void Stop();
 
     /// <summary>
