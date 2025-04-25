@@ -14,9 +14,21 @@ using System.Threading.Tasks;
 
 namespace Network.Stream.Symmetric;
 
+/// <summary>
+/// Represents a network stream that uses the same message type for sending and receiving.
+/// 
+/// This is useful for protocols where the request and response types are identical,
+/// such as in symmetric peer-to-peer communication.
+/// </summary>
+/// <typeparam name="TMessage">The type of the message used for both sending and receiving.</typeparam>
 public class SymmetricNetworkStream<TMessage> : EnhancedNetworkStream<TMessage, TMessage>
     where TMessage : IMessage
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SymmetricNetworkStream{TMessage}"/> class.
+    /// </summary>
+    /// <param name="networkStream">The network stream used for communication.</param>
+    /// <param name="configuration">The configuration object specifying message handling and protocol settings.</param>
     public SymmetricNetworkStream(NetworkStream networkStream, SymmetricNetworkStreamConfiguration<TMessage> configuration)
         : base(networkStream, configuration)
     {
