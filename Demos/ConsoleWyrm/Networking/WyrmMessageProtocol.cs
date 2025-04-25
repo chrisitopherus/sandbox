@@ -3,7 +3,7 @@ using ConsoleWyrm.Networking.Messages.Codecs.Shared;
 using ConsoleWyrm.Networking.Messages.Data;
 using ConsoleWyrm.Networking.Messages.Shared;
 using ConsoleWyrm.Utility;
-using Helpers.Utility;
+using Helpers.Utility.Span;
 using Microsoft.Win32;
 using Network.Architecture.Interfaces.Protocol;
 using System;
@@ -16,17 +16,18 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ConsoleWyrm.Networking;
 
-public class WyrmMessageProtocol<TMessage> : ISymmetricMessageProtocol<TMessage>
-    where TMessage : ICustomMessage
+public class WyrmMessageProtocol<TSendMessage, TReceiveMessage> : IMessageProtocol<TSendMessage, TReceiveMessage>
+    where TSendMessage : ICustomMessage
+    where TReceiveMessage : ICustomMessage
 {
-    private readonly MessageDecoderRegistry<TMessage> codecRegistry;
+    private readonly MessageDecoderRegistry<TReceiveMessage> decoderRegistry;
     private readonly int headerByteSize = 5;
     private readonly AliveMessageCodec aliveMessageCodec = new();
     private readonly AliveMessage aliveMessage = new();
 
-    public WyrmMessageProtocol(MessageDecoderRegistry<TMessage> messageCodecRegistry)
+    public WyrmMessageProtocol(MessageDecoderRegistry<TReceiveMessage> decoderRegistry)
     {
-        this.codecRegistry = messageCodecRegistry;
+        this.decoderRegistry = decoderRegistry;
         this.AliveMessageBytes = this.aliveMessageCodec.Encode(this.aliveMessage);
     }
 
@@ -35,15 +36,15 @@ public class WyrmMessageProtocol<TMessage> : ISymmetricMessageProtocol<TMessage>
         get;
     }
 
-    public TMessage Decode(ReadOnlyMemory<byte> data)
+    public TReceiveMessage Decode(ReadOnlyMemory<byte> data)
     {
         var span = data.Span;
         MessageType type = this.ReadMessageType(ref span);
-        IMessageDecoder<TMessage> messageDecoder = this.codecRegistry.GetMessageDecoder(type);
+        IMessageDecoder<TReceiveMessage> messageDecoder = this.decoderRegistry.GetMessageDecoder(type);
         return messageDecoder.Decode(data);
     }
 
-    public ReadOnlyMemory<byte> Encode(TMessage message)
+    public ReadOnlyMemory<byte> Encode(TSendMessage message)
     {
         return message.Encode();
     }
@@ -56,6 +57,20 @@ public class WyrmMessageProtocol<TMessage> : ISymmetricMessageProtocol<TMessage>
         SpanReader.Skip(ref span, 1);
         int length = SpanReader.ReadInt(ref span);
         return length + this.headerByteSize;
+    }
+
+    public bool TryGetMessageSize(ReadOnlyMemory<byte> buffer, out int messageSize)
+    {
+        try
+        {
+            messageSize = this.GetMessageSize(buffer);
+            return true;
+        }
+        catch
+        {
+            messageSize = default;
+            return false;
+        }
     }
 
     public bool IsAliveMessage(ReadOnlyMemory<byte> data)
