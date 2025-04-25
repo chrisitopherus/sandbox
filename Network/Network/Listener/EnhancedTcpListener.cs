@@ -42,6 +42,11 @@ public class EnhancedTcpListener<TSendMessage, TReceiveMessage> : LifecycleCompo
 
     public override void Stop()
     {
+        if (this.State == LifecycleState.Stopped)
+        {
+            return;
+        }
+
         if (this.State != LifecycleState.Started)
         {
             throw new InvalidOperationException("Listener is not running.");
@@ -79,7 +84,7 @@ public class EnhancedTcpListener<TSendMessage, TReceiveMessage> : LifecycleCompo
         }
         finally
         {
-            this.State = LifecycleState.Stopped;
+            this.Stop();
         }
     }
 }

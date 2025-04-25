@@ -50,7 +50,7 @@ public class EnhancedNetworkStream<TSendMessage, TReceiveMessage> : LifecycleCom
     public event EventHandler<NetworkStreamDataReceivedEventArgs>? DataReceived;
 
     /// <summary>
-    ///  Starts the network stream and begins polling for incoming messages in the background.
+    /// Starts the network stream and begins polling for incoming messages in the background.
     /// </summary>
     /// <exception cref="InvalidOperationException">Thrown if the stream has already been started.</exception>
     public override void Start()
@@ -71,6 +71,11 @@ public class EnhancedNetworkStream<TSendMessage, TReceiveMessage> : LifecycleCom
     /// <exception cref="InvalidOperationException">Thrown if the stream is not currently running.</exception>
     public override void Stop()
     {
+        if (this.state == LifecycleState.Stopped)
+        {
+            return;
+        }
+
         if (this.state != LifecycleState.Started)
         {
             throw new InvalidOperationException("Network stream is not running.");
@@ -93,7 +98,7 @@ public class EnhancedNetworkStream<TSendMessage, TReceiveMessage> : LifecycleCom
         }
         catch
         {
-            Stop();
+            this.Stop();
         }
     }
 
@@ -113,7 +118,7 @@ public class EnhancedNetworkStream<TSendMessage, TReceiveMessage> : LifecycleCom
         }
         catch
         {
-            Stop();
+            this.Stop();
         }
     }
 
@@ -132,7 +137,7 @@ public class EnhancedNetworkStream<TSendMessage, TReceiveMessage> : LifecycleCom
         }
         catch
         {
-            Stop();
+            this.Stop();
         }
     }
 
@@ -242,7 +247,7 @@ public class EnhancedNetworkStream<TSendMessage, TReceiveMessage> : LifecycleCom
         }
         finally
         {
-            this.State = LifecycleState.Stopped;
+            this.Stop();
         }
     }
 }

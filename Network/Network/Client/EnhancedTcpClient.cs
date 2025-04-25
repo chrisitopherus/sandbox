@@ -98,6 +98,11 @@ public class EnhancedTcpClient<TSendMessage, TReceiveMessage> : LifecycleCompone
 
     public override void Stop()
     {
+        if (this.State == LifecycleState.Stopped)
+        {
+            return;
+        }
+
         if (this.State != LifecycleState.Started)
         {
             throw new InvalidOperationException("Client is not running.");
@@ -151,7 +156,7 @@ public class EnhancedTcpClient<TSendMessage, TReceiveMessage> : LifecycleCompone
         }
         finally
         {
-            this.State = LifecycleState.Stopped;
+            this.Stop();
         }
     }
 }
