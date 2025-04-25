@@ -86,9 +86,7 @@ public class EnhancedNetworkStream<TSendMessage, TReceiveMessage> : LifecycleCom
         this.State = LifecycleState.Stopped;
     }
 
-    /// <summary>
     /// <inheritdoc />
-    /// </summary>
     public void Send(TSendMessage message)
     {
         try
@@ -102,9 +100,7 @@ public class EnhancedNetworkStream<TSendMessage, TReceiveMessage> : LifecycleCom
         }
     }
 
-    /// <summary>
     /// <inheritdoc />
-    /// </summary>
     public async Task SendAsync(TSendMessage message, CancellationToken cancellationToken = default)
     {
         try
@@ -122,9 +118,7 @@ public class EnhancedNetworkStream<TSendMessage, TReceiveMessage> : LifecycleCom
         }
     }
 
-    /// <summary>
     /// <inheritdoc />
-    /// </summary>
     public async Task SendAsync(ReadOnlyMemory<byte> data, CancellationToken cancellationToken = default)
     {
         try

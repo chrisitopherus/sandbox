@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ConsoleWyrm": {
+      "commandName": "Project",
+      "commandLineArgs": "help"
+    }
+  }
+}
