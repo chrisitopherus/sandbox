@@ -50,9 +50,9 @@ public class EnhancedNetworkStream<TSendMessage, TReceiveMessage> : LifecycleCom
     public event EventHandler<NetworkStreamDataReceivedEventArgs>? DataReceived;
 
     /// <summary>
-    /// <inheritdoc />
+    ///  Starts the network stream and begins polling for incoming messages in the background.
     /// </summary>
-    /// <exception cref="InvalidOperationException">Is raised if the network stream was already started.</exception>
+    /// <exception cref="InvalidOperationException">Thrown if the stream has already been started.</exception>
     public override void Start()
     {
         if (this.state == LifecycleState.Started)
@@ -66,9 +66,9 @@ public class EnhancedNetworkStream<TSendMessage, TReceiveMessage> : LifecycleCom
     }
 
     /// <summary>
-    /// <inheritdoc />
+    /// Stops the network stream and cancels ongoing background polling for messages.
     /// </summary>
-    /// <exception cref="InvalidOperationException">Is raised if the network stream is not running.</exception>
+    /// <exception cref="InvalidOperationException">Thrown if the stream is not currently running.</exception>
     public override void Stop()
     {
         if (this.state != LifecycleState.Started)
@@ -146,14 +146,11 @@ public class EnhancedNetworkStream<TSendMessage, TReceiveMessage> : LifecycleCom
     }
 
     /// <summary>
-    /// 
+    /// Extracts all full messages currently available in the buffer.
     /// </summary>
-    /// <param name="messageSize"></param>
-    /// <param name="dataBuffer"></param>
-    /// <param name="networkBuffer"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    /// <exception cref="InvalidOperationException"></exception>
+    /// <param name="dataBuffer">The buffer containing potentially multiple message and/or leftover bytes.</param>
+    /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
+    /// <returns>A list of fully extracted message byte blocks.</returns>
     private async Task<List<ReadOnlyMemory<byte>>> ExtractAllMessagesAsync(MemoryStream dataBuffer, CancellationToken cancellationToken = default)
     {
         List<ReadOnlyMemory<byte>> messages = [];
@@ -194,10 +191,12 @@ public class EnhancedNetworkStream<TSendMessage, TReceiveMessage> : LifecycleCom
     }
 
     /// <summary>
-    ///  
+    /// Continually polls the network stream for incoming data and raises events when full messages are received.
+    /// 
+    /// Incomplete messages are buffered until complete data becomes available.
     /// </summary>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
+    /// <param name="cancellationToken">A token that can be used to cancel polling.</param>
+    /// <returns>A task that represents the asynchronous polling operation.</returns>
     private async Task PollForDataAsync(CancellationToken cancellationToken = default)
     {
         Memory<byte> buffer = new byte[this.configuration.NetworkBufferSize];
