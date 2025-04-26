@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Helpers.Utility.Lifecycle;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,19 @@ using System.Threading.Tasks;
 
 namespace Helpers.Utility.Keyboard;
 
-public class KeyboardWatcher
+public class KeyboardWatcher : LifecycleComponent
 {
     public bool Exit { get; set; }
+
+    public override void Start()
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void Stop()
+    {
+        throw new NotImplementedException();
+    }
 
     private bool HasModifier(ConsoleModifiers modifiers, ConsoleModifiers modifier)
     {
