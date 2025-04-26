@@ -2,9 +2,9 @@
 using Network.Architecture.Interfaces;
 using Network.Architecture.Interfaces.Protocol;
 using Network.Stream.Configuration;
-using Network.Util;
 using System.Net.Sockets;
 using Helpers.Extension;
+using Helpers.Utility.Lifecycle;
 
 namespace Network.Stream;
 

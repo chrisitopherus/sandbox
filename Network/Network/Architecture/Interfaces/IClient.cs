@@ -1,4 +1,5 @@
-﻿using Network.Architecture.Interfaces.Events;
+﻿using Helpers.Utility.Lifecycle;
+using Network.Architecture.Interfaces.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;

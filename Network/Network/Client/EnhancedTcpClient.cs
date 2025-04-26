@@ -1,9 +1,9 @@
-﻿using Network.Architecture;
+﻿using Helpers.Utility.Lifecycle;
+using Network.Architecture;
 using Network.Architecture.Interfaces;
 using Network.Client.Configuration;
 using Network.Stream;
 using Network.Stream.Symmetric;
-using Network.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
