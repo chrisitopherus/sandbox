@@ -26,18 +26,25 @@ public class KeyboardWatcher : LifecycleComponent
         return (modifiers & modifier) != 0;
     }
 
-    private void WatchKeyboardWorker()
+    private async Task WatchKeyboardAsync(CancellationToken cancellationToken = default)
     {
-        while (!this.Exit)
+        while (!cancellationToken.IsCancellationRequested)
         {
-            ConsoleKeyInfo keyInfo = Console.ReadKey();
-            KeyData keyData = new(
-                keyInfo.Key, 
-                this.HasModifier(keyInfo.Modifiers, ConsoleModifiers.Shift),
-                this.HasModifier(keyInfo.Modifiers, ConsoleModifiers.Alt),
-                this.HasModifier(keyInfo.Modifiers, ConsoleModifiers.Control));
+            if (Console.KeyAvailable)
+            {
+                ConsoleKeyInfo keyInfo = Console.ReadKey(intercept: true);
+                KeyData keyData = new(
+                    keyInfo.Key,
+                    this.HasModifier(keyInfo.Modifiers, ConsoleModifiers.Shift),
+                    this.HasModifier(keyInfo.Modifiers, ConsoleModifiers.Alt),
+                    this.HasModifier(keyInfo.Modifiers, ConsoleModifiers.Control));
 
-            // sends event
+                // sends event
+            }
+            else
+            {
+                await Task.Delay(10, cancellationToken);
+            }
         }
     }
 }
