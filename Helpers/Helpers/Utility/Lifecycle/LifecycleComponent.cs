@@ -48,13 +48,22 @@ public abstract class LifecycleComponent : ILifecycleComponent
     public event EventHandler? Started;
 
     /// <inheritdoc />
-    public event EventHandler? Stopped;
+    public event EventHandler<LifecycleComponentStoppedEventArgs>? Stopped;
 
     /// <inheritdoc />
     public abstract void Start();
 
     /// <inheritdoc />
     public abstract void Stop();
+
+    public virtual void Fail(Exception exception)
+    {
+        if (this.State != LifecycleState.Stopped)
+        {
+            this.state = LifecycleState.Stopped;
+            this.FireOnStopped(exception);
+        }
+    }
 
     /// <summary>
     /// Raises the <see cref="Started"/> event.
@@ -67,8 +76,8 @@ public abstract class LifecycleComponent : ILifecycleComponent
     /// <summary>
     /// Raises the <see cref="Stopped"/> event.
     /// </summary>
-    protected virtual void FireOnStopped()
+    protected virtual void FireOnStopped(Exception? exception = default)
     {
-        this.Stopped?.Invoke(this, EventArgs.Empty);
+        this.Stopped?.Invoke(this, new LifecycleComponentStoppedEventArgs(exception));
     }
 }

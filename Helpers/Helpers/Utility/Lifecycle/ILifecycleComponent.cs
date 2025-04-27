@@ -19,7 +19,7 @@ public interface ILifecycleComponent
     /// <summary>
     /// Is raised when the component stopped.
     /// </summary>
-    event EventHandler? Stopped;
+    event EventHandler<LifecycleComponentStoppedEventArgs>? Stopped;
 
     /// <summary>
     /// Gets the current state of the component.
