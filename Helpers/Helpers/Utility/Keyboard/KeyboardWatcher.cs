@@ -16,7 +16,7 @@ public class KeyboardWatcher : LifecycleComponent
     {
         if (this.state == LifecycleState.Started)
         {
-            throw new InvalidOperationException("Network stream was already started.");
+            throw new InvalidOperationException("Keyboardwatcher was already started.");
         }
 
         this.State = LifecycleState.Started;
@@ -26,12 +26,37 @@ public class KeyboardWatcher : LifecycleComponent
 
     public override void Stop()
     {
-        throw new NotImplementedException();
+        if (this.state == LifecycleState.Stopped)
+        {
+            return;
+        }
+
+        if (this.state != LifecycleState.Started)
+        {
+            throw new InvalidOperationException("Keyboardwatcher is not running.");
+        }
+
+        this.cancellationTokenSource?.Cancel();
+        this.cancellationTokenSource = null;
+        this.State = LifecycleState.Stopped;
     }
 
     protected override void Fail(Exception exception)
     {
-        throw new NotImplementedException();
+        if (this.state == LifecycleState.Stopped)
+        {
+            return;
+        }
+
+        if (this.state != LifecycleState.Started)
+        {
+            throw new InvalidOperationException("Keyboardwatcher is not running.");
+        }
+
+        this.cancellationTokenSource?.Cancel();
+        this.cancellationTokenSource = null;
+        this.state = LifecycleState.Stopped;
+        this.FireOnStopped(exception);
     }
 
     protected virtual void FireOnKeyPressed(KeyboardWatcherKeyPressedEventArgs e)
@@ -59,7 +84,6 @@ public class KeyboardWatcher : LifecycleComponent
                         this.HasModifier(keyInfo.Modifiers, ConsoleModifiers.Alt),
                         this.HasModifier(keyInfo.Modifiers, ConsoleModifiers.Control));
 
-                    // sends event
                     this.FireOnKeyPressed(new KeyboardWatcherKeyPressedEventArgs(keyData));
                 }
                 else
