@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Helpers.Utility.Keyboard;
 
-public class KeyData
+public readonly struct ConsoleKeyData
 {
-    public KeyData(ConsoleKey key, bool shift, bool alt, bool control)
+    public ConsoleKeyData(ConsoleKey key, bool shift, bool alt, bool control)
     {
         this.Key = key;
         this.Shift = shift;
@@ -16,11 +16,11 @@ public class KeyData
         this.Control = control;
     }
 
-    public ConsoleKey Key { get; }
+    public ConsoleKey Key { get; init; }
 
-    public bool Shift { get; }
+    public bool Shift { get; init; }
 
-    public bool Alt { get; }
+    public bool Alt { get; init; }
 
-    public bool Control { get; }
+    public bool Control { get; init; }
 }

@@ -9,16 +9,34 @@ namespace Helpers.Utility.Keyboard;
 
 public class KeyboardWatcher : LifecycleComponent
 {
-    public bool Exit { get; set; }
+    private CancellationTokenSource? cancellationTokenSource;
+    public event EventHandler<KeyboardWatcherKeyPressedEventArgs>? KeyPressed;
 
     public override void Start()
     {
-        throw new NotImplementedException();
+        if (this.state == LifecycleState.Started)
+        {
+            throw new InvalidOperationException("Network stream was already started.");
+        }
+
+        this.State = LifecycleState.Started;
+        this.cancellationTokenSource = new CancellationTokenSource();
+        Task _ = Task.Run(() => this.WatchKeyboardAsync(this.cancellationTokenSource.Token));
     }
 
     public override void Stop()
     {
         throw new NotImplementedException();
+    }
+
+    protected override void Fail(Exception exception)
+    {
+        throw new NotImplementedException();
+    }
+
+    protected virtual void FireOnKeyPressed(KeyboardWatcherKeyPressedEventArgs e)
+    {
+        this.KeyPressed?.Invoke(this, e);
     }
 
     private bool HasModifier(ConsoleModifiers modifiers, ConsoleModifiers modifier)
@@ -28,22 +46,44 @@ public class KeyboardWatcher : LifecycleComponent
 
     private async Task WatchKeyboardAsync(CancellationToken cancellationToken = default)
     {
-        while (!cancellationToken.IsCancellationRequested)
+        try
         {
-            if (Console.KeyAvailable)
+            while (!cancellationToken.IsCancellationRequested)
             {
-                ConsoleKeyInfo keyInfo = Console.ReadKey(intercept: true);
-                KeyData keyData = new(
-                    keyInfo.Key,
-                    this.HasModifier(keyInfo.Modifiers, ConsoleModifiers.Shift),
-                    this.HasModifier(keyInfo.Modifiers, ConsoleModifiers.Alt),
-                    this.HasModifier(keyInfo.Modifiers, ConsoleModifiers.Control));
+                if (Console.KeyAvailable)
+                {
+                    ConsoleKeyInfo keyInfo = Console.ReadKey(intercept: true);
+                    ConsoleKeyData keyData = new(
+                        keyInfo.Key,
+                        this.HasModifier(keyInfo.Modifiers, ConsoleModifiers.Shift),
+                        this.HasModifier(keyInfo.Modifiers, ConsoleModifiers.Alt),
+                        this.HasModifier(keyInfo.Modifiers, ConsoleModifiers.Control));
 
-                // sends event
+                    // sends event
+                    this.FireOnKeyPressed(new KeyboardWatcherKeyPressedEventArgs(keyData));
+                }
+                else
+                {
+                    await Task.Delay(10, cancellationToken);
+                }
             }
-            else
+        }
+        catch (OperationCanceledException)
+        {
+            // Expected
+        }
+        catch (Exception exception)
+        {
+            if (this.State != LifecycleState.Stopped)
             {
-                await Task.Delay(10, cancellationToken);
+                this.Fail(exception);
+            }
+        }
+        finally
+        {
+            if (this.State != LifecycleState.Stopped)
+            {
+                this.Stop();
             }
         }
     }
