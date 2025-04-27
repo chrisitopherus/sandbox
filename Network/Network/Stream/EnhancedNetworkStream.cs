@@ -5,6 +5,7 @@ using Network.Stream.Configuration;
 using System.Net.Sockets;
 using Helpers.Extension;
 using Helpers.Utility.Lifecycle;
+using System;
 
 namespace Network.Stream;
 
@@ -135,6 +136,26 @@ public class EnhancedNetworkStream<TSendMessage, TReceiveMessage> : LifecycleCom
         }
     }
 
+    protected override void Fail(Exception exception)
+    {
+        if (this.state == LifecycleState.Stopped)
+        {
+            return;
+        }
+
+        if (this.state != LifecycleState.Started)
+        {
+            throw new InvalidOperationException("Network stream is not running.");
+        }
+
+        this.cancellationTokenSource?.Cancel();
+        this.cancellationTokenSource = null;
+
+        // not using setter to avoid sending 2 events
+        this.state = LifecycleState.Stopped;
+        this.FireOnStopped(exception);
+    }
+
     /// <summary>
     /// Fíres the <see cref="DataReceived"/> event.
     /// </summary>
@@ -235,13 +256,16 @@ public class EnhancedNetworkStream<TSendMessage, TReceiveMessage> : LifecycleCom
         {
             // Expected
         }
-        catch
+        catch (Exception exception)
         {
-            // Exception Handling
+            this.Fail(exception);
         }
         finally
         {
-            this.Stop();
+            if (this.State != LifecycleState.Stopped)
+            {
+                this.Stop();
+            }
         }
     }
 }

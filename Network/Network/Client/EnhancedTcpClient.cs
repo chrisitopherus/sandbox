@@ -157,6 +157,29 @@ public class EnhancedTcpClient<TSendMessage, TReceiveMessage> : LifecycleCompone
         this.State = LifecycleState.Stopped;
     }
 
+    protected override void Fail(Exception exception)
+    {
+        if (this.state == LifecycleState.Stopped)
+        {
+            return;
+        }
+
+        if (this.state != LifecycleState.Started)
+        {
+            throw new InvalidOperationException("Client is not running.");
+        }
+
+        this.networkStream.Stopped -= this.EnhancedNetworkStreamStoppedHandler;
+        this.networkStream.DataReceived -= this.EnhancedNetworkStreamDataReceivedHandler;
+
+        this.cancellationTokenSource?.Cancel();
+        this.cancellationTokenSource = null;
+
+        // not using setter to avoid sending 2 events
+        this.state = LifecycleState.Stopped;
+        this.FireOnStopped(exception);
+    }
+
     /// <summary>
     /// Fires the <see cref="MessageReceived"/> event with the given message.
     /// </summary>
@@ -210,13 +233,16 @@ public class EnhancedTcpClient<TSendMessage, TReceiveMessage> : LifecycleCompone
         {
             // Expected
         }
-        catch
+        catch (Exception exception)
         {
-            // Exception Handling
+            this.Fail(exception);
         }
         finally
         {
-            this.Stop();
+            if (this.State != LifecycleState.Stopped)
+            {
+                this.Stop();
+            }
         }
     }
 }

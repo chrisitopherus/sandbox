@@ -3,7 +3,6 @@ using Network.Architecture;
 using Network.Architecture.Interfaces;
 using Network.Client;
 using Network.Listener.Configuration;
-using Network.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -91,6 +90,26 @@ public class EnhancedTcpListener<TSendMessage, TReceiveMessage> : LifecycleCompo
         this.State = LifecycleState.Stopped;
     }
 
+    protected override void Fail(Exception exception)
+    {
+        if (this.State == LifecycleState.Stopped)
+        {
+            return;
+        }
+
+        if (this.State != LifecycleState.Started)
+        {
+            throw new InvalidOperationException("Listener is not running.");
+        }
+
+        this.cancellationTokenSource?.Cancel();
+        this.cancellationTokenSource = null;
+
+        // not using setter to avoid sending 2 events
+        this.state = LifecycleState.Stopped;
+        this.FireOnStopped(exception);
+    }
+
     /// <summary>
     /// Raises the <see cref="NewClient"/> event.
     /// </summary>
@@ -109,9 +128,9 @@ public class EnhancedTcpListener<TSendMessage, TReceiveMessage> : LifecycleCompo
     {
         try
         {
+            this.listener.Start();
             while (!cancellationToken.IsCancellationRequested)
             {
-                this.listener.Start();
                 TcpClient tcpClient = await this.listener.AcceptTcpClientAsync(cancellationToken);
                 EnhancedTcpClient<TSendMessage, TReceiveMessage> client = new(tcpClient, this.configuration.ClientConfiguration);
                 this.FireOnNewClient(new EnhancedTcpListenerNewClientEventArgs<TSendMessage, TReceiveMessage>(client));
@@ -121,13 +140,16 @@ public class EnhancedTcpListener<TSendMessage, TReceiveMessage> : LifecycleCompo
         {
             // Expected
         }
-        catch
+        catch (Exception exception)
         {
-            // Exception Handling
+            this.Fail(exception);
         }
         finally
         {
-            this.Stop();
+            if (this.State != LifecycleState.Stopped)
+            {
+                this.Stop();
+            }
         }
     }
 }

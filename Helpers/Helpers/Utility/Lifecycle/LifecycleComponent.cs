@@ -56,14 +56,7 @@ public abstract class LifecycleComponent : ILifecycleComponent
     /// <inheritdoc />
     public abstract void Stop();
 
-    public virtual void Fail(Exception exception)
-    {
-        if (this.State != LifecycleState.Stopped)
-        {
-            this.state = LifecycleState.Stopped;
-            this.FireOnStopped(exception);
-        }
-    }
+    protected abstract void Fail(Exception exception);
 
     /// <summary>
     /// Raises the <see cref="Started"/> event.
