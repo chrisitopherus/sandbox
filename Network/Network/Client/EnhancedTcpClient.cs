@@ -157,6 +157,18 @@ public class EnhancedTcpClient<TSendMessage, TReceiveMessage> : LifecycleCompone
         this.State = LifecycleState.Stopped;
     }
 
+    /// <summary>
+    /// Like <see cref="Stop"/> - Handles unexpected failures by stopping the TCP client, disconnecting event handlers, and cancelling background operations.
+    /// </summary>
+    /// <param name="exception">The exception that caused the failure.</param>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if the client is not in a running state when attempting to handle a failure.
+    /// </exception>
+    /// <remarks>
+    /// This method detaches the client from the network stream events, cancels ongoing tasks,
+    /// resets the internal state to <see cref="LifecycleState.Stopped"/>,
+    /// and triggers the <see cref="LifecycleComponent.Stopped"/> event.
+    /// </remarks>
     protected override void Fail(Exception exception)
     {
         if (this.state == LifecycleState.Stopped)
@@ -203,7 +215,7 @@ public class EnhancedTcpClient<TSendMessage, TReceiveMessage> : LifecycleCompone
     }
 
     /// <summary>
-    /// Handles the ´<see cref="EnhancedNetworkStream.DataReceived"/> event of the network stream by decoding the message and firing the client event.
+    /// Handles the <see cref="EnhancedNetworkStream{TSendMessage, TReceiveMessage}.DataReceived"/> event of the network stream by decoding the message and firing the client event.
     /// </summary>
     /// <param name="sender">The sender of the event.</param>
     /// <param name="e">The event arguments containing the received data.</param>

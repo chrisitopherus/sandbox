@@ -2,7 +2,6 @@
 using Network.Architecture.Interfaces;
 using Network.Architecture.Interfaces.Protocol;
 using Network.Stream.Symmetric;
-using Network.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;

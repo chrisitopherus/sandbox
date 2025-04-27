@@ -90,6 +90,17 @@ public class EnhancedTcpListener<TSendMessage, TReceiveMessage> : LifecycleCompo
         this.State = LifecycleState.Stopped;
     }
 
+    /// <summary>
+    /// Like <see cref="Stop"/> - Handles unexpected failures by stopping the TCP listener and canceling ongoing operations.
+    /// </summary>
+    /// <param name="exception">The exception that caused the failure.</param>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if the listener is not in a running state when attempting to handle a failure.
+    /// </exception>
+    /// <remarks>
+    /// This method cancels the background listening loop, resets the internal state to <see cref="LifecycleState.Stopped"/>,
+    /// and triggers the <see cref="LifecycleComponent.Stopped"/> event.
+    /// </remarks>
     protected override void Fail(Exception exception)
     {
         if (this.State == LifecycleState.Stopped)

@@ -136,6 +136,17 @@ public class EnhancedNetworkStream<TSendMessage, TReceiveMessage> : LifecycleCom
         }
     }
 
+    /// <summary>
+    /// Like <see cref="Stop"/> - Handles unexpected failures by stopping the network stream and canceling ongoing operations.
+    /// </summary>
+    /// <param name="exception">The exception that caused the failure.</param>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if the stream is not in a running state when attempting to handle a failure.
+    /// </exception>
+    /// <remarks>
+    /// This method cancels the polling task, resets the internal state to <see cref="LifecycleState.Stopped"/>,
+    /// and triggers the <see cref="LifecycleComponent.Stopped"/> event.
+    /// </remarks>
     protected override void Fail(Exception exception)
     {
         if (this.state == LifecycleState.Stopped)

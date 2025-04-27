@@ -31,7 +31,7 @@ public interface IMessageProtocol<TSendMessage, TReceiveMessage> : IMessageCodec
     /// Gets he total size of a message from the beginning of the given <paramref name="buffer"/>.
     /// </summary>
     /// <param name="buffer">THe buffer containing a binary message.</param>
-    /// <returns>The size of the <typeparamref name="TMessage"/> in bytes.</returns>
+    /// <returns>The size of the <typeparamref name="TReceiveMessage"/> in bytes.</returns>
     int GetMessageSize(ReadOnlyMemory<byte> buffer);
 
     /// <summary>
