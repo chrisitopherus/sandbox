@@ -11,7 +11,7 @@ namespace ConsoleWyrm.Networking.Messages.Shared;
 
 public class AliveMessage : Message
 {
-    private readonly AliveMessageCodec codec = new();
+    private readonly AliveMessageCodec codec = AliveMessageCodec.Instance;
 
     public AliveMessage()
         : base(MessageType.Alive)

@@ -9,18 +9,21 @@ using Network.Architecture.Interfaces.Protocol;
 
 namespace ConsoleWyrm.Networking.Messages.Client;
 
-public class WyrmBoostOffMessage : IClientMessage
+public class WyrmBoostOffMessage : Message, IClientMessage
 {
-    private readonly WyrmBoostOffMessageCodec codec = new();
+    private readonly WyrmBoostOffMessageCodec codec = WyrmBoostOffMessageCodec.Instance;
 
-    public MessageType Type { get; } = MessageType.WyrmBoostOff;
+    public WyrmBoostOffMessage()
+        : base(MessageType.WyrmBoostOff)
+    {
+    }
 
     public void Accept(IClientMessageVisitor visitor)
     {
         visitor.Visit(this);
     }
 
-    public ReadOnlyMemory<byte> Encode()
+    public override ReadOnlyMemory<byte> Encode()
     {
         return this.codec.Encode(this);
     }

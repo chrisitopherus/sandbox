@@ -3,21 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ConsoleWyrm.Networking.Messages.Codecs.Client;
 using ConsoleWyrm.Networking.Messages.Data;
 
 namespace ConsoleWyrm.Networking.Messages.Client;
 
-public class WyrmDirectionChangeMessage : IClientMessage
+public class WyrmDirectionChangeMessage : Message, IClientMessage
 {
-    public MessageType Type { get; } = MessageType.WyrmDirectionChange;
+    private readonly WyrmDirectionChangeMessageCodec codec = WyrmDirectionChangeMessageCodec.Instance;
+
+    public WyrmDirectionChangeMessage()
+        : base(MessageType.WyrmDirectionChange)
+    {
+    }
 
     public void Accept(IClientMessageVisitor visitor)
     {
         visitor.Visit(this);
     }
 
-    public ReadOnlyMemory<byte> Encode()
+    public override ReadOnlyMemory<byte> Encode()
     {
-        throw new NotImplementedException();
+        return this.codec.Encode(this);
     }
 }
