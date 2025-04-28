@@ -52,10 +52,5 @@ public enum MessageType : byte
     /// <summary>
     /// Client to Server.
     /// </summary>
-    WyrmBoostOn,
-
-    /// <summary>
-    /// Client to Server.
-    /// </summary>
-    WyrmBoostOff,
+    WyrmBoostChange,
 }

@@ -30,14 +30,14 @@ public class AliveMessageCodec : ISymmetricMessageCodec<AliveMessage>
 
             if (type != MessageType.Alive || contentLength != 1 || checkValue != 69)
             {
-                throw new InvalidDataException("Invalid AliveMessage format.");
+                throw ExceptionFactory.CreateInvalidFormat(nameof(AliveMessage));
             }
 
             return new AliveMessage();
         }
         catch (Exception exception)
         {
-            throw new InvalidDataException("Failed to decode AliveMessage", exception);
+            throw ExceptionFactory.CreateDecodeFailure(nameof(AliveMessage), exception);
         }
     }
 
@@ -55,7 +55,7 @@ public class AliveMessageCodec : ISymmetricMessageCodec<AliveMessage>
         }
         catch (Exception exception)
         {
-            throw new InvalidDataException("Failed to encode AliveMessage", exception);
+            throw ExceptionFactory.CreateEncodeFailure(nameof(AliveMessage), exception);
         }
     }
 }

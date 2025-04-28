@@ -48,6 +48,6 @@ public class ServerCommand : ICommand
     private MessageDecoderRegistry<IClientMessage> InitializeMessageDecoderRegistry()
     {
         return new MessageDecoderRegistry<IClientMessage>()
-            .Register(MessageType.WyrmBoostOff, WyrmBoostOffMessageCodec.Instance);
+            .Register(MessageType.WyrmBoostChange, WyrmBoostChangeMessageCodec.Instance);
     }
 }

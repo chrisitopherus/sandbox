@@ -13,6 +13,5 @@ public interface IClientMessageVisitor
     // void Visit(AliveMessage aliveMessage);
 
     void Visit(WyrmDirectionChangeMessage directionChangeMessage);
-    void Visit(WyrmBoostOnMessage boostOnMessage);
-    void Visit(WyrmBoostOffMessage boostOffMessage);
+    void Visit(WyrmBoostChangeMessage boostOffMessage);
 }

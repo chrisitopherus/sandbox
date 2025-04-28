@@ -20,8 +20,7 @@ public static class EnumConverter
         4 => MessageType.FoodEaten,
         5 => MessageType.WyrmsUpdated,
         6 => MessageType.WyrmDirectionChange,
-        7 => MessageType.WyrmBoostOn,
-        8 => MessageType.WyrmBoostOff,
+        7 => MessageType.WyrmBoostChange,
         _ => throw new ArgumentOutOfRangeException(nameof(value), $"Not a valid value.")
     };
 
