@@ -24,4 +24,13 @@ public static class EnumConverter
         8 => MessageType.WyrmBoostOff,
         _ => throw new ArgumentOutOfRangeException(nameof(value), $"Not a valid value.")
     };
+
+    public static Direction ToDirection(byte value) => value switch
+    {
+        0 => Direction.Up,
+        1 => Direction.Left,
+        2 => Direction.Down,
+        3 => Direction.Right,
+        _ => throw new ArgumentOutOfRangeException(nameof(value), $"Not a valid value.")
+    };
 }
