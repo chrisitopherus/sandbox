@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleWyrm.Utility;
+namespace ConsoleWyrm.Utility.Messages;
 
 public class MessageDecoderRegistry<TMessage> : IMessageDecoderRegistry<MessageType, TMessage>
     where TMessage : ICustomMessage
@@ -24,7 +24,7 @@ public class MessageDecoderRegistry<TMessage> : IMessageDecoderRegistry<MessageT
     public IMessageDecoder<TMessage> GetMessageDecoder(MessageType type)
     {
         IMessageDecoder<TMessage> decoder;
-        if (!this.TryGetMessageDecoder(type, out decoder))
+        if (!TryGetMessageDecoder(type, out decoder))
         {
             throw new ArgumentOutOfRangeException($"No registered decoder for message type: {type}");
         }
