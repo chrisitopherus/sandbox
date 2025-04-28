@@ -10,6 +10,10 @@ namespace ConsoleWyrm.Networking.Messages.Codecs.Client;
 
 public class WyrmBoostOffMessageCodec : ISymmetricMessageCodec<WyrmBoostOffMessage>
 {
+    public static readonly WyrmBoostOffMessageCodec Instance = new();
+
+    private WyrmBoostOffMessageCodec() { }
+
     public WyrmBoostOffMessage Decode(ReadOnlyMemory<byte> data)
     {
         throw new NotImplementedException(); 

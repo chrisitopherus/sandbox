@@ -13,6 +13,12 @@ namespace ConsoleWyrm.Networking.Messages.Codecs.Shared;
 
 public class AliveMessageCodec : ISymmetricMessageCodec<AliveMessage>
 {
+    public static AliveMessageCodec Instance = new AliveMessageCodec();
+
+    private AliveMessageCodec()
+    {
+    }
+
     public AliveMessage Decode(ReadOnlyMemory<byte> data)
     {
         try

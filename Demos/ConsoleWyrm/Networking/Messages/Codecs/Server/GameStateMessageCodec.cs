@@ -10,6 +10,12 @@ namespace ConsoleWyrm.Networking.Messages.Codecs.Server;
 
 public class GameStateMessageCodec : ISymmetricMessageCodec<GameStateMessage>
 {
+    public static GameStateMessageCodec Instance = new();
+
+    private GameStateMessageCodec()
+    {
+    }
+
     public GameStateMessage Decode(ReadOnlyMemory<byte> data)
     {
         throw new NotImplementedException();
