@@ -7,7 +7,7 @@ using ConsoleWyrm.Networking.Messages.Client;
 using ConsoleWyrm.Networking.Messages.Codecs.Client;
 using ConsoleWyrm.Networking.Messages.Codecs.Server;
 using ConsoleWyrm.Networking.Messages.Data;
-using ConsoleWyrm.Utility;
+using ConsoleWyrm.Utility.Messages;
 using Helpers.Utility;
 using Network.Architecture.Interfaces.Protocol;
 using System;
@@ -43,12 +43,11 @@ public class ServerCommand : ICommand
         int? port = ctx.GetModifierValue(this.portModifier);
         IPAddress? ip = ctx.GetModifierValue(this.ipModifer);
         MessageDecoderRegistry<IClientMessage> decoderRegistry = this.InitializeMessageDecoderRegistry();
-        WyrmMessageProtocol<IClientMessage> messageProtocol = new(decoderRegistry);
     }
 
     private MessageDecoderRegistry<IClientMessage> InitializeMessageDecoderRegistry()
     {
         return new MessageDecoderRegistry<IClientMessage>()
-            .Register(MessageType.WyrmBoostOff, new WyrmBoostOffMessageCodec());
+            .Register(MessageType.WyrmBoostOff, WyrmBoostOffMessageCodec.Instance);
     }
 }
