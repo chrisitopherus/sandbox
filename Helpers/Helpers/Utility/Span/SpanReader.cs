@@ -17,6 +17,11 @@ public static class SpanReader
         return value;
     }
 
+    public static bool ReadBoolean(ref ReadOnlySpan<byte> span)
+    {
+        return ReadByte(ref span) != 0;
+    }
+
     public static short ReadShort(ref ReadOnlySpan<byte> span)
     {
         short value = BinaryPrimitives.ReadInt16LittleEndian(span);

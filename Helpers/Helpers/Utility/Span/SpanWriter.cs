@@ -15,6 +15,11 @@ public static class SpanWriter
         span = span[1..];
     }
 
+    public static void WriteBoolean(ref Span<byte> span, bool value)
+    {
+        WriteByte(ref span, Convert.ToByte(value));
+    }
+
     public static void WriteShort(ref Span<byte> span, short value)
     {
         BinaryPrimitives.WriteInt16LittleEndian(span, value);
