@@ -3,6 +3,7 @@ using ConsoleWyrm.Networking.Messages.Codecs.Shared;
 using ConsoleWyrm.Networking.Messages.Data;
 using ConsoleWyrm.Networking.Messages.Shared;
 using ConsoleWyrm.Utility;
+using ConsoleWyrm.Utility.Messages;
 using Helpers.Utility.Span;
 using Microsoft.Win32;
 using Network.Architecture.Interfaces.Protocol;
@@ -22,7 +23,7 @@ public class WyrmMessageProtocol<TSendMessage, TReceiveMessage> : IMessageProtoc
 {
     private readonly MessageDecoderRegistry<TReceiveMessage> decoderRegistry;
     private readonly int headerByteSize = 5;
-    private readonly AliveMessageCodec aliveMessageCodec = new();
+    private readonly AliveMessageCodec aliveMessageCodec = AliveMessageCodec.Instance;
     private readonly AliveMessage aliveMessage = new();
 
     public WyrmMessageProtocol(MessageDecoderRegistry<TReceiveMessage> decoderRegistry)
