@@ -9,18 +9,15 @@ using Network.Architecture.Interfaces.Protocol;
 
 namespace ConsoleWyrm.Networking.Messages.Shared;
 
-public class AliveMessage : Message
+public class AliveMessage : ICustomMessage
 {
     private readonly AliveMessageCodec codec = AliveMessageCodec.Instance;
 
-    public AliveMessage()
-        : base(MessageType.Alive)
-    {
-    }
+    public MessageType Type { get; } = MessageType.Alive;
 
     public byte Check { get; } = 69;
 
-    public override ReadOnlyMemory<byte> Encode()
+    public ReadOnlyMemory<byte> Encode()
     {
         return this.codec.Encode(this);
     }

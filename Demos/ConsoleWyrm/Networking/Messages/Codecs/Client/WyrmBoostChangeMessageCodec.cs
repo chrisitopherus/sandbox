@@ -12,13 +12,13 @@ using System.Threading.Tasks;
 
 namespace ConsoleWyrm.Networking.Messages.Codecs.Client;
 
-public class WyrmBoostChangeMessageCodec : ISymmetricMessageCodec<WyrmBoostChangeMessage>
+public class WyrmBoostChangeMessageCodec : MessageCodec<WyrmBoostChangeMessage>
 {
     public static readonly WyrmBoostChangeMessageCodec Instance = new();
 
     private WyrmBoostChangeMessageCodec() { }
 
-    public WyrmBoostChangeMessage Decode(ReadOnlyMemory<byte> data)
+    public override WyrmBoostChangeMessage Decode(ReadOnlyMemory<byte> data)
     {
         var span = data.Span;
         try
@@ -40,12 +40,12 @@ public class WyrmBoostChangeMessageCodec : ISymmetricMessageCodec<WyrmBoostChang
         }
     }
 
-    public ReadOnlyMemory<byte> Encode(WyrmBoostChangeMessage message)
+    public override ReadOnlyMemory<byte> Encode(WyrmBoostChangeMessage message)
     {
         try
         {
             int contentLength = 1;
-            byte[] bytes = new byte[message.HeaderBytesCount + contentLength];
+            byte[] bytes = new byte[this.HeaderByteCount + contentLength];
             var span = bytes.AsSpan();
             SpanWriter.WriteByte(ref span, EnumConverter.ToByte(message.Type));
             SpanWriter.WriteInt(ref span, contentLength);

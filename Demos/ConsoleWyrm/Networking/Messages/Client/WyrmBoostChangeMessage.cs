@@ -9,15 +9,16 @@ using Network.Architecture.Interfaces.Protocol;
 
 namespace ConsoleWyrm.Networking.Messages.Client;
 
-public class WyrmBoostChangeMessage : Message, IClientMessage
+public class WyrmBoostChangeMessage : IClientMessage
 {
     private readonly WyrmBoostChangeMessageCodec codec = WyrmBoostChangeMessageCodec.Instance;
 
     public WyrmBoostChangeMessage(bool isBoostOn)
-        : base(MessageType.WyrmBoostChange)
     {
         this.IsBoostOn = isBoostOn;
     }
+
+    public MessageType Type { get; } = MessageType.WyrmBoostChange;
 
     public bool IsBoostOn { get; }
 
@@ -26,7 +27,7 @@ public class WyrmBoostChangeMessage : Message, IClientMessage
         visitor.Visit(this);
     }
 
-    public override ReadOnlyMemory<byte> Encode()
+    public ReadOnlyMemory<byte> Encode()
     {
         return this.codec.Encode(this);
     }

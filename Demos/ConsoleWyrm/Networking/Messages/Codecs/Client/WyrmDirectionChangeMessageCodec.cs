@@ -1,7 +1,7 @@
-﻿using ConsoleWyrm.Networking.Messages.Client;
+﻿using ConsoleWyrm.Game.Data;
+using ConsoleWyrm.Networking.Messages.Client;
 using ConsoleWyrm.Networking.Messages.Data;
 using ConsoleWyrm.Utility;
-using ConsoleWyrm.Utility.Game;
 using Helpers.Utility.Span;
 using Network.Architecture.Interfaces.Protocol;
 using System;
@@ -12,13 +12,13 @@ using System.Threading.Tasks;
 
 namespace ConsoleWyrm.Networking.Messages.Codecs.Client;
 
-public class WyrmDirectionChangeMessageCodec : ISymmetricMessageCodec<WyrmDirectionChangeMessage>
+public class WyrmDirectionChangeMessageCodec : MessageCodec<WyrmDirectionChangeMessage>
 {
     public static readonly WyrmDirectionChangeMessageCodec Instance = new();
 
     private WyrmDirectionChangeMessageCodec() { }
 
-    public WyrmDirectionChangeMessage Decode(ReadOnlyMemory<byte> data)
+    public override WyrmDirectionChangeMessage Decode(ReadOnlyMemory<byte> data)
     {
         try
         {
@@ -40,12 +40,12 @@ public class WyrmDirectionChangeMessageCodec : ISymmetricMessageCodec<WyrmDirect
         }
     }
 
-    public ReadOnlyMemory<byte> Encode(WyrmDirectionChangeMessage message)
+    public override ReadOnlyMemory<byte> Encode(WyrmDirectionChangeMessage message)
     {
         try
         {
             int contentLength = 1;
-            byte[] bytes = new byte[message.HeaderBytesCount + contentLength];
+            byte[] bytes = new byte[this.HeaderByteCount + contentLength];
             var span = bytes.AsSpan();
             SpanWriter.WriteByte(ref span, EnumConverter.ToByte(message.Type));
             SpanWriter.WriteInt(ref span, contentLength);

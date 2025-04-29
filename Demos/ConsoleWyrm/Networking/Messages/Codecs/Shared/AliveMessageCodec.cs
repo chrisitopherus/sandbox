@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleWyrm.Networking.Messages.Codecs.Shared;
 
-public class AliveMessageCodec : ISymmetricMessageCodec<AliveMessage>
+public class AliveMessageCodec : MessageCodec<AliveMessage>
 {
     public static AliveMessageCodec Instance = new AliveMessageCodec();
 
@@ -19,7 +19,7 @@ public class AliveMessageCodec : ISymmetricMessageCodec<AliveMessage>
     {
     }
 
-    public AliveMessage Decode(ReadOnlyMemory<byte> data)
+    public override AliveMessage Decode(ReadOnlyMemory<byte> data)
     {
         try
         {
@@ -41,12 +41,12 @@ public class AliveMessageCodec : ISymmetricMessageCodec<AliveMessage>
         }
     }
 
-    public ReadOnlyMemory<byte> Encode(AliveMessage message)
+    public override ReadOnlyMemory<byte> Encode(AliveMessage message)
     {
         try
         {
             int contentLength = 1;
-            byte[] bytes = new byte[message.HeaderBytesCount + contentLength];
+            byte[] bytes = new byte[this.HeaderByteCount + contentLength];
             var span = bytes.AsSpan();
             SpanWriter.WriteByte(ref span, EnumConverter.ToByte(message.Type));
             SpanWriter.WriteInt(ref span, contentLength);

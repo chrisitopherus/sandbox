@@ -9,21 +9,18 @@ using System.Threading.Tasks;
 
 namespace ConsoleWyrm.Networking.Messages.Server;
 
-public class GameStateMessage : Message, IServerMessage
+public class GameStateMessage : IServerMessage
 {
     private readonly GameStateMessageCodec codec = GameStateMessageCodec.Instance;
 
-    public GameStateMessage()
-        : base(MessageType.GameState)
-    {
-    }
+    public MessageType Type { get; } = MessageType.GameState;
 
     public void Accept(IServerMessageVisitor visitor)
     {
         visitor.Visit(this);
     }
 
-    public override ReadOnlyMemory<byte> Encode()
+    public ReadOnlyMemory<byte> Encode()
     {
         return this.codec.Encode(this);
     }
