@@ -5,7 +5,6 @@ using ConsoleWyrm.Networking.Messages;
 using ConsoleWyrm.Networking.Messages.Codecs.Server;
 using ConsoleWyrm.Networking.Messages.Data;
 using ConsoleWyrm.Networking.Messages.Server;
-using ConsoleWyrm.Utility.Extensions;
 using ConsoleWyrm.Utility.Messages;
 using Network.Architecture.Interfaces.Protocol;
 using System.Net;
