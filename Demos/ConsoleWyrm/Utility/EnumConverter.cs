@@ -1,5 +1,5 @@
-﻿using ConsoleWyrm.Networking.Messages.Data;
-using ConsoleWyrm.Utility.Game;
+﻿using ConsoleWyrm.Game.Data;
+using ConsoleWyrm.Networking.Messages.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
