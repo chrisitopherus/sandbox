@@ -1,4 +1,8 @@
 ﻿using ConsoleWyrm.Networking.Messages.Client;
+using ConsoleWyrm.Networking.Messages.Data;
+using ConsoleWyrm.Utility;
+using ConsoleWyrm.Utility.Game;
+using Helpers.Utility.Span;
 using Network.Architecture.Interfaces.Protocol;
 using System;
 using System.Collections.Generic;
@@ -16,11 +20,41 @@ public class WyrmDirectionChangeMessageCodec : ISymmetricMessageCodec<WyrmDirect
 
     public WyrmDirectionChangeMessage Decode(ReadOnlyMemory<byte> data)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var span = data.Span;
+            MessageType type = EnumConverter.ToMessageType(SpanReader.ReadByte(ref span));
+            int contentLength = SpanReader.ReadInt(ref span);
+            Direction direction = EnumConverter.ToDirection(SpanReader.ReadByte(ref span));
+
+            if (type != MessageType.WyrmDirectionChange || contentLength != 1)
+            {
+                throw ExceptionFactory.CreateInvalidFormat(nameof(WyrmDirectionChangeMessage));
+            }
+
+            return new WyrmDirectionChangeMessage(direction);
+        }
+        catch (Exception exception)
+        {
+            throw ExceptionFactory.CreateDecodeFailure(nameof(WyrmDirectionChangeMessage), exception);
+        }
     }
 
     public ReadOnlyMemory<byte> Encode(WyrmDirectionChangeMessage message)
     {
-        throw new NotImplementedException();
+        try
+        {
+            int contentLength = 1;
+            byte[] bytes = new byte[message.HeaderBytesCount + contentLength];
+            var span = bytes.AsSpan();
+            SpanWriter.WriteByte(ref span, EnumConverter.ToByte(message.Type));
+            SpanWriter.WriteInt(ref span, contentLength);
+            SpanWriter.WriteByte(ref span, EnumConverter.ToByte(message.NewDirection));
+            return bytes;
+        }
+        catch (Exception exception)
+        {
+            throw ExceptionFactory.CreateEncodeFailure(nameof(WyrmBoostChangeMessage), exception);
+        }
     }
 }
