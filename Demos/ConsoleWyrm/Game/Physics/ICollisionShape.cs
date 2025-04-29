@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleWyrm.Game;
+namespace ConsoleWyrm.Game.Physics;
 
-public class Food : GameEntity
+public class Hitbox
 {
 }
