@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleWyrm.Utility.Game;
+namespace ConsoleWyrm.Game.Data;
 
 public enum Direction : byte
 {
