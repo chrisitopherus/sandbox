@@ -15,7 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Game\Graphics\" />
     <Folder Include="Game\Interfaces\" />
+    <Folder Include="Game\Physics\" />
   </ItemGroup>
 
 </Project>

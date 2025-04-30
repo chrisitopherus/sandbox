@@ -1,8 +1,8 @@
 ﻿using ConsoleWyrm.Game.Data;
-using ConsoleWyrm.Game.Graphics;
-using ConsoleWyrm.Game.Physics;
 using GameStuff.Data;
 using GameStuff.Engine.Interfaces;
+using GameStuff.Graphics.Sprites;
+using GameStuff.Physics.Collisions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

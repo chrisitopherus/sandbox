@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleWyrm.Game.Graphics;
+namespace GameStuff.Graphics.Sprites;
 
 public class AnimationFrame
 {

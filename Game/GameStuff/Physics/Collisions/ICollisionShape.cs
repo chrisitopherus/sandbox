@@ -1,17 +1,17 @@
-﻿using ConsoleWyrm.Game.Data;
+﻿using GameStuff.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleWyrm.Game.Physics;
+namespace GameStuff.Physics.Collisions;
 
 public interface ICollisionShape
 {
-    ConsolePosition[] RelativeCollisionCells { get; }
-
     ConsolePosition EntityOffset { get; }
+
+    ConsolePosition[] RelativeCollisionCells { get; }
 
     IEnumerable<ConsolePosition> GetWorldCells(ConsolePosition entityPosition);
 }
