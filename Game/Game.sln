@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameStuff", "GameStuff\GameStuff.csproj", "{CEF6A771-14A8-403D-8C23-861BCD214C4D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helpers", "..\Helpers\Helpers\Helpers.csproj", "{041A34DD-649C-4E45-9766-E66D2739C290}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CEF6A771-14A8-403D-8C23-861BCD214C4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEF6A771-14A8-403D-8C23-861BCD214C4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEF6A771-14A8-403D-8C23-861BCD214C4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEF6A771-14A8-403D-8C23-861BCD214C4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{041A34DD-649C-4E45-9766-E66D2739C290}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{041A34DD-649C-4E45-9766-E66D2739C290}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{041A34DD-649C-4E45-9766-E66D2739C290}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{041A34DD-649C-4E45-9766-E66D2739C290}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {376F663E-4663-45DD-8E89-503E670F8BF4}
+	EndGlobalSection
+EndGlobal
