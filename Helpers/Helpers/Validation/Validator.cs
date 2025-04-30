@@ -1,4 +1,6 @@
-﻿namespace Helpers.Validation;
+﻿using System.Numerics;
+
+namespace Helpers.Validation;
 
 /// <summary>
 /// Provides utility methods for validating method parameters and throwing descriptive exceptions when validation fails.
@@ -15,14 +17,9 @@ public static class Validator
     /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see langword="null"/>.</exception>
     public static void NotNull<TNullable>(TNullable value, string parameterName, string? message = null)
     {
-        if (message == null)
-        {
-            message = $"{parameterName} must not be null.";
-        }
-
         if (value == null)
         {
-            throw new ArgumentNullException(parameterName, message);
+            throw new ArgumentNullException(parameterName, message ?? $"{parameterName} must not be null.");
         }
     }
 
@@ -38,14 +35,9 @@ public static class Validator
     public static void NotLessThan<TComparable>(TComparable value, TComparable minValue, string parameterName, string? message = null)
         where TComparable : IComparable
     {
-        if (message == null)
-        {
-            message = $"{parameterName} must not be less than {minValue}.";
-        }
-
         if (value.CompareTo(minValue) < 0)
         {
-            throw new ArgumentOutOfRangeException(parameterName, message);
+            throw new ArgumentOutOfRangeException(parameterName, message ?? $"{parameterName} must not be less than {minValue}.");
         }
     }
 
@@ -61,14 +53,9 @@ public static class Validator
     public static void NotGreaterThan<TComparable>(TComparable value, TComparable maxValue, string parameterName, string? message = null)
         where TComparable : IComparable
     {
-        if (message == null)
-        {
-            message = $"{parameterName} must not be greater than {maxValue}.";
-        }
-
         if (value.CompareTo(maxValue) > 0)
         {
-            throw new ArgumentOutOfRangeException(parameterName, message);
+            throw new ArgumentOutOfRangeException(parameterName, message ?? $"{parameterName} must not be greater than {maxValue}.");
         }
     }
 
@@ -89,5 +76,23 @@ public static class Validator
     {
         NotLessThan(value, minValue, parameterName, message);
         NotGreaterThan(value, maxValue, parameterName, message);
+    }
+
+    public static void NotEven<TNumber>(TNumber value, string parameterName, string? message = null)
+        where TNumber : INumber<TNumber>
+    {
+        if (value % TNumber.CreateChecked(2) == TNumber.Zero)
+        {
+            throw new ArgumentOutOfRangeException(parameterName, message ?? $"{parameterName} ({value}) must not be even.");
+        } 
+    }
+
+    public static void NotOdd<TNumber>(TNumber value, string parameterName, string? message = null)
+        where TNumber: INumber<TNumber>
+    {
+        if (value % TNumber.CreateChecked(2) == TNumber.One)
+        {
+            throw new ArgumentOutOfRangeException(parameterName, message ?? $"{parameterName} ({value}) must not be odd.");
+        }
     }
 }
