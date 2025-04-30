@@ -8,4 +8,8 @@ namespace ConsoleWyrm.Game.Entities;
 
 public class Food : GameEntity
 {
+    public override void Update(TimeSpan deltaTime)
+    {
+        throw new NotImplementedException();
+    }
 }

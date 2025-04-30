@@ -1,7 +1,8 @@
 ﻿using ConsoleWyrm.Game.Data;
 using ConsoleWyrm.Game.Graphics;
-using ConsoleWyrm.Game.Interfaces;
 using ConsoleWyrm.Game.Physics;
+using GameStuff.Data;
+using GameStuff.Engine.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleWyrm.Game.Entities;
 
-public abstract class GameEntity : IDirty
+public abstract class GameEntity : IDirty, IUpdatable
 {
     public GameEntity(ICollisionShape collisionShape, Sprite sprite, ConsolePosition position)
     {
@@ -35,4 +36,6 @@ public abstract class GameEntity : IDirty
     {
         this.IsDirty = false;
     }
+
+    public abstract void Update(TimeSpan deltaTime);
 }

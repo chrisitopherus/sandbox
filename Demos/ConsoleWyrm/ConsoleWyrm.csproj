@@ -9,12 +9,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\CLI\CLI\CLI.csproj" />
+    <ProjectReference Include="..\..\Game\GameStuff\GameStuff.csproj" />
     <ProjectReference Include="..\..\Helpers\Helpers\Helpers.csproj" />
     <ProjectReference Include="..\..\Network\Network\Network.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Utility\Game\" />
+    <Folder Include="Game\Interfaces\" />
   </ItemGroup>
 
 </Project>

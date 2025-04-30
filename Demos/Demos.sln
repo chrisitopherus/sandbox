@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helpers", "..\Helpers\Helpe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Network", "..\Network\Network\Network.csproj", "{09820B1D-0989-4FE3-82C1-E0ECBD90D8B5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameStuff", "..\Game\GameStuff\GameStuff.csproj", "{461E55DB-A9BA-45A3-A93C-887EC3D08DCD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{09820B1D-0989-4FE3-82C1-E0ECBD90D8B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09820B1D-0989-4FE3-82C1-E0ECBD90D8B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09820B1D-0989-4FE3-82C1-E0ECBD90D8B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{461E55DB-A9BA-45A3-A93C-887EC3D08DCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{461E55DB-A9BA-45A3-A93C-887EC3D08DCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{461E55DB-A9BA-45A3-A93C-887EC3D08DCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{461E55DB-A9BA-45A3-A93C-887EC3D08DCD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

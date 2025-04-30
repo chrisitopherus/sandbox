@@ -1,4 +1,4 @@
-﻿using ConsoleWyrm.Game.Interfaces;
+﻿using GameStuff.Engine.Interfaces;
 using Helpers.Utility;
 using System;
 using System.Collections.Generic;
