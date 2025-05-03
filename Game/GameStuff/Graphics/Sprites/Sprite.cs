@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GameStuff.Graphics.Sprites;
 
-public class Sprite : IUpdatable, IDirty
+public class Sprite : IUpdatableComponent, IDirty
 {
     public Sprite(string[] lines, ConsoleStyle style)
     {
@@ -28,8 +28,13 @@ public class Sprite : IUpdatable, IDirty
         this.IsDirty = false;
     }
 
-    public virtual void Update(TimeSpan deltaTime)
+    public virtual void TryUpdate(TimeSpan deltaTime)
     {
-        // Static
+        // static
+    }
+
+    public virtual void Update()
+    {
+        // static
     }
 }

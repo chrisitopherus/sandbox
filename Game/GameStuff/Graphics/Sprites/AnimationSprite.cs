@@ -17,8 +17,13 @@ public class AnimationSprite : Sprite
 
     public AnimationFrame[] Frames { get; }
 
-    public override void Update(TimeSpan deltaTime)
+    public override void TryUpdate(TimeSpan deltaTime)
     {
-        // Update logic
+        // logic
+    }
+
+    public override void Update()
+    {
+        // logic
     }
 }
