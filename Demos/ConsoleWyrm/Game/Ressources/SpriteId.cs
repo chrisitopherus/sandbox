@@ -8,4 +8,9 @@ namespace ConsoleWyrm.Game.Ressources;
 
 public enum SpriteId
 {
+    WyrmHead,
+    WyrmTail,
+    Esmacho,
+    Steroid,
+    Pickle
 }

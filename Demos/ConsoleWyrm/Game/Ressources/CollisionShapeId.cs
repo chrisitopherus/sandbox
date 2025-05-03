@@ -8,4 +8,5 @@ namespace ConsoleWyrm.Game.Ressources;
 
 public enum CollisionShapeId
 {
+    Point,
 }

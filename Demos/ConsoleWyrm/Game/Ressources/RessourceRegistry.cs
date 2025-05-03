@@ -3,6 +3,7 @@ using GameStuff.Physics.Collisions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,6 +13,16 @@ public static class RessourceRegistry
 {
     private static readonly Dictionary<SpriteId, Sprite> sprites = [];
     private static readonly Dictionary<CollisionShapeId, ICollisionShape> collisionShapes = [];
+
+    public static void Register(SpriteId id, Sprite sprite)
+    {
+        sprites.Add(id, sprite);
+    }
+
+    public static void Register(CollisionShapeId id, ICollisionShape collisionShape)
+    {
+        collisionShapes.Add(id, collisionShape);
+    }
 
     public static Sprite GetSprite(SpriteId id)
     {
