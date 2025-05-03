@@ -41,6 +41,16 @@ public readonly struct ConsolePosition
 
     public override string ToString()
     {
-        return $"({X}|{Y})";
+        return $"({this.X}|{this.Y})";
+    }
+
+    public ConsolePosition Add(ConsolePosition position)
+    {
+        return new ConsolePosition(this.X + position.X, this.Y + position.Y);
+    }
+
+    public bool Equals(ConsolePosition position)
+    {
+        return this.X == position.X && this.Y == position.Y;
     }
 }
