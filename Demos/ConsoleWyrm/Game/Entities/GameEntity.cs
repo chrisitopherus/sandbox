@@ -1,4 +1,5 @@
 ﻿using ConsoleWyrm.Game.Data;
+using ConsoleWyrm.Game.Graphics;
 using GameStuff.Data;
 using GameStuff.Engine.Interfaces;
 using GameStuff.Graphics.Sprites;
@@ -11,31 +12,50 @@ using System.Threading.Tasks;
 
 namespace ConsoleWyrm.Game.Entities;
 
-public abstract class GameEntity : IDirty, IUpdatable
+public abstract class GameEntity : IDirty, IUpdatableComponent
 {
-    public GameEntity(ICollisionShape collisionShape, Sprite sprite, ConsolePosition position)
+    protected TimeSpan updateTimer = TimeSpan.Zero;
+    public GameEntity(Sprite sprite, ICollisionShape collisionShape, ConsolePosition position)
     {
-        this.CollisionShape = collisionShape;
         this.Sprite = sprite;
+        this.CollisionShape = collisionShape;
         this.Position = position;
     }
 
     public bool IsDirty
     {
         get;
-        private set;
+        protected set;
     }
 
-    public ICollisionShape CollisionShape { get; }
+    public TimeSpan UpdateInterval { get; protected set; }
 
-    public Sprite Sprite { get; }
+    public ICollisionShape CollisionShape { get; protected set; }
 
-    public ConsolePosition Position { get; }
+    public Sprite Sprite { get; protected set; }
+
+    public ConsolePosition Position { get; protected set; }
+
+    public void Accept(IGameEntityVisitor visitor)
+    {
+        visitor.Visit(this);
+    }
 
     public void ClearDirty()
     {
         this.IsDirty = false;
     }
 
-    public abstract void Update(TimeSpan deltaTime);
+    public virtual void TryUpdate(TimeSpan deltaTime)
+    {
+        this.updateTimer += deltaTime;
+        while (this.updateTimer >= this.UpdateInterval)
+        {
+
+            this.updateTimer -= this.UpdateInterval;
+            this.Update();
+        }
+    }
+
+    public abstract void Update();
 }
