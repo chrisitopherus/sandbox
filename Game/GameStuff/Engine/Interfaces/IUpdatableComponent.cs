@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace GameStuff.Engine.Interfaces;
 
-public interface IUpdatable
+public interface IUpdatableComponent : IUpdatable, ITickable
 {
-    void Update();
 }

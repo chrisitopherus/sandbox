@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameStuff.Engine.Interfaces;
 
-public interface IUpdatable
+public interface ITickable
 {
-    void Update();
+    void TryUpdate(TimeSpan deltaTime);
 }
