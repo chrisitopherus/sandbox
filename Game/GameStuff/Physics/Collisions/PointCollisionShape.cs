@@ -9,8 +9,8 @@ namespace GameStuff.Physics.Collisions;
 
 public class PointCollisionShape : RectangularCollisionShape
 {
-    public PointCollisionShape(ConsolePosition entityOffset)
-        : base(1, 1, entityOffset)
+    public PointCollisionShape()
+        : base(1, 1, new ConsolePosition())
     {
     }
 }
