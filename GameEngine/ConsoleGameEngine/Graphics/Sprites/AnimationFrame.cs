@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameStuff.Graphics.Sprites;
+namespace ConsoleGameEngine.Graphics.Sprites;
 
 public class AnimationFrame
 {
@@ -14,6 +14,6 @@ public class AnimationFrame
         this.Duration = duration;
     }
 
-    public Sprite Sprite { get;}
+    public Sprite Sprite { get; }
     public TimeSpan Duration { get; }
 }

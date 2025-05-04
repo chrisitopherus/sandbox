@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameStuff.Physics.Collisions;
+namespace ConsoleGameEngine.Physics.Collisions;
 
 public class CrossCollisionShape : CollisionShape
 {

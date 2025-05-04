@@ -5,14 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameStuff.Physics.Collisions;
+namespace ConsoleGameEngine.Physics.Collisions;
 
-public class TCollisionShape : CollisionShape
+public class CircleApproxCollisionShape : CollisionShape
 {
-    public TCollisionShape(ConsolePosition entityOffset)
+    public CircleApproxCollisionShape(ConsolePosition entityOffset)
         : base(entityOffset)
     {
-        this.RelativeCollisionCells = GenerateRelativeCells();
+        this.RelativeCollisionCells = this.GenerateRelativeCells();
     }
 
     public override ConsolePosition[] RelativeCollisionCells { get; }

@@ -1,4 +1,4 @@
-﻿using GameStuff.Engine.Interfaces;
+﻿using ConsoleGameEngine.Interfaces;
 using Helpers.Utility.Keyboard;
 using System;
 using System.Collections.Generic;
@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameStuff.Engine;
+namespace ConsoleGameEngine.Core;
 
-public abstract class Scene
+public abstract class Scene : IInitializable
 {
     public abstract void Init();
 

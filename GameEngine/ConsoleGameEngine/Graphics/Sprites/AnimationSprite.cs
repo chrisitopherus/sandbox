@@ -1,11 +1,10 @@
-﻿using Helpers.Utility;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameStuff.Graphics.Sprites;
+namespace ConsoleGameEngine.Graphics.Sprites;
 
 public class AnimationSprite : Sprite
 {

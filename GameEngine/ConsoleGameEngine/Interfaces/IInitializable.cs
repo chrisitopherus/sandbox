@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameStuff.Engine.Interfaces;
+namespace ConsoleGameEngine.Interfaces;
 
-public interface IUpdatable
+internal interface IInitializable
 {
-    void Update();
+    void Init();
 }

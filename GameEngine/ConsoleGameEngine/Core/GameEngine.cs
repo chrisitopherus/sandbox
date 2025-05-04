@@ -3,19 +3,18 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameStuff.Engine;
+namespace ConsoleGameEngine.Core;
 
-public class ConsoleGameEngine
+public class GameEngine
 {
     private readonly Stack<Scene> scenes = [];
     private readonly KeyboardWatcher keyboardWatcher = new();
     private readonly Action ressourceLoader;
 
-    public ConsoleGameEngine(Action ressourceLoader)
+    public GameEngine(Action ressourceLoader)
     {
         this.ressourceLoader = ressourceLoader;
     }

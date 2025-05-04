@@ -1,15 +1,14 @@
-﻿using GameStuff.Engine.Interfaces;
+﻿using ConsoleGameEngine.Interfaces;
 using Helpers.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameStuff.Graphics.Sprites;
+namespace ConsoleGameEngine.Graphics.Sprites;
 
-public class Sprite : IUpdatableComponent, IDirty
+public class Sprite : IUpdatable, IDirty
 {
     public Sprite(string[] lines, ConsoleStyle style)
     {

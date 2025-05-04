@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameStuff.Engine.Interfaces;
+namespace ConsoleGameEngine.Interfaces;
 
-public interface ITickable
+internal interface IUpdatable
 {
-    void TryUpdate(TimeSpan deltaTime);
+    void Update();
 }

@@ -4,11 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameStuff.Engine.Interfaces;
+namespace ConsoleGameEngine.Interfaces;
 
-public interface IDirty
+internal interface IUpdatableComponent : IUpdatable, ITickable
 {
-    bool IsDirty { get; }
-
-    void ClearDirty();
 }
