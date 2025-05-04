@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleGameEngine.Interfaces;
 
-internal interface IUpdatable
+public interface IUpdatable
 {
     void Update();
 }

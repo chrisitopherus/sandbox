@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleGameEngine.Interfaces;
 
-internal interface IInitializable
+public interface IInitializable
 {
     void Init();
 }

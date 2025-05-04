@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleGameEngine.Interfaces;
 
-internal interface ITickable
+public interface ITickable
 {
     void TryUpdate(TimeSpan deltaTime);
 }

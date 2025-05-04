@@ -4,10 +4,10 @@
     <Position X="7.106" Y="4.2" Height="0.75" Width="1.7" />
   </Comment>
   <Comment CommentText="Graphics">
-    <Position X="17.617" Y="5.133" Height="0.75" Width="1.7" />
+    <Position X="19.424" Y="4.796" Height="0.75" Width="1.7" />
   </Comment>
   <Comment CommentText="Physics">
-    <Position X="24.814" Y="4.7" Height="0.75" Width="1.7" />
+    <Position X="31.5" Y="4.25" Height="0.75" Width="1.7" />
   </Comment>
   <Class Name="ConsoleGameEngine.Core.Scene">
     <Position X="9.25" Y="5.5" Width="3.5" />
@@ -24,30 +24,33 @@
       <FileName>Core\GameEngine.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ConsoleGameEngine.Graphics.Sprites.Sprite" Collapsed="true">
-    <Position X="16.5" Y="6.5" Width="1.5" />
+  <Class Name="ConsoleGameEngine.Graphics.Sprites.Sprite">
+    <Position X="15.25" Y="6.5" Width="3" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAACBAABABAAABA=</HashCode>
       <FileName>Graphics\Sprites\Sprite.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ConsoleGameEngine.Graphics.Sprites.AnimationSprite" Collapsed="true">
-    <Position X="16.5" Y="7.75" Width="1.5" />
+  <Class Name="ConsoleGameEngine.Graphics.Sprites.AnimationSprite">
+    <Position X="15.25" Y="9.5" Width="3" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAE=</HashCode>
       <FileName>Graphics\Sprites\AnimationSprite.cs</FileName>
     </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Frames" />
+    </ShowAsCollectionAssociation>
   </Class>
-  <Class Name="ConsoleGameEngine.Graphics.Sprites.AnimationFrame" Collapsed="true">
-    <Position X="19" Y="6.5" Width="1.5" />
+  <Class Name="ConsoleGameEngine.Graphics.Sprites.AnimationFrame">
+    <Position X="20.25" Y="9.5" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
       <FileName>Graphics\Sprites\AnimationFrame.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ConsoleGameEngine.Physics.Collisions.CollisionShape">
-    <Position X="22.75" Y="8" Width="5.75" />
+    <Position X="29.5" Y="7.5" Width="5.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAEACAAAAAAAAAAAAAAAAIAABA=</HashCode>
       <FileName>Physics\Collisions\CollisionShape.cs</FileName>
@@ -55,27 +58,27 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="ConsoleGameEngine.Physics.Collisions.RectangularCollisionShape">
-    <Position X="18.5" Y="10.75" Width="5.25" />
+    <Position X="25.25" Y="10.25" Width="5.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQAQAAAACAAAAAAAAAAAAAAAAAAABA=</HashCode>
       <FileName>Physics\Collisions\RectangularCollisionShape.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ConsoleGameEngine.Physics.Collisions.PointCollisionShape">
-    <Position X="20" Y="14" Width="2.25" />
+    <Position X="26.75" Y="13.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Physics\Collisions\PointCollisionShape.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ConsoleGameEngine.Physics.Collisions.CircleApproxCollisionShape">
-    <Position X="25" Y="11.25" Width="4.25" />
+    <Position X="31.75" Y="10.75" Width="4.25" />
     <InheritanceLine Type="ConsoleGameEngine.Physics.Collisions.CollisionShape" FixedFromPoint="true">
       <Path>
-        <Point X="26.688" Y="10.132" />
-        <Point X="26.688" Y="10.875" />
-        <Point X="27.125" Y="10.875" />
-        <Point X="27.125" Y="11.25" />
+        <Point X="33.438" Y="9.632" />
+        <Point X="33.438" Y="10.375" />
+        <Point X="33.875" Y="10.375" />
+        <Point X="33.875" Y="10.75" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -84,12 +87,13 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ConsoleGameEngine.Physics.Collisions.CrossCollisionShape">
-    <Position X="30.5" Y="11" Width="4.75" />
+    <Position X="37.25" Y="10.5" Width="4.75" />
     <InheritanceLine Type="ConsoleGameEngine.Physics.Collisions.CollisionShape" ManuallyRouted="true" FixedFromPoint="true">
       <Path>
-        <Point X="28.5" Y="8.438" />
-        <Point X="30.5" Y="8.438" />
-        <Point X="30.5" Y="12.357" />
+        <Point X="35.25" Y="7.938" />
+        <Point X="36.875" Y="7.938" />
+        <Point X="36.875" Y="11.857" />
+        <Point X="37.25" Y="11.857" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -98,18 +102,26 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ConsoleGameEngine.Physics.Collisions.CustomCollisionShape">
-    <Position X="33.75" Y="8.25" Width="6.25" />
+    <Position X="40.5" Y="7.75" Width="6.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAIAAAAAAAAAACAAAAAAAAAAAAAAAAAAABA=</HashCode>
       <FileName>Physics\Collisions\CustomCollisionShape.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ConsoleGameEngine.Physics.Collisions.TCollisionShape">
-    <Position X="24" Y="14.25" Width="3.25" />
+    <Position X="30.75" Y="13.75" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAABA=</HashCode>
       <FileName>Physics\Collisions\TCollisionShape.cs</FileName>
     </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGameEngine.Core.GameEntity">
+    <Position X="5.75" Y="9.75" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAQAAAAAAAAgAAAAAAAAAggAAAAQAAABABAAABA=</HashCode>
+      <FileName>Core\GameEntity.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Interface Name="ConsoleGameEngine.Interfaces.IUpdatable">
     <Position X="0.5" Y="0.5" Width="1.5" />
@@ -147,7 +159,7 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="ConsoleGameEngine.Physics.Collisions.ICollisionShape">
-    <Position X="23.25" Y="5.75" Width="4.5" />
+    <Position X="30" Y="5.25" Width="4.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAEACAAAAAAAAAAAAAAAAIAAAA=</HashCode>
       <FileName>Physics\Collisions\ICollisionShape.cs</FileName>

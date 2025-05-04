@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace ConsoleGameEngine.Interfaces;
 
-internal interface IUpdatableComponent : IUpdatable, ITickable
+public interface IUpdatableComponent : IUpdatable, ITickable
 {
 }

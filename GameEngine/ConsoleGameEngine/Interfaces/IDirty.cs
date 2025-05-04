@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleGameEngine.Interfaces;
 
-internal interface IDirty
+public interface IDirty
 {
     bool IsDirty { get; }
 
