@@ -13,7 +13,7 @@ namespace ConsoleWyrm.Networking.Messages.Codecs.Shared;
 
 public class AliveMessageCodec : MessageCodec<AliveMessage>
 {
-    public static AliveMessageCodec Instance = new AliveMessageCodec();
+    public static AliveMessageCodec Instance = new();
 
     private AliveMessageCodec()
     {

@@ -23,13 +23,12 @@ public class WyrmMessageProtocol<TSendMessage, TReceiveMessage> : IMessageProtoc
 {
     private readonly MessageDecoderRegistry<TReceiveMessage> decoderRegistry;
     private readonly int headerByteSize = 5;
-    private readonly AliveMessageCodec aliveMessageCodec = AliveMessageCodec.Instance;
     private readonly AliveMessage aliveMessage = new();
 
     public WyrmMessageProtocol(MessageDecoderRegistry<TReceiveMessage> decoderRegistry)
     {
         this.decoderRegistry = decoderRegistry;
-        this.AliveMessageBytes = this.aliveMessageCodec.Encode(this.aliveMessage);
+        this.AliveMessageBytes = this.aliveMessage.Encode();
     }
 
     public ReadOnlyMemory<byte> AliveMessageBytes
