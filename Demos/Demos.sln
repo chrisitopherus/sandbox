@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Network", "..\Network\Netwo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameStuff", "..\Game\GameStuff\GameStuff.csproj", "{461E55DB-A9BA-45A3-A93C-887EC3D08DCD}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleGameEngine", "..\GameEngine\ConsoleGameEngine\ConsoleGameEngine.csproj", "{B5DF4060-9F7A-4908-AB60-E98A8567CA3E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{461E55DB-A9BA-45A3-A93C-887EC3D08DCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{461E55DB-A9BA-45A3-A93C-887EC3D08DCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{461E55DB-A9BA-45A3-A93C-887EC3D08DCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5DF4060-9F7A-4908-AB60-E98A8567CA3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5DF4060-9F7A-4908-AB60-E98A8567CA3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5DF4060-9F7A-4908-AB60-E98A8567CA3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5DF4060-9F7A-4908-AB60-E98A8567CA3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

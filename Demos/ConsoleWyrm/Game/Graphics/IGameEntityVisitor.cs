@@ -1,4 +1,5 @@
-﻿using ConsoleWyrm.Game.Entities;
+﻿using ConsoleGameEngine.Core;
+using ConsoleWyrm.Game.Entities;
 using ConsoleWyrm.Game.Entities.Consumables;
 using ConsoleWyrm.Game.Entities.Wyrms;
 using System;

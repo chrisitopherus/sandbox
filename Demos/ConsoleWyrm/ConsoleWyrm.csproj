@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\CLI\CLI\CLI.csproj" />
+    <ProjectReference Include="..\..\GameEngine\ConsoleGameEngine\ConsoleGameEngine.csproj" />
     <ProjectReference Include="..\..\Game\GameStuff\GameStuff.csproj" />
     <ProjectReference Include="..\..\Helpers\Helpers\Helpers.csproj" />
     <ProjectReference Include="..\..\Network\Network\Network.csproj" />

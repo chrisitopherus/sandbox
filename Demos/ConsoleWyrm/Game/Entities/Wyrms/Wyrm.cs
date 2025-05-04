@@ -1,6 +1,7 @@
-﻿using GameStuff.Data;
-using GameStuff.Graphics.Sprites;
-using GameStuff.Physics.Collisions;
+﻿using ConsoleGameEngine.Core;
+using ConsoleGameEngine.Graphics.Sprites;
+using ConsoleGameEngine.Physics.Collisions;
+using GameStuff.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;

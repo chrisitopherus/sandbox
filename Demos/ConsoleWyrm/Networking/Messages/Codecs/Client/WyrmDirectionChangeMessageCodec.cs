@@ -2,6 +2,7 @@
 using ConsoleWyrm.Networking.Messages.Client;
 using ConsoleWyrm.Networking.Messages.Data;
 using ConsoleWyrm.Utility;
+using GameStuff.Data;
 using Helpers.Utility.Span;
 using Network.Architecture.Interfaces.Protocol;
 using System;

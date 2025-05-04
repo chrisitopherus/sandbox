@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ConsoleWyrm.Game.Data;
 using ConsoleWyrm.Networking.Messages.Codecs.Client;
 using ConsoleWyrm.Networking.Messages.Data;
+using GameStuff.Data;
 
 namespace ConsoleWyrm.Networking.Messages.Client;
 

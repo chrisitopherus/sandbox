@@ -1,5 +1,5 @@
-﻿using GameStuff.Graphics.Sprites;
-using GameStuff.Physics.Collisions;
+﻿using ConsoleGameEngine.Graphics.Sprites;
+using ConsoleGameEngine.Physics.Collisions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
