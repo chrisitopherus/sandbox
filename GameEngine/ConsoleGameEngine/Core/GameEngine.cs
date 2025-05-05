@@ -1,4 +1,5 @@
-﻿using Helpers.Utility.Keyboard;
+﻿using ConsoleGameEngine.Physics.Collisions.Detector;
+using Helpers.Utility.Keyboard;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,6 +14,7 @@ public class GameEngine
     private readonly Stack<Scene> scenes = [];
     private readonly Queue<ConsoleKeyData> inputQueue = [];
     private readonly KeyboardWatcher keyboardWatcher = new();
+    private readonly CollisionDetector collisionDetector = new();
     private readonly Action ressourceLoader;
     private readonly int interval = 16;
 
@@ -36,9 +38,10 @@ public class GameEngine
 
         while (this.scenes.Count > 0)
         {
-            if (!this.CurrentScene!.IsInitialized)
+            Scene currentScene = this.scenes.Peek();
+            if (!currentScene.IsInitialized)
             {
-                this.CurrentScene.Initialize();
+                currentScene.Initialize();
             }
 
             TimeSpan now = stopwatch.Elapsed;
@@ -51,7 +54,7 @@ public class GameEngine
             }
 
             this.Update(deltaTime);
-            this.CheckCollisions();
+            this.CheckCollisions(currentScene.Entities);
             this.Render();
 
             Thread.Sleep(this.interval);
@@ -76,9 +79,15 @@ public class GameEngine
         this.inputQueue.Enqueue(e.KeyData);
     }
 
-    private void CheckCollisions()
+    private void CheckCollisions(IEnumerable<GameEntity> entities)
     {
-        //
+        IEnumerable<Collision> collisions = this.collisionDetector.Detect(entities);
+
+        foreach (Collision collision in collisions)
+        {
+            collision.A.OnCollision(collision.B);
+            collision.B.OnCollision(collision.A);
+        }
     }
 
     private void HandleInput(ConsoleKeyData keyData)
