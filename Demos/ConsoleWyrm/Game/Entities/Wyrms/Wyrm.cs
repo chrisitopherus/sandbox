@@ -1,6 +1,8 @@
 ﻿using ConsoleGameEngine.Core;
 using ConsoleGameEngine.Graphics.Sprites;
+using ConsoleGameEngine.Interfaces;
 using ConsoleGameEngine.Physics.Collisions;
+using ConsoleWyrm.Game.Entities.Consumables;
 using ConsoleWyrm.Game.Ressources;
 using GameStuff.Data;
 using Helpers.Utility.Keyboard;
@@ -12,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleWyrm.Game.Entities.Wyrms;
 
-public class Wyrm : GameEntity
+public class Wyrm : GameEntity, ICollidesWith<Food>
 {
     private readonly LinkedList<WyrmSegment> tail = [];
     private float size = 0;
@@ -36,6 +38,11 @@ public class Wyrm : GameEntity
         {
             return this.tail;
         }
+    }
+
+    public void OnCollision(Food other)
+    {
+        this.Grow();
     }
 
     public override void Update()
