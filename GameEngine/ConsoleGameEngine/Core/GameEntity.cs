@@ -2,6 +2,7 @@
 using ConsoleGameEngine.Interfaces;
 using ConsoleGameEngine.Physics.Collisions;
 using GameStuff.Data;
+using Helpers.Utility.Keyboard;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,9 @@ public abstract class GameEntity : IDirty, IUpdatableComponent
     protected TimeSpan updateTimer = TimeSpan.Zero;
     public GameEntity(Sprite sprite, ICollisionShape collisionShape, ConsolePosition position)
     {
-        Sprite = sprite;
-        CollisionShape = collisionShape;
-        Position = position;
+        this.Sprite = sprite;
+        this.CollisionShape = collisionShape;
+        this.Position = position;
     }
 
     public bool IsDirty
@@ -36,16 +37,18 @@ public abstract class GameEntity : IDirty, IUpdatableComponent
 
     public void ClearDirty()
     {
-        IsDirty = false;
+        this.IsDirty = false;
     }
+
+    public virtual void HandleKeyInput(ConsoleKeyData keyData) {}
 
     public virtual void TryUpdate(TimeSpan deltaTime)
     {
-        updateTimer += deltaTime;
-        while (updateTimer >= UpdateInterval)
+        this.updateTimer += deltaTime;
+        while (this.updateTimer >= this.UpdateInterval)
         {
 
-            updateTimer -= UpdateInterval;
+            this.updateTimer -= UpdateInterval;
             Update();
         }
     }
