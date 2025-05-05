@@ -45,4 +45,13 @@ public readonly struct ConsoleKeyData
     /// Gets a value indicating whether the Control key was pressed.
     /// </summary>
     public bool Control { get; init; }
+
+    public override string ToString()
+    {
+        string shift = this.Shift ? "Shift + " : string.Empty;
+        string alt = this.Alt ? "Alt + " : string.Empty;
+        string ctrl = this.Control ? "Ctrl + " : string.Empty;
+
+        return $"{ctrl}{alt}{shift}{this.Key}";
+    }
 }
