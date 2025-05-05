@@ -14,4 +14,6 @@ public interface ICollisionShape
     ConsolePosition[] RelativeCollisionCells { get; }
 
     IEnumerable<ConsolePosition> GetWorldCells(ConsolePosition entityPosition);
+
+    bool Intersects(ICollisionShape other, ConsolePosition selfPosition, ConsolePosition otherPosition);
 }
