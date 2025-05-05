@@ -15,6 +15,7 @@ public class WyrmSegment : GameEntity
     public WyrmSegment(Sprite sprite, ICollisionShape collisionShape, ConsolePosition position)
         : base(sprite, collisionShape, position)
     {
+        this.IsDirty = false;
     }
 
     public override void TryUpdate(TimeSpan deltaTime)
