@@ -16,4 +16,10 @@ public class ConsoleStyle
 
     public ConsoleColor Foreground { get; init; }
     public ConsoleColor Background { get; init; }
+
+    public void Apply()
+    {
+        Console.ForegroundColor = this.Foreground;
+        Console.BackgroundColor = this.Background;
+    }
 }
