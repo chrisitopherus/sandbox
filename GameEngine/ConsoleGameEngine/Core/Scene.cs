@@ -8,19 +8,27 @@ using System.Threading.Tasks;
 
 namespace ConsoleGameEngine.Core;
 
-public abstract class Scene : IInitializable
+public abstract class Scene : IInitializable, IRenderable
 {
-    public abstract void Init();
+    public abstract IEnumerable<GameEntity> Entities { get; protected set; }
 
-    public abstract void Update(TimeSpan deltaTime);
-
-    public abstract void Render();
-
-    public virtual void HandleKeyInput(ConsoleKeyData keyData) { }
-
-    public virtual bool BlocksUpdate { get; protected set; } = true;
+    public bool BlocksUpdate { get; protected set; } = true;
 
     public virtual bool BlocksRender { get; protected set; } = true;
 
     public virtual bool BlocksInput { get; protected set; } = true;
+
+    public virtual void Update(TimeSpan deltaTime)
+    {
+        foreach (GameEntity entity in this.Entities)
+        {
+            entity.TryUpdate(deltaTime);
+        }
+    }
+
+    public virtual void HandleKeyInput(ConsoleKeyData keyData) { }
+
+    public abstract void Render();
+
+    public abstract void Init();
 }
