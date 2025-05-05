@@ -1,6 +1,7 @@
 ﻿using ConsoleGameEngine.Graphics.Sprites;
 using ConsoleGameEngine.Interfaces;
 using ConsoleGameEngine.Physics.Collisions;
+using ConsoleGameEngine.Physics.Collisions.Detector;
 using GameStuff.Data;
 using Helpers.Utility.Keyboard;
 using System;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleGameEngine.Core;
 
-public abstract class GameEntity : IDirty, IUpdatableComponent
+public abstract class GameEntity : IDirty, IUpdatableComponent, ICollidable
 {
     protected TimeSpan updateTimer = TimeSpan.Zero;
     private ConsolePosition position;
@@ -20,7 +21,8 @@ public abstract class GameEntity : IDirty, IUpdatableComponent
     {
         this.Sprite = sprite;
         this.CollisionShape = collisionShape;
-        this.Position = position;
+        this.position = position;
+        this.PreviousPosition = position;
     }
 
     public bool IsDirty
@@ -28,6 +30,10 @@ public abstract class GameEntity : IDirty, IUpdatableComponent
         get;
         protected set;
     }
+
+    public Scene? Scene { get; set; }
+
+    public bool IsDespawnRequested { get; private set; }
 
     public TimeSpan UpdateInterval { get; protected set; }
 
@@ -55,6 +61,8 @@ public abstract class GameEntity : IDirty, IUpdatableComponent
         private set;
     }
 
+    public abstract void Update();
+
     public void ClearDirty()
     {
         this.IsDirty = false;
@@ -72,5 +80,15 @@ public abstract class GameEntity : IDirty, IUpdatableComponent
         }
     }
 
-    public abstract void Update();
+    public virtual void OnCollision(ICollidable other)
+    {
+        CollisionDispatcher.Dispatch(this, other);
+    }
+    public virtual void OnSpawn() { }
+    public virtual void OnDespawn() { }
+
+    protected void RequestDespawn()
+    {
+        this.IsDespawnRequested = true;
+    }
 }
