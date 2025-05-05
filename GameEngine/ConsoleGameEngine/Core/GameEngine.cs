@@ -11,6 +11,7 @@ namespace ConsoleGameEngine.Core;
 public class GameEngine
 {
     private readonly Stack<Scene> scenes = [];
+    private readonly Queue<ConsoleKeyData> inputQueue = [];
     private readonly KeyboardWatcher keyboardWatcher = new();
     private readonly Action ressourceLoader;
     private readonly int interval = 16;
@@ -35,12 +36,22 @@ public class GameEngine
 
         while (this.scenes.Count > 0)
         {
+            if (!this.CurrentScene!.IsInitialized)
+            {
+                this.CurrentScene.Initialize();
+            }
+
             TimeSpan now = stopwatch.Elapsed;
             TimeSpan deltaTime = now - lastUpdate;
             lastUpdate = now;
 
-            this.CheckCollisions();
+            while (this.inputQueue.Count > 0)
+            {
+                this.HandleInput(this.inputQueue.Dequeue());
+            }
+
             this.Update(deltaTime);
+            this.CheckCollisions();
             this.Render();
 
             Thread.Sleep(this.interval);
@@ -52,7 +63,6 @@ public class GameEngine
 
     public void PushScene(Scene scene)
     {
-        scene.Init();
         this.scenes.Push(scene);
     }
 
@@ -63,9 +73,19 @@ public class GameEngine
 
     private void KeyboardWatcherOnKeyPressedHandler(object? sender, KeyboardWatcherKeyPressedEventArgs e)
     {
+        this.inputQueue.Enqueue(e.KeyData);
+    }
+
+    private void CheckCollisions()
+    {
+        //
+    }
+
+    private void HandleInput(ConsoleKeyData keyData)
+    {
         foreach (Scene scene in this.scenes)
         {
-            scene.HandleKeyInput(e.KeyData);
+            scene.HandleKeyInput(keyData);
 
             // if scene blocks input for lower scenes -> exit
             if (scene.BlocksInput)
@@ -73,11 +93,6 @@ public class GameEngine
                 break;
             }
         }
-    }
-
-    private void CheckCollisions()
-    {
-        //
     }
 
     private void Update(TimeSpan deltaTime)
