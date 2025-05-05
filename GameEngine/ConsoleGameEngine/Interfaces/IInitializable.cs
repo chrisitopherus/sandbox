@@ -8,5 +8,7 @@ namespace ConsoleGameEngine.Interfaces;
 
 public interface IInitializable
 {
-    void Init();
+    public bool IsInitialized { get; }
+
+    void Initialize();
 }
