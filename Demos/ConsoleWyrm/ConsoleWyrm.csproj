@@ -15,9 +15,4 @@
     <ProjectReference Include="..\..\Network\Network\Network.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Game\Interfaces\" />
-    <Folder Include="Game\Physics\" />
-  </ItemGroup>
-
 </Project>

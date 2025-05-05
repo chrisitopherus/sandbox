@@ -1,6 +1,7 @@
 ﻿using CLI;
 using CLI.Interfaces;
 using ConsoleWyrm.Cli.Modifier;
+using ConsoleWyrm.Game;
 using ConsoleWyrm.Networking;
 using ConsoleWyrm.Networking.Messages;
 using ConsoleWyrm.Networking.Messages.Client;
@@ -43,6 +44,9 @@ public class ServerCommand : ICommand
         int? port = ctx.GetModifierValue(this.portModifier);
         IPAddress? ip = ctx.GetModifierValue(this.ipModifer);
         MessageDecoderRegistry<IClientMessage> decoderRegistry = this.InitializeMessageDecoderRegistry();
+
+        WyrmGame game = new();
+        game.Start();
     }
 
     private MessageDecoderRegistry<IClientMessage> InitializeMessageDecoderRegistry()
