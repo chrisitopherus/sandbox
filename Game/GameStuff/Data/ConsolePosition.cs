@@ -12,10 +12,8 @@ public readonly struct ConsolePosition
 
     public ConsolePosition(int x = 0, int y = 0)
     {
-        Validator.NotLessThan(x, 0, nameof(x));
-        Validator.NotLessThan(y, 0, nameof(y));
-        X = x;
-        Y = y;
+        this.X = x;
+        this.Y = y;
     }
 
     public int X { get; }
@@ -24,10 +22,7 @@ public readonly struct ConsolePosition
 
     public ConsolePosition MoveBy(int dx, int dy)
     {
-        Validator.NotLessThan(X + dx, 0, nameof(X));
-        Validator.NotLessThan(Y + dy, 0, nameof(Y));
-
-        return new ConsolePosition(X + dx, Y + dy);
+        return new ConsolePosition(this.X + dx, this.Y + dy);
     }
 
     public ConsolePosition MoveToDirection(Direction direction) => direction switch
@@ -49,8 +44,13 @@ public readonly struct ConsolePosition
         return new ConsolePosition(this.X + position.X, this.Y + position.Y);
     }
 
-    public bool Equals(ConsolePosition position)
+    public bool Equal(ConsolePosition position)
     {
         return this.X == position.X && this.Y == position.Y;
+    }
+
+    public ConsolePosition Negate()
+    {
+        return new ConsolePosition(-this.X, -this.Y);
     }
 }
