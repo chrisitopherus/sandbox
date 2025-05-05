@@ -14,6 +14,8 @@ namespace ConsoleGameEngine.Core;
 public abstract class GameEntity : IDirty, IUpdatableComponent
 {
     protected TimeSpan updateTimer = TimeSpan.Zero;
+    private ConsolePosition position;
+
     public GameEntity(Sprite sprite, ICollisionShape collisionShape, ConsolePosition position)
     {
         this.Sprite = sprite;
@@ -33,7 +35,25 @@ public abstract class GameEntity : IDirty, IUpdatableComponent
 
     public Sprite Sprite { get; protected set; }
 
-    public ConsolePosition Position { get; protected set; }
+    public ConsolePosition Position
+    {
+        get
+        {
+            return this.position;
+        }
+
+        set
+        {
+            this.PreviousPosition = this.position;
+            this.position = value;
+        }
+    }
+
+    public ConsolePosition PreviousPosition
+    {
+        get;
+        private set;
+    }
 
     public void ClearDirty()
     {
@@ -45,11 +65,10 @@ public abstract class GameEntity : IDirty, IUpdatableComponent
     public virtual void TryUpdate(TimeSpan deltaTime)
     {
         this.updateTimer += deltaTime;
-        while (this.updateTimer >= this.UpdateInterval)
+        if (this.updateTimer >= this.UpdateInterval)
         {
-
-            this.updateTimer -= UpdateInterval;
-            Update();
+            this.Update();
+            this.updateTimer = TimeSpan.Zero;
         }
     }
 
