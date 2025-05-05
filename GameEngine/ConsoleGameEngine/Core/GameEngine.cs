@@ -13,6 +13,7 @@ public class GameEngine
     private readonly Stack<Scene> scenes = [];
     private readonly KeyboardWatcher keyboardWatcher = new();
     private readonly Action ressourceLoader;
+    private readonly int interval = 16;
 
     public GameEngine(Action ressourceLoader)
     {
@@ -30,6 +31,8 @@ public class GameEngine
         Stopwatch stopwatch = Stopwatch.StartNew();
         TimeSpan lastUpdate = stopwatch.Elapsed;
 
+        Thread.Sleep(this.interval);
+
         while (this.scenes.Count > 0)
         {
             TimeSpan now = stopwatch.Elapsed;
@@ -40,7 +43,7 @@ public class GameEngine
             this.Update(deltaTime);
             this.Render();
 
-            Thread.Sleep(16);
+            Thread.Sleep(this.interval);
         }
 
         this.keyboardWatcher.KeyPressed -= this.KeyboardWatcherOnKeyPressedHandler;
