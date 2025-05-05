@@ -23,6 +23,7 @@ public abstract class GameEntity : IDirty, IUpdatableComponent, ICollidable
         this.CollisionShape = collisionShape;
         this.position = position;
         this.PreviousPosition = position;
+        this.IsDirty = true;
     }
 
     public bool IsDirty
