@@ -1,10 +1,12 @@
 ﻿using ConsoleGameEngine.Core;
 using ConsoleGameEngine.Graphics.Sprites;
 using ConsoleGameEngine.Physics.Collisions;
+using ConsoleWyrm.Game.Entities.Consumables;
 using ConsoleWyrm.Game.Entities.Wyrms;
 using ConsoleWyrm.Game.Graphics;
 using ConsoleWyrm.Game.Ressources;
 using GameStuff.Data;
+using Helpers.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,32 +18,41 @@ namespace ConsoleWyrm.Game.Scenes;
 public class GameScene : Scene
 {
     private List<Wyrm> wyrms = [];
-    public override IEnumerable<GameEntity> Entities
-    {
-        get
-        {
-            return this.wyrms;
-        }
-    }
 
     public override void Render()
     {
-        foreach (Wyrm wyrm in this.Entities.Where(e => e.IsDirty))
+        foreach (GameEntity entity in this.gameEntities.Where(e => e.IsDirty))
         {
-            this.UndrawChar(wyrm.PreviousPosition);
-            this.DrawWyrmHead(wyrm);
-            this.DrawFirstSegment(wyrm);
-            this.UndrawLastSegment(wyrm);
-            wyrm.ClearDirty();
+            if (entity is Wyrm)
+            {
+                Wyrm wyrm = (Wyrm)entity;
+                this.UndrawChar(wyrm.PreviousPosition);
+                this.DrawWyrmHead(wyrm);
+                this.DrawFirstSegment(wyrm);
+                this.UndrawLastSegment(wyrm);
+            }
+            else
+            {
+                this.UndrawChar(entity.PreviousPosition);
+                this.DrawSprite(entity.Sprite, entity.Position);
+            }
+
+            entity.ClearDirty();
         }
     }
     protected override void Init()
     {
         Sprite wyrmSprite = RessourceRegistry.GetSprite(SpriteId.WyrmHead);
-        ICollisionShape collisionShape = RessourceRegistry.GetCollisionShape(CollisionShapeId.Point);
+        ICollisionShape pointCollisionShape = RessourceRegistry.GetCollisionShape(CollisionShapeId.Point);
         ConsolePosition position = new ConsolePosition(10, 10);
-        Wyrm wyrm = new(wyrmSprite, collisionShape, position);
+        Wyrm wyrm = new(wyrmSprite, pointCollisionShape, position);
         this.wyrms.Add(wyrm);
+
+        Sprite foodSprite = new(["F"], new ConsoleStyle(ConsoleColor.Red, ConsoleColor.Black));
+        ConsolePosition foodPos = new ConsolePosition(20, 10);
+        Food food = new(foodSprite, pointCollisionShape, foodPos);
+        this.gameEntities.Add(wyrm);
+        this.gameEntities.Add(food);
     }
 
     private void DrawWyrmHead(Wyrm wyrm)
