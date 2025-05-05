@@ -17,7 +17,6 @@ public class Food : GameEntity, ICollidesWith<Wyrm>
     public Food(Sprite sprite, ICollisionShape collisionShape, ConsolePosition position)
         : base(sprite, collisionShape, position)
     {
-        this.IsDirty = true;
     }
 
     public void OnCollision(Wyrm other)

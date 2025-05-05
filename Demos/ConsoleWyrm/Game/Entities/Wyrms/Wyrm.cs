@@ -27,7 +27,6 @@ public class Wyrm : GameEntity, ICollidesWith<Food>
     {
         this.UpdateInterval = TimeSpan.FromMilliseconds(50);
         this.CurrentDirection = Direction.Right;
-        this.IsDirty = true;
     }
 
     public Direction CurrentDirection { get; private set; }
