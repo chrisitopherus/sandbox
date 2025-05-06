@@ -25,7 +25,7 @@ public class Wyrm : GameEntity, ICollidesWith<Food>
     public Wyrm(Sprite sprite, ICollisionShape collisionShape, ConsolePosition position)
         : base(sprite, collisionShape, position)
     {
-        this.UpdateInterval = TimeSpan.FromMilliseconds(50);
+        this.UpdateInterval = TimeSpan.FromMilliseconds(10);
         this.CurrentDirection = Direction.Right;
     }
 
@@ -59,7 +59,6 @@ public class Wyrm : GameEntity, ICollidesWith<Food>
         if (keyData.Control && keyData.Key == ConsoleKey.G)
         {
             this.Grow();
-            this.IsDirty = true;
         }
     }
 
@@ -71,6 +70,7 @@ public class Wyrm : GameEntity, ICollidesWith<Food>
         ConsolePosition position = refPos.Add(new ConsolePosition(1, 0));
         WyrmSegment wyrmSegment = new(this.tailSprite, collisionShape, position);
         this.tail.AddLast(wyrmSegment);
+        this.IsDirty = true;
     }
 
     private void Die()
