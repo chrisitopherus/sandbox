@@ -19,9 +19,9 @@ public class GameScene : Scene
 {
     private List<Wyrm> wyrms = [];
 
-    public override void Render()
+    protected override void RenderScene(IEnumerable<GameEntity> entitiesToRender)
     {
-        foreach (GameEntity entity in this.gameEntities.Where(e => e.IsDirty))
+        foreach (GameEntity entity in entitiesToRender)
         {
             if (entity is Wyrm)
             {
@@ -40,6 +40,7 @@ public class GameScene : Scene
             entity.ClearDirty();
         }
     }
+
     protected override void Init()
     {
         Sprite wyrmSprite = RessourceRegistry.GetSprite(SpriteId.WyrmHead);
@@ -51,8 +52,13 @@ public class GameScene : Scene
         Sprite foodSprite = new(["F"], new ConsoleStyle(ConsoleColor.Red, ConsoleColor.Black));
         ConsolePosition foodPos = new ConsolePosition(20, 10);
         Food food = new(foodSprite, pointCollisionShape, foodPos);
+
+        Sprite leonFoodSprite = new Sprite(["Leon"], new ConsoleStyle(ConsoleColor.Green, ConsoleColor.Black));
+        ICollisionShape shape = new RectangularCollisionShape(4, 1, new ConsolePosition(0, 0));
+        Food leon = new Food(leonFoodSprite, shape, new ConsolePosition(10, 69));
         this.gameEntities.Add(wyrm);
         this.gameEntities.Add(food);
+        this.gameEntities.Add(leon);
     }
 
     private void DrawWyrmHead(Wyrm wyrm)
