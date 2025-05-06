@@ -13,6 +13,7 @@ public abstract class Scene : IInitializable, IRenderable, ISpawner<GameEntity>,
     protected readonly List<GameEntity> gameEntities = [];
     protected readonly Queue<GameEntity> spawnQueue = [];
     protected readonly Queue<GameEntity> despawnQueue = [];
+    protected readonly Queue<GameEntity> unrenderQueue = [];
 
     public IEnumerable<GameEntity> Entities
     {
@@ -64,7 +65,16 @@ public abstract class Scene : IInitializable, IRenderable, ISpawner<GameEntity>,
         }
     }
 
-    public abstract void Render();
+    public virtual void Render()
+    {
+        this.PreRender();
+        GameEntity[] dirtyEntities = this.gameEntities.Where(entity => entity.IsDirty).ToArray();
+        this.RenderScene(dirtyEntities);
+        foreach (GameEntity entity in dirtyEntities)
+        {
+            entity.ClearDirty();
+        }
+    }
 
     public void Initialize()
     {
@@ -73,6 +83,8 @@ public abstract class Scene : IInitializable, IRenderable, ISpawner<GameEntity>,
     }
 
     protected abstract void Init();
+
+    protected abstract void RenderScene(IEnumerable<GameEntity> entitiesToRender);
 
     protected virtual void HandleSpawn(GameEntity entity)
     {
@@ -86,6 +98,20 @@ public abstract class Scene : IInitializable, IRenderable, ISpawner<GameEntity>,
         entity.Scene = default;
         entity.OnDespawn();
         this.gameEntities.Remove(entity);
+    }
+
+    protected virtual void PreRender()
+    {
+        while (this.unrenderQueue.Count > 0)
+        {
+            GameEntity entity = this.unrenderQueue.Dequeue();
+            this.UnrenderEntity(entity);
+        }
+    }
+
+    protected virtual void UnrenderEntity(GameEntity entity)
+    {
+        // undrawing sprite
     }
 
     private void CheckForDespawnRequests(IEnumerable<GameEntity> entities)
@@ -110,6 +136,7 @@ public abstract class Scene : IInitializable, IRenderable, ISpawner<GameEntity>,
         while (this.despawnQueue.Count > 0)
         {
             GameEntity entity = this.despawnQueue.Dequeue();
+            this.unrenderQueue.Enqueue(entity);
             this.HandleDespawn(entity);
         }
     }
