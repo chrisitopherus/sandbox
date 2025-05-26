@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleGameEngine.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleGameEngine.Graphics.Sprites;
 
-public class AnimationSprite : Sprite
+public class AnimationSprite : Sprite, IUpdatableComponent
 {
     public AnimationSprite(AnimationFrame[] frames)
         : base(frames[0].Sprite.Lines, frames[0].Sprite.Style)
@@ -16,13 +17,14 @@ public class AnimationSprite : Sprite
 
     public AnimationFrame[] Frames { get; }
 
-    public override void TryUpdate(TimeSpan deltaTime)
+    public virtual void TryUpdate(TimeSpan deltaTime)
     {
-        // logic
+        // check if update time -> call Update
     }
 
-    public override void Update()
+    public virtual void Update()
     {
-        // logic
+        // change sprite
+        this.IsDirty = true;
     }
 }

@@ -1,5 +1,5 @@
-﻿using ConsoleGameEngine.Interfaces;
-using Helpers.Utility;
+﻿using ConsoleGameEngine.Graphics.Styling;
+using ConsoleGameEngine.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleGameEngine.Graphics.Sprites;
 
-public class Sprite : IUpdatable, IDirty
+public class Sprite : IDirty
 {
     public Sprite(string[] lines, ConsoleStyle style)
     {
@@ -25,15 +25,5 @@ public class Sprite : IUpdatable, IDirty
     public void ClearDirty()
     {
         this.IsDirty = false;
-    }
-
-    public virtual void TryUpdate(TimeSpan deltaTime)
-    {
-        // static
-    }
-
-    public virtual void Update()
-    {
-        // static
     }
 }
