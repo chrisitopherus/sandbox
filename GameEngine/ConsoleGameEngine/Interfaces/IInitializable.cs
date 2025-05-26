@@ -6,9 +6,18 @@ using System.Threading.Tasks;
 
 namespace ConsoleGameEngine.Interfaces;
 
+/// <summary>
+/// Defines a component that can be initialized once.
+/// </summary>
 public interface IInitializable
 {
-    public bool IsInitialized { get; }
+    /// <summary>
+    /// Gets a value indicating whether the component has been initialized.
+    /// </summary>
+    bool IsInitialized { get; }
 
+    /// <summary>
+    /// Performs initialization logic.
+    /// </summary>
     void Initialize();
 }
